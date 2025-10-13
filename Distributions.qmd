@@ -12,7 +12,6 @@ author:
   - Niki  Umlauf
 format:
   revealjs:
-    multiplex: true
     slide-number: true
     show-slide-number: print
     chalkboard: 

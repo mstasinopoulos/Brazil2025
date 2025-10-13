@@ -13,7 +13,6 @@ author:
 format:
   revealjs:
     format:
-    multiplex: true
     slide-number: true
     show-slide-number: print
     chalkboard: 
@@ -157,8 +156,8 @@ pe_param_grid(madditive,c("area", "yearc",  "location", "bath", "kitchen"))
 ```{R}
 #| echo: true
 #| layout-ncol: 2
-pe_param(madditive, c("area", "yearc"))
-pe_param( madditive, c("area", "yearc"), filled=TRUE)
+ pe_param(madditive, c("area", "yearc")) 
+pe_param( madditive, c("area", "yearc"), filled=TRUE) 
 ```
 
 ## ALE; parameters $\mu$; Additive
@@ -215,14 +214,14 @@ gamlss.ggplots:::pe_quantile(madditive,c("location"))
 
 ```{R}
 #| echo: true
- gamlss.ggplots:::pe_quantile(madditive,c("area", "yearc"))
+  gamlss.ggplots:::pe_quantile(madditive,c("area", "yearc"))
 ```
 
 ## quantiles interactions 2
 
 ```{R}
 #| echo: true
-gamlss.ggplots:::pe_quantile(madditive,c("area", "location"))
+ gamlss.ggplots:::pe_quantile(madditive,c("area", "location"))
 ```
 
 ## quantiles interactions 2
@@ -236,14 +235,14 @@ gamlss.ggplots:::pe_quantile(madditive,c( "location", "bath"))
 
 ```{R}
 #| echo: true
-gamlss.ggplots:::pe_pdf_grid(madditive, list("area", "yearc", "location","bath"))
+#gamlss.ggplots:::pe_pdf_grid(madditive, list("area", "yearc", "location","bath"))
 ```
 
 ## distributions, $\mu$, NN
 
 ```{R}
 #| echo: true
-gamlss.ggplots:::pe_pdf_grid(mneural, list("area", "yearc", "location","bath"))
+#gamlss.ggplots:::pe_pdf_grid(mneural, list("area", "yearc", "location","bath"))
 ```
 
 ## the purpose of the study {.smaller}
@@ -278,17 +277,17 @@ Scenarios
 #| warning: false
 #| message: false
 #| output: true
-    rent <- c(1500, 1000,800)
-    area <- c(140, 55, 65)
-   yearc <- c(1983, 1915, 1960)
-location <- factor(c(3,1,1))
-    bath <- factor(c(1,0,1))
- kitchen <- factor(c(1,0,1))
-cheating <- factor(c(1,0,1))
-ndat <- data.frame(rent, area, yearc, location, bath, kitchen, cheating)
-cat("prediction z-scores", "\n")
-pp <-predict(madditive, newdata=ndat, type="parameter")
- qNO(madditive$family$p(q=ndat$rent, par=pp))
+#     rent <- c(1500, 1000,800)
+#     area <- c(140, 55, 65)
+#    yearc <- c(1983, 1915, 1960)
+# location <- factor(c(3,1,1))
+#     bath <- factor(c(1,0,1))
+#  kitchen <- factor(c(1,0,1))
+# cheating <- factor(c(1,0,1))
+# ndat <- data.frame(rent, area, yearc, location, bath, kitchen, cheating)
+# cat("prediction z-scores", "\n")
+# pp <-predict(madditive, newdata=ndat, type="parameter")
+#  qNO(madditive$family$p(q=ndat$rent, par=pp))
 ```
 
 ## summary
@@ -328,7 +327,6 @@ Personal view for the future of `GAMLSS` development;
 | `Robert Rigby`         | `Julian Merder`        | Fiona McElduff               |
 | `Mikis Stasinopoulos`  | Abu Hossain            | Raydonal Ospina              |
 
-# discussion
 
 ## end
 

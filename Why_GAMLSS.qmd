@@ -34,59 +34,19 @@ format:
 
 # Introduction
 
-## DAY 1
+## Program 
 
--   Morning
 
-    -   `why GAMLSS`
+  -   `why GAMLSS`
 
-    -   `Available software`
+  -   `available software`
 
-    -   `Practical 1`
+  -   `distributions`
 
--   Afternoon
+  -  `fitting`
+    
+  - `interpretation`
 
-    -   `Distributions`
-
-    -   `Continuous distributions`
-
-    -   `Practical 2`
-
-## DAY 2
-
--   Morning
-
-    -   `Discrete Distributions`
-
-    -   `Mixed distributions`
-
-    -   `Practical 3`
-
--   Afternoon
-
-    -   `Model Fitting`
-
-    -   `Model Selection`
-
-    -   `Practical 4`
-
-## DAY 3
-
--   Morning
-
-    -   `Centile estination`
-
-    -   `Diagnostics and ggplots`
-
-    -   `Practical 5`
-
--   Afternoon
-
-    -   `Model Comparison`
-
-    -   `Model Interpretation`
-
-    -   `Discussion`
 
 ## Why GAMLSS
 
