@@ -622,7 +622,7 @@ plotBCTZadj(mu=2, sigma=0.3, nu=2, tau=4, xi=.1)
 
 ## end
 
-[back to the index](https://mstasinopoulos.github.io/Porto_short_course/)
+[back to the index](https://mstasinopoulos.github.io/Brazil2025/)
 
 ::: {layout-ncol="3," layout-nrow="1"}
 ![](book-1.png){width="300"} ![](BOOK-2.png){width="323"} ![](book3.png){width="333"} The Books
