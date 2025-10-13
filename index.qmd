@@ -8,11 +8,10 @@ author:
   - Niki Umlauf  
 ---
 
-This website contains slides from the short course on GAMLSS given in June 2024 at Porto - Portugal.
+This website contains slides from the short course on GAMLSS given in Ovtober 2025 at Lavras - Brazil.
 
 -   [Why GAMLSS](Why_GAMLSS.qmd)
 -   [The R shoftware](TheRsoftware.qmd)
 -   [Distributions](Distributions.qmd)
 -   [Model Fitting](fitting.qmd)
--   [Comparison of Models](comparison.qmd)
 -   [Interpretation of Models](Interpret.qmd)
