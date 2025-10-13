@@ -676,7 +676,7 @@
     "href": "index.html",
     "title": "GAMLSS short course slides for XVII MGEST-2025",
     "section": "",
-    "text": "This website contains slides from the short course on GAMLSS given in Ovtober 2025 at Lavras - Brazil.\n\nWhy GAMLSS\nThe R shoftware\nDistributions\nModel Fitting\nInterpretation of Models"
+    "text": "This website contains slides from the short course on GAMLSS given in Ovtober 2025 at Lavras - Brazil.\n\nWhy GAMLSS\nThe R software\nDistributions\nModel Fitting\nInterpretation of Models"
   },
   {
     "objectID": "Distributions.html#introduction",
@@ -1153,5 +1153,12 @@
     "title": "Interpreting models",
     "section": "end",
     "text": "end\nback to the index\n\n\n\n\n\n\n   The Books\n\n\n\n\n\n\n\nwww.gamlss.com"
+  },
+  {
+    "objectID": "TheRsoftware.html",
+    "href": "TheRsoftware.html",
+    "title": "The R software",
+    "section": "",
+    "text": "residuals in GAMLSS\nan example; the rent99 data\nR packages"
   }
 ]
