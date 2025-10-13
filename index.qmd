@@ -11,7 +11,7 @@ author:
 This website contains slides from the short course on GAMLSS given in Ovtober 2025 at Lavras - Brazil.
 
 -   [Why GAMLSS](Why_GAMLSS.qmd)
--   [The R shoftware](TheRsoftware.qmd)
+-   [The R software](TheRsoftware.qmd)
 -   [Distributions](Distributions.qmd)
 -   [Model Fitting](fitting.qmd)
 -   [Interpretation of Models](Interpret.qmd)
