@@ -271,5 +271,887 @@
     "title": "Why GAMLSS?",
     "section": "end",
     "text": "end\nback to the index\n\n\n\n\n\n\n   The Books\n\n\n\n\n\n\n\nwww.gamlss.com"
+  },
+  {
+    "objectID": "fitting.html#introduction",
+    "href": "fitting.html#introduction",
+    "title": "Fitting models",
+    "section": "Introduction",
+    "text": "Introduction\nquestions\n\ndo my data support a GAMLSS model?\ndo I need GAMLSS to answer my questions?\nsize of the data\nquestions of interest"
+  },
+  {
+    "objectID": "fitting.html#this-talk",
+    "href": "fitting.html#this-talk",
+    "title": "Fitting models",
+    "section": "this talk",
+    "text": "this talk\n\nthe basic GAMLSS algorithm\ndifferent statistical approaches for fitting a GAMLSS model\ndifferent machine learning techniques for fitting a GAMLSS model."
+  },
+  {
+    "objectID": "fitting.html#gamlss",
+    "href": "fitting.html#gamlss",
+    "title": "Fitting models",
+    "section": "GAMLSS",
+    "text": "GAMLSS\n\\[\\begin{split}\ny_i     &  \\stackrel{\\small{ind}}{\\sim }&  {D}( \\theta_{1i}, \\ldots, \\theta_{ki}) \\nonumber \\\\\ng(\\theta_{1i})  &=& b_{10} + s_1({x}_{1i})  +  \\ldots,  s_p({x}_{pi}) \\nonumber\\\\\n\\ldots &=& \\ldots \\nonumber\\\\\ng({\\theta}_{ki})  &=& b_0 + s_1({x}_{1i})  +   \\ldots,  s_p({x}_{pi})\n\\end{split}\n\\qquad(1)\\]\n\n\nfor \\(i=1,2,\\ldots,n\\)."
+  },
+  {
+    "objectID": "fitting.html#gamlss-ml",
+    "href": "fitting.html#gamlss-ml",
+    "title": "Fitting models",
+    "section": "GAMLSS + ML",
+    "text": "GAMLSS + ML\n\\[\\begin{split}\ny_i     &  \\stackrel{\\small{ind}}{\\sim }&  {D}( \\theta_{1i}, \\ldots, \\theta_{ki}) \\nonumber \\\\\ng({\\theta}_{1i}) &=& {ML}_1({x}_{1i},{x}_{2i}, \\ldots,  {x}_{pi}) \\nonumber \\\\\n\\ldots &=& \\ldots \\nonumber\\\\\ng({\\theta}_{ki}) &=& {ML}_1({x}_{1i},{x}_{2i}, \\ldots,  {x}_{pi})\n\\end{split}\n  \\qquad(2)\\]"
+  },
+  {
+    "objectID": "fitting.html#parameters-for-estimation",
+    "href": "fitting.html#parameters-for-estimation",
+    "title": "Fitting models",
+    "section": "Parameters for Estimation",
+    "text": "Parameters for Estimation\n\ndistribution parameters\ncoefficient parameters\n  - **coefficients**\n\n  - **random effects**\nhyper-parameters"
+  },
+  {
+    "objectID": "fitting.html#flowchart",
+    "href": "fitting.html#flowchart",
+    "title": "Fitting models",
+    "section": "flowchart",
+    "text": "flowchart\n\n\n\n\n\n\nflowchart LR\n  A[GAMLSS] --&gt; L[Parametric]\n  A --&gt; N[Smooth]\n  L --&gt; B(Likelihood)\n  L --&gt; D(Bayesian)\n  L --&gt; E(Boosting)\n  N --&gt; C(Penalised Likelihood)\n  N --&gt; D(Bayesian)\n  N --&gt; E(Boosting)\n  B --&gt; G[beta's]\n  C --&gt; F[beta's, gamma's, & lambda's]\n  E --&gt; F\n  D --&gt; F\n  D --&gt; G\n  E --&gt; G\n\n\n\n\nFigure 1: Different ways to estimate the parameters in a GAMLSS model."
+  },
+  {
+    "objectID": "fitting.html#the-basic-algorithm-for-gamlss",
+    "href": "fitting.html#the-basic-algorithm-for-gamlss",
+    "title": "Fitting models",
+    "section": "The Basic Algorithm for GAMLSS",
+    "text": "The Basic Algorithm for GAMLSS\n\nFor specified distribution family, data and machine learning (ML) model.\n\nInitialize: set starting values for all distribution parameters \\((\\hat{\\boldsymbol{\\mu}}^{(0)}, \\hat{\\boldsymbol{\\sigma}}^{(0)}, \\hat{\\boldsymbol{\\nu}}^{(0)}, \\hat{\\boldsymbol{\\tau}}^{(0)} )\\).\nFor i in \\(1,2,\\ldots\\)\n\nfix \\(\\hat{\\boldsymbol{\\sigma}}^{(i-1)}\\),\\(\\hat{\\boldsymbol{\\nu}}^{(i-1)}\\), and \\(\\hat{\\boldsymbol{\\tau}}^{(i-1)}\\) and fit a ML model to iterative response \\(\\textbf{y}_{\\mu}\\) using iterative weights \\(\\textbf{w}_{\\mu}\\) to obtain the new \\(\\hat{\\boldsymbol{\\mu}}^{(i)}\\)\nfix \\(\\hat{\\boldsymbol{\\mu}}^{(i)}\\),\\(\\hat{\\boldsymbol{\\nu}}^{(i-1)}\\), and \\(\\hat{\\boldsymbol{\\tau}}^{(i-1)}\\) and fit a ML model to iterative response \\(\\textbf{y}_{\\sigma}\\) using iterative weights \\(\\textbf{w}_{\\sigma}\\) to obtain the new \\(\\hat{\\boldsymbol{\\sigma}}^{(i)}\\)\nfix \\(\\hat{\\boldsymbol{\\mu}}^{(i)}\\),\\(\\hat{\\boldsymbol{\\sigma}}^{(i)}\\), and \\(\\hat{\\boldsymbol{\\tau}}^{(i-1)}\\) and fit a ML model to iterative response \\(\\textbf{y}_{\\nu}\\) using iterative weights \\(\\textbf{w}_{\\nu}\\) to obtain the new \\(\\hat{\\boldsymbol{\\nu}}^{(i)}\\)\nfix \\(\\hat{\\boldsymbol{\\mu}}^{(i)}\\),\\(\\hat{\\boldsymbol{\\sigma}}^{(i)}\\), and \\(\\hat{\\boldsymbol{\\nu}}^{(i)}\\) and fit a ML model to iterative response \\(\\textbf{y}_{\\tau}\\) using iterative weights \\(\\textbf{w}_{\\tau}\\) to obtain the new \\(\\hat{\\boldsymbol{\\nu}}^{(i)}\\)\ncheck if the global deviance, \\(-2(\\textit{log-likelihood})\\) does not change repeat otherwise exit"
+  },
+  {
+    "objectID": "fitting.html#important",
+    "href": "fitting.html#important",
+    "title": "Fitting models",
+    "section": "Important",
+    "text": "Important\n\nassumed distribution (the log-likelihood is needed and the first and second derivatives)\nhierarchy of the paramerers (i.e. a good location model is required before model the scale)\northogonality of the parameters (leads to better convergence)"
+  },
+  {
+    "objectID": "fitting.html#checking-orthogonality",
+    "href": "fitting.html#checking-orthogonality",
+    "title": "Fitting models",
+    "section": "Checking orthogonality",
+    "text": "Checking orthogonality\n\nSpecify a distribution family, and select values for all the parameters.\ngenerate a sample of of N observations (default \\(N=10000\\))\nfit the distribution to the generated sample.\ndisplay the correlation coefficients of the estimated predictors, \\(\\eta_{\\theta}\\)."
+  },
+  {
+    "objectID": "fitting.html#checking-orthogonality-con.",
+    "href": "fitting.html#checking-orthogonality-con.",
+    "title": "Fitting models",
+    "section": "Checking orthogonality (con.)",
+    "text": "Checking orthogonality (con.)\n\nsource(\"~/Dropbox/GAMLSS-development/ggplot/family_cor.R\")\nlibrary(gamlss)\nlibrary(ggplot2)\nfamily_cor(\"BCTo\", mu=1, sigma=0.11, nu=1, tau=5, no.sim=10000)\n\n\n\nFigure 2: Paramater orthogonality for BCTo distribution"
+  },
+  {
+    "objectID": "fitting.html#properties",
+    "href": "fitting.html#properties",
+    "title": "Fitting models",
+    "section": "properties",
+    "text": "properties\n\nare the standard errors available?\ndo the x’s need standardization.\nabout the algorithm\n - stability\n - speed \n - convergence    \nnonlinear terms\ninteractions\ndataset type\nis the selection of x’s automatic?\ninterpretation"
+  },
+  {
+    "objectID": "fitting.html#linear-models",
+    "href": "fitting.html#linear-models",
+    "title": "Fitting models",
+    "section": "Linear Models",
+    "text": "Linear Models\n\nmlinear &lt;- gamlss2(rent~area+poly(yearc,2)+location+bath+kitchen+\n              cheating|area+yearc+location+bath+kitchen+cheating, \n              family=BCTo, trace=FALSE, data=da)\nsummary(mlinear)"
+  },
+  {
+    "objectID": "fitting.html#linear-models-output",
+    "href": "fitting.html#linear-models-output",
+    "title": "Fitting models",
+    "section": "Linear Models",
+    "text": "Linear Models\n\nCall:\ngamlss2(formula = rent ~ area + poly(yearc, 2) + location + bath + \n    kitchen + cheating | area + yearc + location + bath + kitchen + \n    cheating, data = da, family = BCTo, ... = pairlist(trace = FALSE))\n---\nFamily: BCTo \nLink functions: mu = log, sigma = log, nu = identity, tau = log\n*--------\nCoefficients:\n                     Estimate Std. Error   t value Pr(&gt;|t|)    \nmu.(Intercept)      5.013e+00  2.754e-02   182.007  &lt; 2e-16 ***\nmu.area             1.063e-02  2.329e-04    45.640  &lt; 2e-16 ***\nmu.location2        8.788e-02  1.041e-02     8.440  &lt; 2e-16 ***\nmu.location3        1.983e-01  3.830e-02     5.178 2.39e-07 ***\nmu.bath1            4.152e-02  2.065e-02     2.010   0.0445 *  \nmu.kitchen1         1.130e-01  2.361e-02     4.784 1.80e-06 ***\nmu.cheating1        3.305e-01  2.405e-02    13.743  &lt; 2e-16 ***\nmu.poly(yearc, 2)1  5.047e+00  3.302e-01    15.287  &lt; 2e-16 ***\nmu.poly(yearc, 2)2  3.358e+00  2.751e-01    12.204  &lt; 2e-16 ***\nsigma.(Intercept)   1.047e+01  6.245e-02   167.650  &lt; 2e-16 ***\nsigma.area          1.218e-03  6.099e-04     1.996   0.0460 *  \nsigma.yearc        -5.972e-03  8.078e-07 -7392.764  &lt; 2e-16 ***\nsigma.location2     5.971e-02  2.911e-02     2.051   0.0403 *  \nsigma.location3     2.176e-01  9.224e-02     2.359   0.0184 *  \nsigma.bath1         5.069e-03  5.966e-02     0.085   0.9323    \nsigma.kitchen1      3.750e-02  7.106e-02     0.528   0.5977    \nsigma.cheating1    -2.431e-01  4.766e-02    -5.100 3.60e-07 ***\nnu.(Intercept)      6.534e-01  5.454e-02    11.980  &lt; 2e-16 ***\ntau.(Intercept)     3.190e+00  1.758e-02   181.397  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n*--------\nn = 3082 df =  19 res.df =  3063\nDeviance = 38254.617 Null Dev. Red. = 5.95%\nAIC = 38292.617 elapsed =  0.50sec"
+  },
+  {
+    "objectID": "fitting.html#additive-models",
+    "href": "fitting.html#additive-models",
+    "title": "Fitting models",
+    "section": "Additive Models",
+    "text": "Additive Models\n\nmadditive &lt;- gamlss2(rent~s(area)+s(yearc)+location+bath+kitchen+\n                cheating|s(area)+s(yearc)+location+bath+kitchen+cheating, \n              family=BCTo, data=da, trace=F)\nGAIC(mlinear, madditive)\n\n               AIC       df\nmadditive 38196.79 31.99106\nmlinear   38292.62 19.00000"
+  },
+  {
+    "objectID": "fitting.html#additive-models-con.",
+    "href": "fitting.html#additive-models-con.",
+    "title": "Fitting models",
+    "section": "Additive Models (con.)",
+    "text": "Additive Models (con.)\n\nsummary(madditive)\n\nCall:\ngamlss2(formula = rent ~ s(area) + s(yearc) + location + bath + \n    kitchen + cheating | s(area) + s(yearc) + location + bath + \n    kitchen + cheating, data = da, family = BCTo, ... = pairlist(trace = F))\n---\nFamily: BCTo \nLink functions: mu = log, sigma = log, nu = identity, tau = log\n*--------\nCoefficients:\n                  Estimate Std. Error t value Pr(&gt;|t|)    \nmu.(Intercept)     5.71441    0.02085 274.133  &lt; 2e-16 ***\nmu.location2       0.08788    0.01102   7.977 2.11e-15 ***\nmu.location3       0.20994    0.04962   4.231 2.39e-05 ***\nmu.bath1           0.05822    0.04262   1.366  0.17206    \nmu.kitchen1        0.10870    0.03636   2.990  0.00281 ** \nmu.cheating1       0.34716    0.02024  17.148  &lt; 2e-16 ***\nsigma.(Intercept) -1.15391    0.03702 -31.168  &lt; 2e-16 ***\nsigma.location2    0.05338    0.02264   2.358  0.01845 *  \nsigma.location3    0.21232    0.08615   2.464  0.01378 *  \nsigma.bath1        0.03452    0.08290   0.416  0.67713    \nsigma.kitchen1     0.01909    0.07583   0.252  0.80122    \nsigma.cheating1   -0.23645    0.03761  -6.288 3.69e-10 ***\nnu.(Intercept)     0.69396    0.04544  15.272  &lt; 2e-16 ***\ntau.(Intercept)    3.27139    0.07556  43.292  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n---\nSmooth terms:\n    mu.s(area) mu.s(yearc) sigma.s(area) sigma.s(yearc)\nedf     6.6206      6.2852        1.0123         4.0731\n*--------\nn = 3082 df =  31.99 res.df =  3050.01\nDeviance = 38132.8112 Null Dev. Red. = 6.25%\nAIC = 38196.7933 elapsed =  0.59sec"
+  },
+  {
+    "objectID": "fitting.html#additive-models-con.-1",
+    "href": "fitting.html#additive-models-con.-1",
+    "title": "Fitting models",
+    "section": "Additive Models (con.)",
+    "text": "Additive Models (con.)\n\nplot(madditive)"
+  },
+  {
+    "objectID": "fitting.html#sec-RegressionTrees",
+    "href": "fitting.html#sec-RegressionTrees",
+    "title": "Fitting models",
+    "section": "Regression Trees",
+    "text": "Regression Trees\n\nsource(\"~/Dropbox/GAMLSS-development/nnet/reg.tree.R\")\nmregtree &lt;- gamlss2(rent~tree(~area+yearc+location+bath+kitchen+cheating)|\n                       tree(~area+yearc+location+bath+kitchen+cheating),\n                  family=BCTo, data=da, trace=FALSE) \n\nGAIC(mlinear, madditive, mregtree)\n\n               AIC       df\nmadditive 38196.79 31.99106\nmlinear   38292.62 19.00000\nmregtree  38622.27 26.00000"
+  },
+  {
+    "objectID": "fitting.html#regression-trees-con.",
+    "href": "fitting.html#regression-trees-con.",
+    "title": "Fitting models",
+    "section": "Regression Trees (con.)",
+    "text": "Regression Trees (con.)\n\npp&lt;- specials(mregtree, model = \"mu\", elements = \"model\")\nplot(pp)\ntext(pp)"
+  },
+  {
+    "objectID": "fitting.html#regression-trees-continue",
+    "href": "fitting.html#regression-trees-continue",
+    "title": "Fitting models",
+    "section": "Regression Trees (continue)",
+    "text": "Regression Trees (continue)\n\npp&lt;-specials(mregtree, model = \"sigma\", elements = \"model\")\nplot(pp)\ntext(pp)"
+  },
+  {
+    "objectID": "fitting.html#neural-networks-fit",
+    "href": "fitting.html#neural-networks-fit",
+    "title": "Fitting models",
+    "section": "Neural Networks (fit)",
+    "text": "Neural Networks (fit)\n\nf &lt;- rent ~ n(~area+yearc+location+bath+kitchen, size=10)|           n(~area+yearc+location+bath+kitchen, size=3)\nmneural &lt;- gamlss2(f,family=BCTo, data=da)\n\nGAMLSS-RS iteration  1: Global Deviance = 38212.1529 eps = 0.289812     \nGAMLSS-RS iteration  2: Global Deviance = 38187.2302 eps = 0.000652     \nGAMLSS-RS iteration  3: Global Deviance = 38179.642 eps = 0.000198     \nGAMLSS-RS iteration  4: Global Deviance = 38177.9778 eps = 0.000043     \nGAMLSS-RS iteration  5: Global Deviance = 38164.163 eps = 0.000361     \nGAMLSS-RS iteration  6: Global Deviance = 38162.7354 eps = 0.000037     \nGAMLSS-RS iteration  7: Global Deviance = 38162.2335 eps = 0.000013     \nGAMLSS-RS iteration  8: Global Deviance = 38161.8367 eps = 0.000010     \nGAMLSS-RS iteration  9: Global Deviance = 38161.3414 eps = 0.000012     \nGAMLSS-RS iteration 10: Global Deviance = 38160.9489 eps = 0.000010     \nGAMLSS-RS iteration 11: Global Deviance = 38160.6182 eps = 0.000008     \n\ngamlss2::GAIC(mlinear, madditive, mneural, mregtree, k=2)\n\n               AIC        df\nmadditive 38196.79  31.99106\nmlinear   38292.62  19.00000\nmneural   38380.62 110.00000\nmregtree  38622.27  26.00000"
+  },
+  {
+    "objectID": "fitting.html#neural-networks-plot",
+    "href": "fitting.html#neural-networks-plot",
+    "title": "Fitting models",
+    "section": "Neural Networks (plot)",
+    "text": "Neural Networks (plot)\n\nsource(\"~/Dropbox/GAMLSS-development/nnet/plot_NN.R\")\n plot(specials(mneural, model = \"mu\", elements = \"model\"))"
+  },
+  {
+    "objectID": "fitting.html#neural-networks-plot-1",
+    "href": "fitting.html#neural-networks-plot-1",
+    "title": "Fitting models",
+    "section": "Neural Networks (plot)",
+    "text": "Neural Networks (plot)\n\nsource(\"~/Dropbox/GAMLSS-development/nnet/plot_NN.R\")\nplot(specials(mneural, model = \"sigma\", elements = \"model\"))"
+  },
+  {
+    "objectID": "fitting.html#random-forest",
+    "href": "fitting.html#random-forest",
+    "title": "Fitting models",
+    "section": "random forest",
+    "text": "random forest\n\nf &lt;- rent ~ cf(~area+yearc+location+bath+kitchen)|    cf(~area+yearc+location+bath+kitchen)\nmcf &lt;- gamlss2(f,family=BCTo, data=da)\n\nGAMLSS-RS iteration  1: Global Deviance = 38466.2361 eps = 0.285090     \nGAMLSS-RS iteration  2: Global Deviance = 38312.7521 eps = 0.003990     \nGAMLSS-RS iteration  3: Global Deviance = 38307.7194 eps = 0.000131     \nGAMLSS-RS iteration  4: Global Deviance = 38306.3367 eps = 0.000036     \nGAMLSS-RS iteration  5: Global Deviance = 38306.1885 eps = 0.000003     \n\ngamlss2::GAIC(mlinear, madditive, mneural, mregtree, mcf, k=2)\n\n               AIC        df\nmadditive 38196.79  31.99106\nmlinear   38292.62  19.00000\nmneural   38380.62 110.00000\nmregtree  38622.27  26.00000\nmcf       38714.19 204.00000"
+  },
+  {
+    "objectID": "fitting.html#lasso-ridge",
+    "href": "fitting.html#lasso-ridge",
+    "title": "Fitting models",
+    "section": "LASSO-RIDGE",
+    "text": "LASSO-RIDGE\n\nthere is function ri() in gamlss using P-splines\nthere is also package gamlss.lasso for gamlss connecting with package glmnet\nbut LASSO is non implemented for gamlss2 yet"
+  },
+  {
+    "objectID": "fitting.html#principal-componet-regression",
+    "href": "fitting.html#principal-componet-regression",
+    "title": "Fitting models",
+    "section": "Principal Componet Regression",
+    "text": "Principal Componet Regression\n\nfunctions pc() and pcr() in gamlss.foreach package for gamlss\nPCR is non implemented for gamlss2 yet"
+  },
+  {
+    "objectID": "fitting.html#summary",
+    "href": "fitting.html#summary",
+    "title": "Fitting models",
+    "section": "summary",
+    "text": "summary\n\n\n\nTable 1: Summary of properties of the machine learning algorithms\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nML Models\ncoef. s.e.\nstand. of x’s\nalgo. stab., speed, conv.\nnon-linear terms\ninter- actions\ndata type\nauto sele-ction\ninterpre- tation\n\n\n\n\nlinear\nyes\nno\nyes, fast, v.good\npoly\ndeclare\n\\(n&gt;r\\)\nno\nv. easy\n\n\nadditive\nno\nno\nyes, slow, good\nsmooth\ndeclare\n\\(n&gt;r\\)\nno\neasy\n\n\nRT\nno\nno\nno, slow, bad\ntrees\nauto\n\\(n&gt;r\\)??\nyes\neasy"
+  },
+  {
+    "objectID": "fitting.html#summary-continue",
+    "href": "fitting.html#summary-continue",
+    "title": "Fitting models",
+    "section": "summary (continue)",
+    "text": "summary (continue)\n\n\n\nTable 2: Summary of properties of the machine learning algorithms\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nML Models\ncoef. s.e.\nstand. of x’s\nalgo. stab., speed, conv.\nnon-linear terms\ninter- actions\ndata type\nauto sele-ction\ninterpre- tation\n\n\n\n\nNN\nno\n0 to 1\nno, \\(\\,\\,\\) ok, \\(\\,\\,\\) ok\nauto\nauto\nboth?\nyes\nv. hard\n\n\nRF\nno\nno\nno, slow, slow\nYES\nno\nboth\nauto\nhard\n\n\nLASSO\nno\nyes\nyes, fast, good\npoly\ndeclare\nboth\nauto\neasy"
+  },
+  {
+    "objectID": "fitting.html#summary-continue-1",
+    "href": "fitting.html#summary-continue-1",
+    "title": "Fitting models",
+    "section": "summary (continue)",
+    "text": "summary (continue)\n\n\n\nTable 3: Summary of properties of the machine learning algorithms\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nML Models\ncoef. s.e.\nstand. of x’s\nalgo. stab., speed, conv.\nnon-linear terms\ninter- actions\ndata type\nauto sele-ction\ninterpre- tation\n\n\n\n\nBoost\nno\nno\nyes, fast, good\nsmooth trees\ndeclare\n\\(n&lt;&lt;r\\)\nyes\neasy\n\n\nMCMC\nyes\nno\ngood, ok, \\(\\,\\,\\) ok\nsmooth\ndeclare\n\\(n&gt;r\\)\nno\neasy\n\n\nPCR\nyes\nyes\nyes, fast, good\npoly\ndeclare\nboth\nauto\nhard"
+  },
+  {
+    "objectID": "fitting.html#end",
+    "href": "fitting.html#end",
+    "title": "Fitting models",
+    "section": "end",
+    "text": "end\nback to the index\n\n\n\n\n\n\n   The Books\n\n\n\n\n\n\n\nwww.gamlss.com"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#program",
+    "href": "Why_GAMLSS.html#program",
+    "title": "Why GAMLSS?",
+    "section": "Program",
+    "text": "Program\n\nwhy GAMLSS\navailable software\ndistributions\nfitting\ninterpretation"
+  },
+  {
+    "objectID": "TheRsoftware.html#introduction",
+    "href": "TheRsoftware.html#introduction",
+    "title": "The R software",
+    "section": "Introduction",
+    "text": "Introduction\n\nresiduals in GAMLSS\nan example; the rent99 data\nR packages"
+  },
+  {
+    "objectID": "TheRsoftware.html#introduction-1",
+    "href": "TheRsoftware.html#introduction-1",
+    "title": "The R software",
+    "section": "Introduction",
+    "text": "Introduction\n\nGAMLSS uses as residuals the\n\nnormalised quantile residuals\\(\\equiv\\) z-scores"
+  },
+  {
+    "objectID": "TheRsoftware.html#pit-and-z-scores-residuals",
+    "href": "TheRsoftware.html#pit-and-z-scores-residuals",
+    "title": "The R software",
+    "section": "PIT and z-scores residuals",
+    "text": "PIT and z-scores residuals\nlet \\(y_i\\) and \\(F(y_i, \\hat(\\theta)_i)\\) be the ith observation and its fitted cdf respectively. Then the Probability Integral Transformed (PIT) residuals are\n\\[u_i = F(y_i, \\hat(\\theta)_i) \\] and the z-scores residuals are\n\\[z_i = \\Phi^{-1}(y_i, \\hat(\\theta)_i) \\]"
+  },
+  {
+    "objectID": "TheRsoftware.html#properties",
+    "href": "TheRsoftware.html#properties",
+    "title": "The R software",
+    "section": "properties",
+    "text": "properties\nIf the distribution of \\(y_i\\) is specified correctly then PIT are uniform;\ni.e \\[u_i \\sim U(0,1)\\]\nand z-scores are normally distributed\ni.e. \\[z_i \\sim NO(0,1)\\]"
+  },
+  {
+    "objectID": "TheRsoftware.html#pit",
+    "href": "TheRsoftware.html#pit",
+    "title": "The R software",
+    "section": "PIT",
+    "text": "PIT"
+  },
+  {
+    "objectID": "TheRsoftware.html#z-scores",
+    "href": "TheRsoftware.html#z-scores",
+    "title": "The R software",
+    "section": "z-scores",
+    "text": "z-scores"
+  },
+  {
+    "objectID": "TheRsoftware.html#diagnostics-plots",
+    "href": "TheRsoftware.html#diagnostics-plots",
+    "title": "The R software",
+    "section": "diagnostics plots",
+    "text": "diagnostics plots\n\nresiduals plots against other variables\nindex \nx-variable\nparameters \nquantiles\nqqplots\nworm plots\ndensity plots\nbucket plots\nskewness plots"
+  },
+  {
+    "objectID": "TheRsoftware.html#data",
+    "href": "TheRsoftware.html#data",
+    "title": "The R software",
+    "section": "Data",
+    "text": "Data\n\n\n\nTable 1: The Table of Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nobs number\ny\nx1\nx2\nx3\n…\nxr-1\nxr\n\n\n\n\n1\ny1\nx11\nx12\nx13\n…\nx1r-1\nx1r\n\n\n2\ny2\nx21\nx22\nx23\n…\nx2r-1\nx2r\n\n\n3\ny3\nx31\nx32\nx33\n…\nx3r-1\nx3r\n\n\n…\n…\n…\n…\n…\n…\n…\n…\n\n\nn-1\nyn-1\nxn-11\nxn-12\nxn-12\n…\nxn-1r-1\nxn-1r\n\n\nn\nyn\nxn1\nxn2\nxn3\n…\nxnr-1\nxnr"
+  },
+  {
+    "objectID": "TheRsoftware.html#the-rent-1999-munich-data",
+    "href": "TheRsoftware.html#the-rent-1999-munich-data",
+    "title": "The R software",
+    "section": "The rent 1999 Munich data",
+    "text": "The rent 1999 Munich data\n\n\n\n\nTable 2: Variables in Munich rent data\n\n\n\n\n\n\nR\nFl\nA\nB\nH\nL\nloc\n\n\n\n\n693.3\n50\n1972\n0\n0\n0\n2\n\n\n422.0\n54\n1972\n0\n0\n0\n2\n\n\n736.6\n70\n1972\n0\n0\n0\n2\n\n\n732.2\n50\n1972\n0\n0\n0\n2\n\n\n1295.1\n55\n1893\n0\n0\n0\n2\n\n\n1195.9\n59\n1893\n0\n0\n0\n2"
+  },
+  {
+    "objectID": "TheRsoftware.html#fitting",
+    "href": "TheRsoftware.html#fitting",
+    "title": "The R software",
+    "section": "Fitting",
+    "text": "Fitting\n\nr1 &lt;- gamlss2(R~pb(Fl)+pb(A)+H+loc|pb(Fl)+pb(A)+H+loc, \n           family=GA, data=rent)\n\nGAMLSS-RS iteration  1: Global Deviance = 27566.2472 eps = 0.090862     \nGAMLSS-RS iteration  2: Global Deviance = 27564.2989 eps = 0.000070     \nGAMLSS-RS iteration  3: Global Deviance = 27564.2459 eps = 0.000001"
+  },
+  {
+    "objectID": "TheRsoftware.html#residual-plots-agaist-index",
+    "href": "TheRsoftware.html#residual-plots-agaist-index",
+    "title": "The R software",
+    "section": "residual plots agaist index",
+    "text": "residual plots agaist index\n\nlibrary(gamlss.ggplots)\nresid_index(r1)"
+  },
+  {
+    "objectID": "TheRsoftware.html#against-continuous-x-variables",
+    "href": "TheRsoftware.html#against-continuous-x-variables",
+    "title": "The R software",
+    "section": "against continuous x-variables",
+    "text": "against continuous x-variables\n\nresid_xvar(r1, A)"
+  },
+  {
+    "objectID": "TheRsoftware.html#against-factor-x-variables",
+    "href": "TheRsoftware.html#against-factor-x-variables",
+    "title": "The R software",
+    "section": "against factor x-variables",
+    "text": "against factor x-variables\n\nresid_xvar(r1,loc)"
+  },
+  {
+    "objectID": "TheRsoftware.html#qq-plots",
+    "href": "TheRsoftware.html#qq-plots",
+    "title": "The R software",
+    "section": "QQ-plots",
+    "text": "QQ-plots\n\nresid_qqplot(r1)"
+  },
+  {
+    "objectID": "TheRsoftware.html#worm-plots",
+    "href": "TheRsoftware.html#worm-plots",
+    "title": "The R software",
+    "section": "worm plots",
+    "text": "worm plots\n\nresid_wp(r1)"
+  },
+  {
+    "objectID": "TheRsoftware.html#density-plots",
+    "href": "TheRsoftware.html#density-plots",
+    "title": "The R software",
+    "section": "density plots",
+    "text": "density plots\n\nresid_density(r1)"
+  },
+  {
+    "objectID": "TheRsoftware.html#bucket-plots",
+    "href": "TheRsoftware.html#bucket-plots",
+    "title": "The R software",
+    "section": "bucket plots",
+    "text": "bucket plots\n\nmoment_bucket(r1)"
+  },
+  {
+    "objectID": "TheRsoftware.html#symmetry-plots",
+    "href": "TheRsoftware.html#symmetry-plots",
+    "title": "The R software",
+    "section": "symmetry plots",
+    "text": "symmetry plots\n\nresid_symmetry(r1)"
+  },
+  {
+    "objectID": "TheRsoftware.html#ecdf-plot",
+    "href": "TheRsoftware.html#ecdf-plot",
+    "title": "The R software",
+    "section": "ecdf plot",
+    "text": "ecdf plot\n\nresid_ecdf(r1)"
+  },
+  {
+    "objectID": "TheRsoftware.html#detrended-ecdf-plot",
+    "href": "TheRsoftware.html#detrended-ecdf-plot",
+    "title": "The R software",
+    "section": "detrended ecdf plot",
+    "text": "detrended ecdf plot\n\nresid_dtop(r1)"
+  },
+  {
+    "objectID": "TheRsoftware.html#all-in-one-plots",
+    "href": "TheRsoftware.html#all-in-one-plots",
+    "title": "The R software",
+    "section": "all in one plots",
+    "text": "all in one plots\n\nresid_plots(r1)"
+  },
+  {
+    "objectID": "TheRsoftware.html#all-in-one-plots-standard",
+    "href": "TheRsoftware.html#all-in-one-plots-standard",
+    "title": "The R software",
+    "section": "all in one plots (standard)",
+    "text": "all in one plots (standard)\n\nplot(r1,which=\"resid\")"
+  },
+  {
+    "objectID": "TheRsoftware.html#older-packages",
+    "href": "TheRsoftware.html#older-packages",
+    "title": "The R software",
+    "section": "Older Packages",
+    "text": "Older Packages\n\ngamlss: the original (needs dist and data)\ngamlss.dist: defining the gamlss.family distributions\ngamlss.data: for extra data sets\ngamlss.add: connect with mgcv, nnet and trees\ngamlss.tr: for truncating gamlss.family distributions\ngamlss.cens: for censored response variables\ngamlss.demo: for demonstrating GAMLSS concepts\ngamlss.mx: for fitting finite mixtures"
+  },
+  {
+    "objectID": "TheRsoftware.html#new-packages",
+    "href": "TheRsoftware.html#new-packages",
+    "title": "The R software",
+    "section": "New Packages",
+    "text": "New Packages\n\ngamboostLSS for GAMLSS boosting\nbamlss the Bayesian GAMLSS\ngamlss2\\(^*\\): the new version of GAMLSS\ngamlss.ggplots: using ggplot2 within GAMLSS\ngamlss.foreach: for parallel computing\ngamlss.prepdata: preparation of data before fitting\ngamlss.lasso: for LASSO. Ridge and elastic Net regression\ngamlss.shiny\\(^*\\): similar to gamlss.demo\ntopmodels distributional regression help (not necessary gamlss)\n\n\n\n\\(^*\\) in GitHub needed testing"
+  },
+  {
+    "objectID": "TheRsoftware.html#why-gamlss2",
+    "href": "TheRsoftware.html#why-gamlss2",
+    "title": "The R software",
+    "section": "why gamlss2",
+    "text": "why gamlss2\n\ngamlss() for very large data is slow\npredict in gamlss is not easy to use\ncurrent implementation can cope with only 4 parameters \\(\\mu\\), \\(\\sigma\\), \\(\\nu\\) and \\(\\tau\\)\nto connect different estimation statistical approaches\n\npenalised likelihood\nBayesian\nboosting\n\nto implement extra algorithms i.e. stepwise, robust\nto implement machine learning methodology"
+  },
+  {
+    "objectID": "TheRsoftware.html#getting-the-libraries",
+    "href": "TheRsoftware.html#getting-the-libraries",
+    "title": "The R software",
+    "section": "getting the libraries",
+    "text": "getting the libraries\n\nFor CRAN use\n\ninstall.packages(gamlss)\n\nfor GitHub use\n\ndevtools::install_github(\"gamlss-dev/gamlss2\")\nhttps://gamlss-dev.r-universe.dev/builds\n\nand then use\n\nlibrary(gamlss2)"
+  },
+  {
+    "objectID": "TheRsoftware.html#end",
+    "href": "TheRsoftware.html#end",
+    "title": "The R software",
+    "section": "end",
+    "text": "end\nback to the index\n\n\n\n\n\n\n   The Books\n\n\n\n\n\n\n\nwww.gamlss.com"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "GAMLSS short course slides for XVII MGEST-2025",
+    "section": "",
+    "text": "This website contains slides from the short course on GAMLSS given in June 2024 at Porto - Portugal.\n\nWhy GAMLSS\nThe R shoftware\nDistributions\nModel Fitting\nComparison of Models\nInterpretation of Models"
+  },
+  {
+    "objectID": "Distributions.html#introduction",
+    "href": "Distributions.html#introduction",
+    "title": "Distributions",
+    "section": "Introduction",
+    "text": "Introduction\nSuitable distribution for the response variable.\n\n\ndifferent types of distributions\nproperies of distributions\ndistributions in GAMLSS\n\nexplicit\nimplicit\n\na procedure to find a good initial distribution for the response"
+  },
+  {
+    "objectID": "Distributions.html#types",
+    "href": "Distributions.html#types",
+    "title": "Distributions",
+    "section": "Types",
+    "text": "Types\n\ncontinuous\n\n\\((-\\infty, \\infty)\\), real line;\n\\((0, \\infty)\\), positive real line;\n\\((0,1)\\) from 0 to 1\n\ndiscrete\n\n\\((0,1,\\dots, \\infty)\\)\n\\((0,1,\\dots, N)\\)\n\nmixed part continuous part discrete\n\n\\([0, \\infty)\\) zero adjusted\n\\([0, 1]\\) zero (and 1) inflated"
+  },
+  {
+    "objectID": "Distributions.html#continuous",
+    "href": "Distributions.html#continuous",
+    "title": "Distributions",
+    "section": "continuous",
+    "text": "continuous\n\n\n(a) continuous"
+  },
+  {
+    "objectID": "Distributions.html#discrete",
+    "href": "Distributions.html#discrete",
+    "title": "Distributions",
+    "section": "discrete",
+    "text": "discrete\n\n\n(a) discrete"
+  },
+  {
+    "objectID": "Distributions.html#mixed",
+    "href": "Distributions.html#mixed",
+    "title": "Distributions",
+    "section": "mixed",
+    "text": "mixed\n\n\n(a) mixed"
+  },
+  {
+    "objectID": "Distributions.html#properties",
+    "href": "Distributions.html#properties",
+    "title": "Distributions",
+    "section": "properties",
+    "text": "properties\n\\(f(y;{\\theta})\\)\n\n\\(\\int_{R_Y} f(y) \\; dy=1\\)\n\\(\\sum_{y\\in R_Y} f(y)=\\sum_{y \\in R_Y} P(Y=y)=1\\)\n\\(\\int_{R_{1}} f(y)\\, dy + \\sum_{y \\in R_{2}} f(y) = 1\\)."
+  },
+  {
+    "objectID": "Distributions.html#parameters",
+    "href": "Distributions.html#parameters",
+    "title": "Distributions",
+    "section": "parameters",
+    "text": "parameters\n\n\\(f(y;{\\theta})\\)\n\\({\\theta}= (\\theta_1, \\theta_2, \\ldots, \\theta_k)\\).\nlocation\nscale\nshape\n\nskewness\nkurtosis"
+  },
+  {
+    "objectID": "Distributions.html#left-skew",
+    "href": "Distributions.html#left-skew",
+    "title": "Distributions",
+    "section": "left skew",
+    "text": "left skew\n\n\n(a) left skew"
+  },
+  {
+    "objectID": "Distributions.html#symmetric",
+    "href": "Distributions.html#symmetric",
+    "title": "Distributions",
+    "section": "symmetric",
+    "text": "symmetric\n\n\n(a) symmetric"
+  },
+  {
+    "objectID": "Distributions.html#right-skew",
+    "href": "Distributions.html#right-skew",
+    "title": "Distributions",
+    "section": "right skew",
+    "text": "right skew\n\n\nFigure 6: right skew"
+  },
+  {
+    "objectID": "Distributions.html#platy",
+    "href": "Distributions.html#platy",
+    "title": "Distributions",
+    "section": "platy",
+    "text": "platy\n\n\n(a) platy"
+  },
+  {
+    "objectID": "Distributions.html#meso",
+    "href": "Distributions.html#meso",
+    "title": "Distributions",
+    "section": "meso",
+    "text": "meso\n\n\nFigure 8: meso"
+  },
+  {
+    "objectID": "Distributions.html#lepto",
+    "href": "Distributions.html#lepto",
+    "title": "Distributions",
+    "section": "lepto",
+    "text": "lepto\n\n\nFigure 9: lepto"
+  },
+  {
+    "objectID": "Distributions.html#moments-based-characteristics",
+    "href": "Distributions.html#moments-based-characteristics",
+    "title": "Distributions",
+    "section": "moments based characteristics",
+    "text": "moments based characteristics\n\nmean \\[\\begin{align*}\nE(Y)= \\begin{cases}\n\\int_{-\\infty}^{\\infty} y f(y)\\, dy&\\text{for continuous}\\\\\n\\sum_{y \\epsilon R_Y} y\\, P(Y=y) &\\text{for discrete}\n\\end{cases}\n\\end{align*}\\]\nvariance\ncoefficient of skewness\n(adjusted) coefficient for kurtosis\n\n\n\nNot always exist"
+  },
+  {
+    "objectID": "Distributions.html#mean",
+    "href": "Distributions.html#mean",
+    "title": "Distributions",
+    "section": "mean",
+    "text": "mean\n\n\nFigure 10: The mean is the point in which the distribution is balance."
+  },
+  {
+    "objectID": "Distributions.html#centile-based-characteristics",
+    "href": "Distributions.html#centile-based-characteristics",
+    "title": "Distributions",
+    "section": "centile based characteristics",
+    "text": "centile based characteristics\n\nthe median\nsemi interquartile range\ncentile skewness\ncentile kurtosis\n\n\n\nAlways exist"
+  },
+  {
+    "objectID": "Distributions.html#quantiles",
+    "href": "Distributions.html#quantiles",
+    "title": "Distributions",
+    "section": "quantiles",
+    "text": "quantiles\n\n\nFigure 11: Showing how \\(Q1\\), \\(m\\) (median), \\(Q3\\) and the interquartile range IR of a continuous distribution are derived from \\(f(y)\\)."
+  },
+  {
+    "objectID": "Distributions.html#the-gamlss-families",
+    "href": "Distributions.html#the-gamlss-families",
+    "title": "Distributions",
+    "section": "The GAMLSS families",
+    "text": "The GAMLSS families\n\nover 100 explicit distributions\nimplicit distributions\n\ntruncation\nlog distributions\nlogit distribution\ninflated distributions\nzero adjusted\ngeneralised Tobit"
+  },
+  {
+    "objectID": "Distributions.html#explicit-distributions",
+    "href": "Distributions.html#explicit-distributions",
+    "title": "Distributions",
+    "section": "explicit distributions",
+    "text": "explicit distributions\n\nd probability density functions (pdf)\np cumulative density functions (cdf)\nq the q-function or inversed cumulative density functions (icdf)\nr random generating function\nfitting function\n\nfirst and second devivative of the log-likelihood\nother information like names of parameters, range of the response a of the parameters e.t.c."
+  },
+  {
+    "objectID": "Distributions.html#continuous-1",
+    "href": "Distributions.html#continuous-1",
+    "title": "Distributions",
+    "section": "continuous",
+    "text": "continuous"
+  },
+  {
+    "objectID": "Distributions.html#with-ggplot2",
+    "href": "Distributions.html#with-ggplot2",
+    "title": "Distributions",
+    "section": "with ggplot2",
+    "text": "with ggplot2"
+  },
+  {
+    "objectID": "Distributions.html#discrete-1",
+    "href": "Distributions.html#discrete-1",
+    "title": "Distributions",
+    "section": "discrete",
+    "text": "discrete"
+  },
+  {
+    "objectID": "Distributions.html#with-ggplot2-1",
+    "href": "Distributions.html#with-ggplot2-1",
+    "title": "Distributions",
+    "section": "with ggplot2",
+    "text": "with ggplot2"
+  },
+  {
+    "objectID": "Distributions.html#demo",
+    "href": "Distributions.html#demo",
+    "title": "Distributions",
+    "section": "demo",
+    "text": "demo\n\nlibrary(gamlss.demo)\ngamlss.demo()"
+  },
+  {
+    "objectID": "Distributions.html#truncated-distributions",
+    "href": "Distributions.html#truncated-distributions",
+    "title": "Distributions",
+    "section": "truncated distributions",
+    "text": "truncated distributions\n\nAny distribution can be truncated\n– to the left\n– to the right or\n– in both sides"
+  },
+  {
+    "objectID": "Distributions.html#truncated-continuous",
+    "href": "Distributions.html#truncated-continuous",
+    "title": "Distributions",
+    "section": "truncated continuous",
+    "text": "truncated continuous\n\nlibrary(gamlss.tr)\ngen.trun(\"NO\", par=c(0,3), type=\"both\")\n\nA truncated family of distributions from NO has been generated \n and saved under the names:  \n dNOtr pNOtr qNOtr rNOtr NOtr \nThe type of truncation is both \n and the truncation parameter is 0 3  \n\nfamily_pdf(\"NOtr\", from=0,to=3, mu=0, sigma=1)\n\nintegrate(dNOtr, 0,3)\n\n1 with absolute error &lt; 1.1e-14"
+  },
+  {
+    "objectID": "Distributions.html#truncated-discrete",
+    "href": "Distributions.html#truncated-discrete",
+    "title": "Distributions",
+    "section": "truncated discrete",
+    "text": "truncated discrete\n\ngen.trun(\"NBI\", par=0)\n\nA truncated family of distributions from NBI has been generated \n and saved under the names:  \n dNBItr pNBItr qNBItr rNBItr NBItr \nThe type of truncation is left \n and the truncation parameter is 0  \n\nfamily_pdf(\"NBItr\", from= 1, to=10, mu=1.5, sigma=1)"
+  },
+  {
+    "objectID": "Distributions.html#transformation-from--infty-infty-to-0-infty",
+    "href": "Distributions.html#transformation-from--infty-infty-to-0-infty",
+    "title": "Distributions",
+    "section": "Transformation from \\((-\\infty, \\infty)\\) to \\((0, +\\infty)\\)",
+    "text": "Transformation from \\((-\\infty, \\infty)\\) to \\((0, +\\infty)\\)\n\nAny distribution for \\(Z\\) on \\((-\\infty, \\infty)\\) can be transformed to a corresponding distribution for \\(Y=\\exp(Z)\\) on \\((0, +\\infty)\\)\nFor example: from t distribution to \\(\\log t\\) distribution"
+  },
+  {
+    "objectID": "Distributions.html#log-distributions",
+    "href": "Distributions.html#log-distributions",
+    "title": "Distributions",
+    "section": "log distributions",
+    "text": "log distributions\n\nfamily_pdf(\"TF\", from=-5,to=5, mu=0, sigma=1, nu=5)"
+  },
+  {
+    "objectID": "Distributions.html#log-distributions-con",
+    "href": "Distributions.html#log-distributions-con",
+    "title": "Distributions",
+    "section": "log distributions (con)",
+    "text": "log distributions (con)\n\ngen.Family(\"TF\")\n\nA  log  family of distributions from TF has been generated \n and saved under the names:  \n dlogTF plogTF qlogTF rlogTF logTF \n\nfamily_pdf(\"logTF\", from=0.01,to=3, mu=0, sigma=1, nu=5)"
+  },
+  {
+    "objectID": "Distributions.html#transformation-from--infty-infty-to-0-1",
+    "href": "Distributions.html#transformation-from--infty-infty-to-0-1",
+    "title": "Distributions",
+    "section": "Transformation from \\((-\\infty, \\infty)\\) to \\((0, 1)\\)",
+    "text": "Transformation from \\((-\\infty, \\infty)\\) to \\((0, 1)\\)\n\nAny distribution for \\(Z\\) on \\((-\\infty, \\infty)\\) can be transformed to a corresponding distribution for \\(Y=\\exp(Z)\\) on \\((0, 1)\\)\nFor example: from t distribution to logit t distribution"
+  },
+  {
+    "objectID": "Distributions.html#logit-distributions",
+    "href": "Distributions.html#logit-distributions",
+    "title": "Distributions",
+    "section": "logit distributions",
+    "text": "logit distributions\n\nlibrary(gamlss)\nlibrary(gamlss.ggplots)\nfamily_pdf(\"TF\", from=-5,to=5, mu=0, sigma=1, nu=5)"
+  },
+  {
+    "objectID": "Distributions.html#logit-distributions-con",
+    "href": "Distributions.html#logit-distributions-con",
+    "title": "Distributions",
+    "section": "logit distributions (con)",
+    "text": "logit distributions (con)\n\ngen.Family(\"TF\", \"logit\")\n\nA  logit  family of distributions from TF has been generated \n and saved under the names:  \n dlogitTF plogitTF qlogitTF rlogitTF logitTF \n\nfamily_pdf(\"logitTF\", from=0.001, to=.999, mu=0, sigma=1, nu=5)"
+  },
+  {
+    "objectID": "Distributions.html#inflated-distributions",
+    "href": "Distributions.html#inflated-distributions",
+    "title": "Distributions",
+    "section": "inflated distributions",
+    "text": "inflated distributions\n\n\nA  logit  family of distributions from SHASHo has been generated \n and saved under the names:  \n dlogitSHASHo plogitSHASHo qlogitSHASHo rlogitSHASHo logitSHASHo \n\n\nA  0to1 inflated logitSHASHo distribution has been generated \n and saved under the names:  \n dlogitSHASHoInf0to1 plogitSHASHoInf0to1 qlogitSHASHoInf0to1 rlogitSHASHoInf0to1 \n plotlogitSHASHoInf0to1"
+  },
+  {
+    "objectID": "Distributions.html#zero-adjusted",
+    "href": "Distributions.html#zero-adjusted",
+    "title": "Distributions",
+    "section": "zero adjusted",
+    "text": "zero adjusted\n\n\nA zero adjusted BCT distribution has been generated \n and saved under the names:  \n dBCTZadj pBCTZadj qBCTZadj rBCTZadj \n plotBCTZadj"
+  },
+  {
+    "objectID": "Distributions.html#tobit",
+    "href": "Distributions.html#tobit",
+    "title": "Distributions",
+    "section": "TOBIT",
+    "text": "TOBIT"
+  },
+  {
+    "objectID": "Distributions.html#generalized-tobit",
+    "href": "Distributions.html#generalized-tobit",
+    "title": "Distributions",
+    "section": "generalized TOBIT",
+    "text": "generalized TOBIT"
+  },
+  {
+    "objectID": "Distributions.html#book-2",
+    "href": "Distributions.html#book-2",
+    "title": "Distributions",
+    "section": "book 2",
+    "text": "book 2\n\nbook2"
+  },
+  {
+    "objectID": "Distributions.html#end",
+    "href": "Distributions.html#end",
+    "title": "Distributions",
+    "section": "end",
+    "text": "end\nback to the index\n\n\n\n\n\n\n   The Books\n\n\n\n\n\n\n\nwww.gamlss.com"
+  },
+  {
+    "objectID": "Interpret.html#introduction",
+    "href": "Interpret.html#introduction",
+    "title": "Interpreting models",
+    "section": "Introduction",
+    "text": "Introduction\n\nhow to interpreted the effect of a single term into the distribution of the response;\nhow to use the GAMLSS model for prediction."
+  },
+  {
+    "objectID": "Interpret.html#interpretation",
+    "href": "Interpret.html#interpretation",
+    "title": "Interpreting models",
+    "section": "Interpretation",
+    "text": "Interpretation\n\nhow the information we obtain from the fitted model can be used\n\n\n\n\n\n\n\nflowchart TB\n  A[Features.] --&gt; B(Parameters) \n  B --&gt; D[Properties, \\n Characteristics]\n  D --&gt;  C(Distribution)\n  B --&gt; C\n\n\n\n\nFigure 1: How x-variables effecting the properties of the distribution."
+  },
+  {
+    "objectID": "Interpret.html#graphical-partial-effects",
+    "href": "Interpret.html#graphical-partial-effects",
+    "title": "Interpreting models",
+    "section": "graphical Partial effects",
+    "text": "graphical Partial effects\n\nceteris paribus (concentate in one term fixing the rest)\n\\(\\textbf{x}_j\\) denote a single (or maximum two terms)\n\\(\\textbf{x}_{-j}\\) all the rest so \\(\\{\\textbf{x}_j, \\textbf{x}_{-j} \\}\\) are all terms in the model\n\\(\\omega(D)\\) the characteristic of the distribution we are interested \\({D}(y | \\textbf{x}_j , \\textbf{x}_{-j}; \\boldsymbol{\\theta})\\) i.e. kurtosis\nunder scenario, \\(\\textbf{S}[g()]\\) ()\n\\[{PE}_{\\omega({D})}\\left( \\textbf{x}_{j} | \\textbf{S} \\left[ g(\\textbf{x}_{-j})\\right] \\right)\\]"
+  },
+  {
+    "objectID": "Interpret.html#scenarios",
+    "href": "Interpret.html#scenarios",
+    "title": "Interpreting models",
+    "section": "Scenarios",
+    "text": "Scenarios\n\nfixing values of \\(\\textbf{x}_{-j}\\) (mean or median for continuous, level with more number of observations for factors or other possible values of importance)\naverage over values of \\(\\textbf{x}_{-j}\\)\n\nPartial Dependence Plots (PDF), \\(\\textbf{S}\\left[ \\text{average}(\\textbf{x}_{-j})\\right]\\)\n\nAccumulated Local Effects, (ALE), accumulated average local differences\nMarginal Effects (ME) average over local neighbourhood"
+  },
+  {
+    "objectID": "Interpret.html#characteristics",
+    "href": "Interpret.html#characteristics",
+    "title": "Interpreting models",
+    "section": "Characteristics",
+    "text": "Characteristics\n\npredictors, \\(\\eta_{\\theta_i}\\)\nparameters, \\(\\theta_i\\)\nmoment, i.e. mean and variance\nquantiles i.e. median\ndistribution"
+  },
+  {
+    "objectID": "Interpret.html#pe-parameter-mu-additive",
+    "href": "Interpret.html#pe-parameter-mu-additive",
+    "title": "Interpreting models",
+    "section": "PE-parameter \\(\\mu\\) additive",
+    "text": "PE-parameter \\(\\mu\\) additive\nlibrary(gamlss.ggplots)\npe_param(madditive,\"area\")\npe_param(madditive,\"yearc\")"
+  },
+  {
+    "objectID": "Interpret.html#pe-parameter-mu-nn",
+    "href": "Interpret.html#pe-parameter-mu-nn",
+    "title": "Interpreting models",
+    "section": "PE-parameter \\(\\mu\\) NN",
+    "text": "PE-parameter \\(\\mu\\) NN\npe_param(mneural, \"area\" )\npe_param(mneural, \"yearc\" )"
+  },
+  {
+    "objectID": "Interpret.html#pe-parameter-sigma-additive",
+    "href": "Interpret.html#pe-parameter-sigma-additive",
+    "title": "Interpreting models",
+    "section": "PE; parameter \\(\\sigma\\); additive",
+    "text": "PE; parameter \\(\\sigma\\); additive\npe_param(madditive,\"area\", parameter=\"sigma\")\npe_param(madditive,\"yearc\", parameter=\"sigma\")"
+  },
+  {
+    "objectID": "Interpret.html#pe-parameter-sigma-nn",
+    "href": "Interpret.html#pe-parameter-sigma-nn",
+    "title": "Interpreting models",
+    "section": "PE; parameter \\(\\sigma\\); NN",
+    "text": "PE; parameter \\(\\sigma\\); NN\npe_param(mneural,\"area\", parameter=\"sigma\")\npe_param(mneural,\"yearc\", parameter=\"sigma\")"
+  },
+  {
+    "objectID": "Interpret.html#all-terms-additive",
+    "href": "Interpret.html#all-terms-additive",
+    "title": "Interpreting models",
+    "section": "all terms (additive)",
+    "text": "all terms (additive)\n\npe_param_grid(madditive,c(\"area\", \"yearc\",  \"location\", \"bath\", \"kitchen\"))"
+  },
+  {
+    "objectID": "Interpret.html#way-interactions-additive",
+    "href": "Interpret.html#way-interactions-additive",
+    "title": "Interpreting models",
+    "section": "2 way interactions (additive)",
+    "text": "2 way interactions (additive)\n pe_param(madditive, c(\"area\", \"yearc\")) \npe_param( madditive, c(\"area\", \"yearc\"), filled=TRUE)"
+  },
+  {
+    "objectID": "Interpret.html#ale-parameters-mu-additive",
+    "href": "Interpret.html#ale-parameters-mu-additive",
+    "title": "Interpreting models",
+    "section": "ALE; parameters \\(\\mu\\); Additive",
+    "text": "ALE; parameters \\(\\mu\\); Additive\ngamlss.ggplots:::ale_param(madditive,\"area\")\ngamlss.ggplots:::ale_param(madditive,\"yearc\")"
+  },
+  {
+    "objectID": "Interpret.html#ale-parameters-mu-nn",
+    "href": "Interpret.html#ale-parameters-mu-nn",
+    "title": "Interpreting models",
+    "section": "ALE; parameters \\(\\mu\\); NN",
+    "text": "ALE; parameters \\(\\mu\\); NN\ngamlss.ggplots:::ale_param(mneural,\"area\")\ngamlss.ggplots:::ale_param(mneural,\"yearc\")"
+  },
+  {
+    "objectID": "Interpret.html#ale-interactions",
+    "href": "Interpret.html#ale-interactions",
+    "title": "Interpreting models",
+    "section": "ALE interactions",
+    "text": "ALE interactions\ngamlss.ggplots:::ale_param(madditive,c(\"area\", \"yearc\"))\ngamlss.ggplots:::ale_param(mneural,c(\"area\", \"yearc\"))"
+  },
+  {
+    "objectID": "Interpret.html#moments-mean",
+    "href": "Interpret.html#moments-mean",
+    "title": "Interpreting models",
+    "section": "moments (mean)",
+    "text": "moments (mean)\n\nNot implemented yet for gamlss2 objects\nNote that moments not always exist for example for the BCTo distribution\n\nfor \\(\\tau\\le2\\) the variance do not exist\nfor \\(\\tau\\le1\\) the mean do not exist"
+  },
+  {
+    "objectID": "Interpret.html#quantiles-additive",
+    "href": "Interpret.html#quantiles-additive",
+    "title": "Interpreting models",
+    "section": "quantiles, additive",
+    "text": "quantiles, additive\n\n gamlss.ggplots:::pe_quantile(madditive,c(\"area\"))"
+  },
+  {
+    "objectID": "Interpret.html#quantiles-additive-con.",
+    "href": "Interpret.html#quantiles-additive-con.",
+    "title": "Interpreting models",
+    "section": "quantiles, additive (con.)",
+    "text": "quantiles, additive (con.)"
+  },
+  {
+    "objectID": "Interpret.html#quantiles-interactions",
+    "href": "Interpret.html#quantiles-interactions",
+    "title": "Interpreting models",
+    "section": "quantiles interactions",
+    "text": "quantiles interactions\n\n  gamlss.ggplots:::pe_quantile(madditive,c(\"area\", \"yearc\"))"
+  },
+  {
+    "objectID": "Interpret.html#quantiles-interactions-2",
+    "href": "Interpret.html#quantiles-interactions-2",
+    "title": "Interpreting models",
+    "section": "quantiles interactions 2",
+    "text": "quantiles interactions 2\n\n gamlss.ggplots:::pe_quantile(madditive,c(\"area\", \"location\"))"
+  },
+  {
+    "objectID": "Interpret.html#quantiles-interactions-2-1",
+    "href": "Interpret.html#quantiles-interactions-2-1",
+    "title": "Interpreting models",
+    "section": "quantiles interactions 2",
+    "text": "quantiles interactions 2\n\ngamlss.ggplots:::pe_quantile(madditive,c( \"location\", \"bath\"))"
+  },
+  {
+    "objectID": "Interpret.html#distributions-mu-additive",
+    "href": "Interpret.html#distributions-mu-additive",
+    "title": "Interpreting models",
+    "section": "distributions, \\(\\mu\\), additive",
+    "text": "distributions, \\(\\mu\\), additive\n\n#gamlss.ggplots:::pe_pdf_grid(madditive, list(\"area\", \"yearc\", \"location\",\"bath\"))"
+  },
+  {
+    "objectID": "Interpret.html#distributions-mu-nn",
+    "href": "Interpret.html#distributions-mu-nn",
+    "title": "Interpreting models",
+    "section": "distributions, \\(\\mu\\), NN",
+    "text": "distributions, \\(\\mu\\), NN\n\n#gamlss.ggplots:::pe_pdf_grid(mneural, list(\"area\", \"yearc\", \"location\",\"bath\"))"
+  },
+  {
+    "objectID": "Interpret.html#the-purpose-of-the-study",
+    "href": "Interpret.html#the-purpose-of-the-study",
+    "title": "Interpreting models",
+    "section": "the purpose of the study",
+    "text": "the purpose of the study\n\nthe purpose should be always in our mind when we try to analyse any data\nfor the Munich rent data are collected almost every 10 years\nguidance to judges on whether a disputed rent is a fair or not\npurpose is to identify very low or very hight rents by correcting for the explanatory variables\nsimilar in detecting “outliers”\na possible solution: prediction z-scores"
+  },
+  {
+    "objectID": "Interpret.html#prediction-z-scores",
+    "href": "Interpret.html#prediction-z-scores",
+    "title": "Interpreting models",
+    "section": "prediction z-scores",
+    "text": "prediction z-scores\nScenarios\n\n\n\nrent\narea\nyearc\nlocation\nbath\nkitchen\nheating\n\n\n\n\n1500\n140\n1983\n3\n1\n1\n1\n\n\n1000\n55\n1915\n1\n0\n0\n0\n\n\n800\n65\n1960\n1\n1\n1\n1"
+  },
+  {
+    "objectID": "Interpret.html#prediction-z-scores-con.",
+    "href": "Interpret.html#prediction-z-scores-con.",
+    "title": "Interpreting models",
+    "section": "prediction z-scores (con.)",
+    "text": "prediction z-scores (con.)\n\n#     rent &lt;- c(1500, 1000,800)\n#     area &lt;- c(140, 55, 65)\n#    yearc &lt;- c(1983, 1915, 1960)\n# location &lt;- factor(c(3,1,1))\n#     bath &lt;- factor(c(1,0,1))\n#  kitchen &lt;- factor(c(1,0,1))\n# cheating &lt;- factor(c(1,0,1))\n# ndat &lt;- data.frame(rent, area, yearc, location, bath, kitchen, cheating)\n# cat(\"prediction z-scores\", \"\\n\")\n# pp &lt;-predict(madditive, newdata=ndat, type=\"parameter\")\n#  qNO(madditive$family$p(q=ndat$rent, par=pp))"
+  },
+  {
+    "objectID": "Interpret.html#summary",
+    "href": "Interpret.html#summary",
+    "title": "Interpreting models",
+    "section": "summary",
+    "text": "summary\nGAMLSS can tackle problems where the interest of the investigation lies not only in the center but other parts of the distribution.\nPersonal view for the future of GAMLSS development;\n\ntheoretical contributions\nsoftware and\nknowledge exchange"
+  },
+  {
+    "objectID": "Interpret.html#summary-continue",
+    "href": "Interpret.html#summary-continue",
+    "title": "Interpreting models",
+    "section": "Summary (continue)",
+    "text": "Summary (continue)\n\ntheoretical contributions\n\ninterpretable tools\nmodel average for prediction\n\nsoftware\n\ngamlss2\n\nbooks and knowledge exchange\n\nthere is need for applied and elementary books\nmore application public health and environment"
+  },
+  {
+    "objectID": "Interpret.html#the-team",
+    "href": "Interpret.html#the-team",
+    "title": "Interpreting models",
+    "section": "the team",
+    "text": "the team\n\n\n\n\n\n\n\n\nworking party\ncurrent\npast\n\n\n\n\nGillian Heller\nKonstantinos Pateras\nPopi Akantziliotou\n\n\nFernanda De Bastiani\nPaul Eilers\nVlasios Voudouris\n\n\nThomas Kneib\nNikos Kametas\nNicoleta Mortan\n\n\nAchim Zaileis\nTim Cole\nDaniil Kiose\n\n\nAndreas Mayr\nNikos Georgikopoulos\nDea-Jin Lee\n\n\nNicolaus Umlauf\nLuiz Nakamura\nMaría Xosé Rodríguez-Álvarez\n\n\nReto Stauffer\nNadja Klein\nMajid Djennad\n\n\nRobert Rigby\nJulian Merder\nFiona McElduff\n\n\nMikis Stasinopoulos\nAbu Hossain\nRaydonal Ospina"
+  },
+  {
+    "objectID": "Interpret.html#end",
+    "href": "Interpret.html#end",
+    "title": "Interpreting models",
+    "section": "end",
+    "text": "end\nback to the index\n\n\n\n\n\n\n   The Books\n\n\n\n\n\n\n\nwww.gamlss.com"
   }
 ]
