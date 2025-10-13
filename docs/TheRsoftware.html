@@ -15,7 +15,7 @@
   <meta name="author" content="Gillian Heller">
   <meta name="author" content="Fernanda De Bastiani">
   <meta name="author" content="Niki Umlauf">
-  <title>GAMLSS Port Short Course 2024 – Why GAMLSS?</title>
+  <title>GAMLSS Port Short Course 2024 – The R software</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -33,6 +33,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
@@ -333,7 +398,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-image="Uni_greenwich.png" data-background-opacity="0.05" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">Why GAMLSS?</h1>
+  <h1 class="title">The <code>R</code> software</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -364,431 +429,417 @@ Niki Umlauf
 </div>
 
 </section>
-<section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
-
-</section>
-<section id="program" class="slide level2">
-<h2>Program</h2>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
 <ul>
-<li><p><code>why GAMLSS</code></p></li>
-<li><p><code>available software</code></p></li>
-<li><p><code>distributions</code></p></li>
-<li><p><code>fitting</code></p></li>
-<li><p><code>interpretation</code></p></li>
+<li><p><code>residuals</code> in GAMLSS</p></li>
+<li><p>an example; the <code>rent99</code> data</p></li>
+<li><p><code>R</code> packages</p></li>
 </ul>
 </section>
-<section id="why-gamlss" class="slide level2">
-<h2>Why GAMLSS</h2>
+<section>
+<section id="residuals" class="title-slide slide level1 center">
+<h1>Residuals</h1>
+
+</section>
+<section id="introduction-1" class="slide level2">
+<h2>Introduction</h2>
 <ul>
-<li><p>Statistical modelling</p></li>
-<li><p>Ditributional Regression</p></li>
+<li><p>GAMLSS uses as <code>residuals</code> the</p>
+<ul>
+<li><code>normalised quantile residuals</code><span class="math inline">\(\equiv\)</span> <code>z-scores</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="pit-and-z-scores-residuals" class="slide level2">
+<h2><code>PIT</code> and <code>z-scores</code> residuals</h2>
+<p>let <span class="math inline">\(y_i\)</span> and <span class="math inline">\(F(y_i, \hat(\theta)_i)\)</span> be the ith observation and its fitted cdf respectively. Then the Probability Integral Transformed (<code>PIT</code>) residuals are</p>
+<p><span class="math display">\[u_i = F(y_i, \hat(\theta)_i) \]</span> and the <code>z-scores</code> residuals are</p>
+<p><span class="math display">\[z_i = \Phi^{-1}(y_i, \hat(\theta)_i) \]</span></p>
+</section>
+<section id="properties" class="slide level2">
+<h2>properties</h2>
+<p>If the distribution of <span class="math inline">\(y_i\)</span> is specified correctly then <code>PIT</code> are <code>uniform</code>;</p>
+<p>i.e <span class="math display">\[u_i \sim U(0,1)\]</span></p>
+<p>and <code>z-scores</code> are <code>normally</code> distributed</p>
+<p>i.e.&nbsp;<span class="math display">\[z_i \sim NO(0,1)\]</span></p>
+</section>
+<section id="pit" class="slide level2">
+<h2>PIT</h2>
+
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<section id="z-scores" class="slide level2">
+<h2>z-scores</h2>
+
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section id="diagnostics-plots" class="slide level2">
+<h2>diagnostics plots</h2>
+<ul>
+<li><p>residuals plots against other variables</p>
+<pre><code>index 
+x-variable
+parameters 
+quantiles</code></pre></li>
+<li><p>qqplots</p></li>
+<li><p>worm plots</p></li>
+<li><p>density plots</p></li>
+<li><p>bucket plots</p></li>
+<li><p>skewness plots</p></li>
 </ul>
 </section></section>
 <section>
-<section id="statistical-modelling" class="title-slide slide level1 center">
-<h1>Statistical modelling</h1>
+<section id="example-rent" class="title-slide slide level1 center">
+<h1>Example: <code>rent</code></h1>
 
 </section>
-<section id="statistical-models" class="slide level2">
-<h2>Statistical models</h2>
-<blockquote>
-<p>“all models are wrong but some are useful”.</p>
-<p>– George Box</p>
-</blockquote>
-<ul>
-<li><p>Models should be <strong>parsimonious</strong></p></li>
-<li><p>Models should be <strong>fit for purpose</strong> and able to answer the question at hand</p></li>
-<li><p>Statistical models have a <strong>stochastic</strong> component</p></li>
-<li><p>All models are based on <strong>assumptions</strong>.</p></li>
-</ul>
-<aside class="notes">
-<p>A common theme in the following scientific subjects; <em>statistical analysis</em>; <em>statistical inference</em>; <em>statistical modelling</em>; <em>machine learning</em>; <em>statistical learning</em>; <em>data mining</em>; <em>information harvesting</em>; <em>information discovery</em>; <em>knowledge extraction</em>; <em>data analytics</em>, is <strong>data</strong>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="data" class="slide level2 smaller">
+<h2>Data</h2>
+<div id="tbl-TheTableofData" class="striped hover quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-TheTableofData-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: The Table of Data
+</figcaption>
+<div aria-describedby="tbl-TheTableofData-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover caption-top">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 6%">
+<col style="width: 15%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>obs number</th>
+<th>y</th>
+<th>x<sub>1</sub></th>
+<th>x<sub>2</sub></th>
+<th>x<sub>3</sub></th>
+<th>…</th>
+<th>x<sub>r-1</sub></th>
+<th>x<sub>r</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>y<sub>1</sub></td>
+<td>x<sub>11</sub></td>
+<td>x<sub>12</sub></td>
+<td>x<sub>13</sub></td>
+<td>…</td>
+<td>x<sub>1r-1</sub></td>
+<td>x<sub>1r</sub></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>y<sub>2</sub></td>
+<td>x<sub>21</sub></td>
+<td>x<sub>22</sub></td>
+<td>x<sub>23</sub></td>
+<td>…</td>
+<td>x<sub>2r-1</sub></td>
+<td>x<sub>2r</sub></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>y<sub>3</sub></td>
+<td>x<sub>31</sub></td>
+<td>x<sub>32</sub></td>
+<td>x<sub>33</sub></td>
+<td>…</td>
+<td>x<sub>3r-1</sub></td>
+<td>x<sub>3r</sub></td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>n-1</td>
+<td>y<sub>n-1</sub></td>
+<td>x<sub>n-11</sub></td>
+<td>x<sub>n-12</sub></td>
+<td>x<sub>n-12</sub></td>
+<td>…</td>
+<td>x<sub>n-1r-1</sub></td>
+<td>x<sub>n-1r</sub></td>
+</tr>
+<tr class="even">
+<td>n</td>
+<td>y<sub>n</sub></td>
+<td>x<sub>n1</sub></td>
+<td>x<sub>n2</sub></td>
+<td>x<sub>n3</sub></td>
+<td>…</td>
+<td>x<sub>nr-1</sub></td>
+<td>x<sub>nr</sub></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 </section>
-<section id="assumptions" class="slide level2">
-<h2>Assumptions</h2>
-<ul>
-<li><p>Assumptions are made to simplify things</p></li>
-<li><p><strong>Explicit</strong> assumptions</p></li>
-<li><p><strong>Implicit</strong> assumptions</p></li>
-<li><p>it is easier to check the explicit assumptions rather the implicit ones</p></li>
-</ul>
+<section id="the-rent-1999-munich-data" class="slide level2 smaller">
+<h2>The rent 1999 Munich data</h2>
+<div class="cell">
+<div id="tbl-stats" class="cell quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Variables in Munich rent data
+</figcaption>
+<div aria-describedby="tbl-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">R</th>
+<th style="text-align: right;">Fl</th>
+<th style="text-align: right;">A</th>
+<th style="text-align: left;">B</th>
+<th style="text-align: left;">H</th>
+<th style="text-align: left;">L</th>
+<th style="text-align: left;">loc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">693.3</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">1972</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">422.0</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">1972</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">736.6</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">1972</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">732.2</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">1972</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1295.1</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">1893</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1195.9</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">1893</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
 </section>
-<section id="model-circle" class="slide level2">
-<h2>Model circle</h2>
-<p><img data-src="Model_cicle.png" width="600"></p>
-
-<aside><div>
-<p>We keep going until we find an adequate model</p>
-</div></aside></section>
-<section id="sec-Regression" class="slide level2">
-<h2>Regression</h2>
-<ul>
-<li><span class="math display">\[
-X  \stackrel{\textit{M}(\theta)}{\longrightarrow} Y
-\]</span></li>
-<li><span class="math inline">\(y\)</span>: <strong>targer</strong>, the <strong>y</strong> or the <strong>dependent</strong> variable</li>
-<li><span class="math inline">\(X\)</span>: <strong>explanatory</strong>, <strong>features</strong>, <strong>x’s</strong> or <strong>independent</strong> variables or <strong>terms</strong></li>
-</ul>
-
-<aside><div>
-<p><span class="math inline">\(M(\theta)\)</span> is a model depending on parameters <span class="math inline">\(\theta\)</span></p>
-</div></aside></section>
-<section id="linear-model" class="slide level2">
-<h2>Linear Model</h2>
-<ul>
-<li>standard way</li>
-</ul>
-<p><span id="eq-LinearModel"><span class="math display">\[
-\begin{equation}
-y_i= b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}+ \epsilon_i
-\end{equation}
-\qquad(1)\]</span></span></p>
-
-<aside><div>
-<p>the model <span class="math inline">\(M(\theta)\)</span> is linear, and there are <span class="math inline">\(n\)</span> observations for <span class="math inline">\(i=1,2,\ldots,n\)</span>.</p>
-</div></aside></section>
-<section id="linear-model-1" class="slide level2">
-<h2>Linear Model</h2>
-<ul>
-<li>different way</li>
-</ul>
-<p><span id="eq-LinearModel1"><span class="math display">\[
-\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim } &amp;  {N}(\mu_i, \sigma) \nonumber \\
-\mu_i &amp;=&amp; b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}
-\end{split}
-\qquad(2)\]</span></span></p>
-
-<aside><div>
-<p>the model <span class="math inline">\(M(\theta)\)</span> is linear, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are the parameter and <span class="math inline">\(\beta\)</span> are the linear coefficients.</p>
-</div></aside></section>
-<section id="example-bmi-data" class="slide level2">
-<h2>Example: <code>BMI</code> data</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="example-bmi-fitted-model" class="slide level2">
-<h2>Example: <code>BMI</code> fitted model</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="additive-models" class="slide level2">
-<h2>Additive Models</h2>
-<p><span id="eq-AdditiveModel"><span class="math display">\[
-\begin{split}
-y_i   &amp;  \stackrel{\small{ind}}{\sim } &amp;  {N}(\mu_i, \sigma) \nonumber \\
-\mu_i &amp;=&amp; b_0 + s_1(x_{1i})  +  s_2(x_{2i}), \ldots,  s_p(x_{pi})
-\end{split}
-\qquad(3)\]</span></span></p>
-
-<aside><div>
-<p><span class="math inline">\(s(x)\)</span> are smooth functions determined by the data</p>
-</div></aside></section>
-<section id="example-additive-fitted-model" class="slide level2">
-<h2>Example: additive fitted model</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="machine-learning-models" class="slide level2">
-<h2>Machine Learning Models</h2>
-<p><span id="eq-MachineLearning"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {N}(\mu_i, \sigma) \nonumber \\
-\mu_i &amp;=&amp; ML(x_{1i},x_{2i}, \ldots,  x_{pi})
-\end{split}
-\qquad(4)\]</span></span></p>
-
-<aside><div>
-<p>All models concentrate on the mean and implicitly assumed a symmetric distribution</p>
-</div></aside></section>
-<section id="example-neural-networks" class="slide level2">
-<h2>Example: neural networks</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section id="example-regression-tree" class="slide level2">
-<h2>Example: regression tree</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
-<section id="generalised-linear-models" class="slide level2">
-<h2>Generalised Linear Models</h2>
-<p><span id="eq-GenaralisedLinearModel"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {E}(\mu_i, \phi) \nonumber \\
-g(\mu_i) &amp;=&amp; b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}
-\end{split}
-\qquad(5)\]</span></span></p>
-<ul>
-<li><p><span class="math inline">\({E}(\mu_i, \phi)\)</span> : <code>Exponential</code> family</p></li>
-<li><p><span class="math inline">\(g(\mu_i)\)</span> : the <code>link</code> function</p></li>
-</ul>
-
-<aside><div>
-<p>Still modelling only shifts in the mean</p>
-</div></aside></section>
-<section id="example-glm" class="slide level2">
-<h2>Example: GLM</h2>
+<section id="fitting" class="slide level2">
+<h2>Fitting</h2>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>r1 <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(R<span class="sc">~</span><span class="fu">pb</span>(Fl)<span class="sc">+</span><span class="fu">pb</span>(A)<span class="sc">+</span>H<span class="sc">+</span>loc<span class="sc">|</span><span class="fu">pb</span>(Fl)<span class="sc">+</span><span class="fu">pb</span>(A)<span class="sc">+</span>H<span class="sc">+</span>loc, </span>
+<span id="cb2-2"><a></a>           <span class="at">family=</span>GA, <span class="at">data=</span>rent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>GAMLSS-RS iteration  1: Global Deviance = 27566.2472 eps = 0.090862     
+GAMLSS-RS iteration  2: Global Deviance = 27564.2989 eps = 0.000070     
+GAMLSS-RS iteration  3: Global Deviance = 27564.2459 eps = 0.000001     </code></pre>
 </div>
 </div>
-</div>
-
-<aside><div>
-<p>gamma fitted distribution</p>
-</div></aside></section>
-<section id="example-diagnostics-1" class="slide level2">
-<h2>Example: diagnostics 1</h2>
+</section>
+<section id="residual-plots-agaist-index" class="slide level2">
+<h2>residual plots agaist index</h2>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(gamlss.ggplots)</span>
+<span id="cb4-2"><a></a><span class="fu">resid_index</span>(r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<aside><div>
-<p>QQ-plot</p>
-</div></aside></section>
-<section id="example-diagnostics-2" class="slide level2">
-<h2>Example: diagnostics 2</h2>
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<section id="against-continuous-x-variables" class="slide level2">
+<h2>against continuous x-variables</h2>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">resid_xvar</span>(r1, A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<aside><div>
-<p>Worm-plot</p>
-</div></aside></section>
-<section id="example-diagnostics-3" class="slide level2">
-<h2>Example: diagnostics 3</h2>
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="against-factor-x-variables" class="slide level2">
+<h2>against factor x-variables</h2>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">resid_xvar</span>(r1,loc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<aside><div>
-<p>Bucket-plot</p>
-</div></aside></section>
-<section id="example-conclusion" class="slide level2">
-<h2>Example: conclusion</h2>
-<ul>
-<li><p>the <code>mean</code> of the response is fitted fine with the linear model but the distribution is not</p></li>
-<li><p>the distribution (implicit <code>Normal</code>) is not-adequate</p></li>
-<li><p>even the explicit <code>Gamma</code> distribution of the GLM is not-adequate</p></li>
-<li><p>therefore if we are interested on a statistic different from the <code>mean</code> we need something extra.</p></li>
-</ul>
-</section></section>
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="qq-plots" class="slide level2">
+<h2>QQ-plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">resid_qqplot</span>(r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="worm-plots" class="slide level2">
+<h2>worm plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">resid_wp</span>(r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="density-plots" class="slide level2">
+<h2>density plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">resid_density</span>(r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="bucket-plots" class="slide level2">
+<h2>bucket plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">moment_bucket</span>(r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="symmetry-plots" class="slide level2">
+<h2>symmetry plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">resid_symmetry</span>(r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="ecdf-plot" class="slide level2">
+<h2>ecdf plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">resid_ecdf</span>(r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="detrended-ecdf-plot" class="slide level2">
+<h2>detrended ecdf plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">resid_dtop</span>(r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="all-in-one-plots" class="slide level2">
+<h2>all in one plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">resid_plots</span>(r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="all-in-one-plots-standard" class="slide level2">
+<h2>all in one plots (standard)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">plot</span>(r1,<span class="at">which=</span><span class="st">"resid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="TheRsoftware_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section></section>
 <section>
-<section id="sec-Distributionalregression" class="title-slide slide level1 center">
-<h1>Distributional regression</h1>
+<section id="r-packages" class="title-slide slide level1 center">
+<h1>R-packages</h1>
 
 </section>
-<section id="distributional-regression" class="slide level2">
-<h2>Distributional regression</h2>
-<p><span class="math display">\[
-X  \stackrel{\textit{M}(\boldsymbol{\theta})}{\longrightarrow} D\left(Y|\boldsymbol{\theta}(\textbf{X})\right)
-\]</span></p>
+<section id="older-packages" class="slide level2 smaller">
+<h2>Older Packages</h2>
 <ul>
-<li><p>All parameters <span class="math inline">\(\boldsymbol{\theta}\)</span> could functions of the explanatory variables <span class="math inline">\(\boldsymbol{\theta}(\textbf{X})\)</span>.</p></li>
-<li><p><span class="math inline">\(D\left(Y|\boldsymbol{\theta}(\textbf{X})\right)\)</span> can be any <span class="math inline">\(k\)</span> parameter distribution</p></li>
+<li><p><code>gamlss</code>: the original (needs <code>dist</code> and <code>data</code>)</p></li>
+<li><p><code>gamlss.dist</code>: defining the <code>gamlss.family</code> distributions</p></li>
+<li><p><code>gamlss.data</code>: for extra data sets</p></li>
+<li><p><code>gamlss.add</code>: connect with <code>mgcv</code>, <code>nnet</code> and <code>trees</code></p></li>
+<li><p><code>gamlss.tr</code>: for truncating <code>gamlss.family</code> distributions</p></li>
+<li><p><code>gamlss.cens</code>: for censored response variables</p></li>
+<li><p><code>gamlss.demo</code>: for demonstrating GAMLSS concepts</p></li>
+<li><p><code>gamlss.mx</code>: for fitting finite mixtures</p></li>
 </ul>
 </section>
-<section id="generalised-additive-models-for-location-scale-and-shape" class="slide level2">
-<h2>Generalised Additive models for Location Scale and Shape</h2>
-<p><span id="eq-GAMLSS"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {D}( \theta_{1i}, \ldots, \theta_{ki}) \nonumber \\
-g(\theta_{1i})  &amp;=&amp; b_{10} + s_1({x}_{1i})  +  \ldots,  s_p({x}_{pi}) \nonumber\\
-\ldots &amp;=&amp; \ldots \nonumber\\
-g({\theta}_{ki})  &amp;=&amp; b_0 + s_1({x}_{1i})  +   \ldots,  s_p({x}_{pi})
-\end{split}
-\qquad(6)\]</span></span></p>
-
-<aside><div>
-<p>for <span class="math inline">\(i=1,2,\ldots,n\)</span>.</p>
-</div></aside></section>
-<section id="gamlss-ml" class="slide level2">
-<h2>GAMLSS + ML</h2>
-<p><span id="eq-GAMLSS_ML"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {D}( \theta_{1i}, \ldots, \theta_{ki}) \nonumber \\
-g({\theta}_{1i}) &amp;=&amp; {ML}_1({x}_{1i},{x}_{2i}, \ldots,  {x}_{pi}) \nonumber \\
-\ldots &amp;=&amp; \ldots \nonumber\\
-g({\theta}_{ki}) &amp;=&amp; {ML}_1({x}_{1i},{x}_{2i}, \ldots,  {x}_{pi})
-\end{split}
-  \qquad(7)\]</span></span> <!--  --> <!--  \ldots &=& \ldots \nonumber\\ --> <!-- g(\boldsymbol{\theta}_k) &=& {ML}_k(\textbf{x}_{1i},\textbf{x}_{2i}, \ldots,  \textbf{x}_{pi})  --></p>
-
-<aside><div>
-<p>for <span class="math inline">\(i=1,2,\ldots,n\)</span>.</p>
-</div></aside></section>
-<section id="sec-Example" class="slide level2">
-<h2>Example: GAMLSS</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>BCT distribution GAMLSS model</p>
-</div></aside></section>
-<section id="example-diagnostics" class="slide level2">
-<h2>Example: diagnostics</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>QQ-plot, Gamma, <code>m3</code>, against BCT model, <code>m6</code>.</p>
-</div></aside></section>
-<section id="example-diagnostics-2-1" class="slide level2">
-<h2>Example: diagnostics 2</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>Worm-plot: Gamma, <code>m3</code>, against BCT model, <code>m6</code>.</p>
-</div></aside></section>
-<section id="example-diagnostics-3-1" class="slide level2">
-<h2>Example: diagnostics 3</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>Bucket-plot, Gamma, <code>m3</code>, against BCT model, <code>m6</code>.</p>
-</div></aside></section>
-<section id="fitted-centiles" class="slide level2">
-<h2>Fitted Centiles</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/fig-diagfigg-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;1: Centile-plot of the fitted <code>m6</code> model
-</p></section>
-<section id="the-true-bmi-data" class="slide level2">
-<h2>The true <code>BMI</code> data</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
-<section id="the-fitted-model" class="slide level2">
-<h2>The fitted model</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
-<section id="the-fitted-centiles" class="slide level2">
-<h2>The fitted centiles</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>see <code>centile estimation</code> of 3rd day</p>
-</div></aside></section>
-<section id="diagnostics-1" class="slide level2">
-<h2>Diagnostics 1</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>QQ-plot</p>
-</div></aside></section>
-<section id="diagnostics-2" class="slide level2">
-<h2>Diagnostics 2</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>worm plot</p>
-</div></aside></section>
-<section id="diagnostics-3" class="slide level2">
-<h2>Diagnostics 3</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>bucket plot</p>
-</div></aside></section>
-<section id="summary" class="slide level2 smaller">
-<h2>Summary</h2>
+<section id="new-packages" class="slide level2 smaller">
+<h2>New Packages</h2>
 <ul>
-<li><p>Distributional assumptions often needed for the response to be fitted properly</p></li>
-<li><p>In the BMI example above we needed to model all the parameters of the distribution as function of the explanatory variable <code>age</code>.</p></li>
-<li><p>Those parameters were the <code>location</code> parameter <span class="math inline">\(\mu\)</span>, the <code>scale</code> parameter, <span class="math inline">\(\sigma\)</span>, the <code>skewness</code> parameter, <span class="math inline">\(\nu\)</span>, and the <code>kurtotic</code> parameter <span class="math inline">\(\tau\)</span></p></li>
-<li><p>Machine Learning methods are useful (especially for modelling interactions between variables) but they are not suitable if the interest do non lie in the mean.</p></li>
+<li><p><code>gamboostLSS</code> for GAMLSS boosting</p></li>
+<li><p><code>bamlss</code> the Bayesian GAMLSS</p></li>
+<li><p><code>gamlss2</code><span class="math inline">\(^*\)</span>: the new version of GAMLSS</p></li>
+<li><p><code>gamlss.ggplots</code>: using <code>ggplot2</code> within GAMLSS</p></li>
+<li><p><code>gamlss.foreach</code>: for parallel computing</p></li>
+<li><p><code>gamlss.prepdata</code>: preparation of data before fitting</p></li>
+<li><p><code>gamlss.lasso</code>: for LASSO. Ridge and elastic Net regression</p></li>
+<li><p><code>gamlss.shiny</code><span class="math inline">\(^*\)</span>: similar to <code>gamlss.demo</code></p></li>
+<li><p><code>topmodels</code> distributional regression help (not necessary gamlss)</p></li>
 </ul>
-<!-- -   `quantile regression` could be used in certain circumstances  but  it is more difficult to check its adequancy -->
-<!-- ::: callout-tip -->
-<!-- Implicit assumptions are more difficult to check in general -->
-<!-- ::: -->
+
+<aside><div>
+<p><span class="math inline">\(^*\)</span> in GitHub needed testing</p>
+</div></aside></section>
+<section id="why-gamlss2" class="slide level2 smaller">
+<h2>why gamlss2</h2>
+<ul>
+<li><p><code>gamlss()</code> for very large data is slow</p></li>
+<li><p><code>predict</code> in <code>gamlss</code> is not easy to use</p></li>
+<li><p>current implementation can cope with only 4 parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\tau\)</span></p></li>
+<li><p>to connect different estimation statistical approaches</p>
+<ul>
+<li><code>penalised likelihood</code></li>
+<li><code>Bayesian</code></li>
+<li><code>boosting</code></li>
+</ul></li>
+<li><p>to implement extra algorithms i.e.&nbsp;<code>stepwise</code>, <code>robust</code></p></li>
+<li><p>to implement <code>machine learning</code> methodology</p></li>
+</ul>
+</section>
+<section id="getting-the-libraries" class="slide level2">
+<h2>getting the libraries</h2>
+<ul>
+<li>For <code>CRAN</code> use
+<ul>
+<li><code>install.packages(gamlss)</code></li>
+</ul></li>
+<li>for <code>GitHub</code> use
+<ul>
+<li><code>devtools::install_github("gamlss-dev/gamlss2")</code></li>
+<li><a href="https://gamlss-dev.r-universe.dev/builds" class="uri">https://gamlss-dev.r-universe.dev/builds</a></li>
+</ul></li>
+<li>and then use
+<ul>
+<li><code>library(gamlss2)</code></li>
+</ul></li>
+</ul>
 </section>
 <section id="end" class="slide level2">
 <h2>end</h2>
@@ -796,7 +847,7 @@ Figure&nbsp;1: Centile-plot of the fitted <code>m6</code> model
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="3," data-layout-nrow="1">
+<div class="quarto-layout-panel" data-layout-nrow="1" data-layout-ncol="3,">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <p><img data-src="book-1.png" width="300"> <img data-src="BOOK-2.png" width="323"> <img data-src="book3.png" width="333"> The Books</p>
@@ -979,7 +1030,7 @@ Figure&nbsp;1: Centile-plot of the fitted <code>m6</code> model
         backgroundTransition: 'none',
 
         // Number of slides away from the current that are visible
-        viewDistance: 5,
+        viewDistance: 3,
 
         // Number of slides away from the current that are visible on mobile
         // devices. It is advisable to set this to a lower number than

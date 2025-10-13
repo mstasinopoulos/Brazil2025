@@ -15,7 +15,7 @@
   <meta name="author" content="Gillian Heller">
   <meta name="author" content="Fernanda De Bastiani">
   <meta name="author" content="Niki Umlauf">
-  <title>GAMLSS Port Short Course 2024 – Why GAMLSS?</title>
+  <title>GAMLSS Port Short Course 2024 – Distributions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -33,6 +33,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
@@ -333,7 +398,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-image="Uni_greenwich.png" data-background-opacity="0.05" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">Why GAMLSS?</h1>
+  <h1 class="title">Distributions</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -364,432 +429,444 @@ Niki Umlauf
 </div>
 
 </section>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
+<p>Suitable distribution for the response variable.</p>
+<div>
+<ul>
+<li><p><code>different types of distributions</code></p></li>
+<li><p><code>properies of distributions</code></p></li>
+<li><p><code>distributions in GAMLSS</code></p>
+<ul>
+<li>explicit</li>
+<li>implicit</li>
+</ul></li>
+<li><p><code>a procedure to find a good initial distribution for the response</code></p></li>
+</ul>
+</div>
+</section>
 <section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
+<section id="distributions" class="title-slide slide level1 center">
+<h1>distributions</h1>
 
 </section>
-<section id="program" class="slide level2">
-<h2>Program</h2>
+<section id="types" class="slide level2 smaller">
+<h2>Types</h2>
 <ul>
-<li><p><code>why GAMLSS</code></p></li>
-<li><p><code>available software</code></p></li>
-<li><p><code>distributions</code></p></li>
-<li><p><code>fitting</code></p></li>
-<li><p><code>interpretation</code></p></li>
+<li><p><strong>continuous</strong></p>
+<ul>
+<li><span class="math inline">\((-\infty, \infty)\)</span>, <code>real line</code>;</li>
+<li><span class="math inline">\((0, \infty)\)</span>, <code>positive real line</code>;</li>
+<li><span class="math inline">\((0,1)\)</span> from 0 to 1</li>
+</ul></li>
+<li><p><strong>discrete</strong></p>
+<ul>
+<li><span class="math inline">\((0,1,\dots, \infty)\)</span></li>
+<li><span class="math inline">\((0,1,\dots, N)\)</span></li>
+</ul></li>
+<li><p><strong>mixed</strong> part continuous part discrete</p>
+<ul>
+<li><span class="math inline">\([0, \infty)\)</span> zero adjusted</li>
+<li><span class="math inline">\([0, 1]\)</span> zero (and 1) inflated</li>
+</ul></li>
 </ul>
 </section>
-<section id="why-gamlss" class="slide level2">
-<h2>Why GAMLSS</h2>
-<ul>
-<li><p>Statistical modelling</p></li>
-<li><p>Ditributional Regression</p></li>
-</ul>
-</section></section>
-<section>
-<section id="statistical-modelling" class="title-slide slide level1 center">
-<h1>Statistical modelling</h1>
+<section id="continuous" class="slide level2">
+<h2>continuous</h2>
 
-</section>
-<section id="statistical-models" class="slide level2">
-<h2>Statistical models</h2>
-<blockquote>
-<p>“all models are wrong but some are useful”.</p>
-<p>– George Box</p>
-</blockquote>
-<ul>
-<li><p>Models should be <strong>parsimonious</strong></p></li>
-<li><p>Models should be <strong>fit for purpose</strong> and able to answer the question at hand</p></li>
-<li><p>Statistical models have a <strong>stochastic</strong> component</p></li>
-<li><p>All models are based on <strong>assumptions</strong>.</p></li>
-</ul>
-<aside class="notes">
-<p>A common theme in the following scientific subjects; <em>statistical analysis</em>; <em>statistical inference</em>; <em>statistical modelling</em>; <em>machine learning</em>; <em>statistical learning</em>; <em>data mining</em>; <em>information harvesting</em>; <em>information discovery</em>; <em>knowledge extraction</em>; <em>data analytics</em>, is <strong>data</strong>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="assumptions" class="slide level2">
-<h2>Assumptions</h2>
-<ul>
-<li><p>Assumptions are made to simplify things</p></li>
-<li><p><strong>Explicit</strong> assumptions</p></li>
-<li><p><strong>Implicit</strong> assumptions</p></li>
-<li><p>it is easier to check the explicit assumptions rather the implicit ones</p></li>
-</ul>
-</section>
-<section id="model-circle" class="slide level2">
-<h2>Model circle</h2>
-<p><img data-src="Model_cicle.png" width="600"></p>
-
-<aside><div>
-<p>We keep going until we find an adequate model</p>
-</div></aside></section>
-<section id="sec-Regression" class="slide level2">
-<h2>Regression</h2>
-<ul>
-<li><span class="math display">\[
-X  \stackrel{\textit{M}(\theta)}{\longrightarrow} Y
-\]</span></li>
-<li><span class="math inline">\(y\)</span>: <strong>targer</strong>, the <strong>y</strong> or the <strong>dependent</strong> variable</li>
-<li><span class="math inline">\(X\)</span>: <strong>explanatory</strong>, <strong>features</strong>, <strong>x’s</strong> or <strong>independent</strong> variables or <strong>terms</strong></li>
-</ul>
-
-<aside><div>
-<p><span class="math inline">\(M(\theta)\)</span> is a model depending on parameters <span class="math inline">\(\theta\)</span></p>
-</div></aside></section>
-<section id="linear-model" class="slide level2">
-<h2>Linear Model</h2>
-<ul>
-<li>standard way</li>
-</ul>
-<p><span id="eq-LinearModel"><span class="math display">\[
-\begin{equation}
-y_i= b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}+ \epsilon_i
-\end{equation}
-\qquad(1)\]</span></span></p>
-
-<aside><div>
-<p>the model <span class="math inline">\(M(\theta)\)</span> is linear, and there are <span class="math inline">\(n\)</span> observations for <span class="math inline">\(i=1,2,\ldots,n\)</span>.</p>
-</div></aside></section>
-<section id="linear-model-1" class="slide level2">
-<h2>Linear Model</h2>
-<ul>
-<li>different way</li>
-</ul>
-<p><span id="eq-LinearModel1"><span class="math display">\[
-\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim } &amp;  {N}(\mu_i, \sigma) \nonumber \\
-\mu_i &amp;=&amp; b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}
-\end{split}
-\qquad(2)\]</span></span></p>
-
-<aside><div>
-<p>the model <span class="math inline">\(M(\theta)\)</span> is linear, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are the parameter and <span class="math inline">\(\beta\)</span> are the linear coefficients.</p>
-</div></aside></section>
-<section id="example-bmi-data" class="slide level2">
-<h2>Example: <code>BMI</code> data</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="example-bmi-fitted-model" class="slide level2">
-<h2>Example: <code>BMI</code> fitted model</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="additive-models" class="slide level2">
-<h2>Additive Models</h2>
-<p><span id="eq-AdditiveModel"><span class="math display">\[
-\begin{split}
-y_i   &amp;  \stackrel{\small{ind}}{\sim } &amp;  {N}(\mu_i, \sigma) \nonumber \\
-\mu_i &amp;=&amp; b_0 + s_1(x_{1i})  +  s_2(x_{2i}), \ldots,  s_p(x_{pi})
-\end{split}
-\qquad(3)\]</span></span></p>
-
-<aside><div>
-<p><span class="math inline">\(s(x)\)</span> are smooth functions determined by the data</p>
-</div></aside></section>
-<section id="example-additive-fitted-model" class="slide level2">
-<h2>Example: additive fitted model</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="machine-learning-models" class="slide level2">
-<h2>Machine Learning Models</h2>
-<p><span id="eq-MachineLearning"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {N}(\mu_i, \sigma) \nonumber \\
-\mu_i &amp;=&amp; ML(x_{1i},x_{2i}, \ldots,  x_{pi})
-\end{split}
-\qquad(4)\]</span></span></p>
-
-<aside><div>
-<p>All models concentrate on the mean and implicitly assumed a symmetric distribution</p>
-</div></aside></section>
-<section id="example-neural-networks" class="slide level2">
-<h2>Example: neural networks</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section id="example-regression-tree" class="slide level2">
-<h2>Example: regression tree</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
-<section id="generalised-linear-models" class="slide level2">
-<h2>Generalised Linear Models</h2>
-<p><span id="eq-GenaralisedLinearModel"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {E}(\mu_i, \phi) \nonumber \\
-g(\mu_i) &amp;=&amp; b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}
-\end{split}
-\qquad(5)\]</span></span></p>
-<ul>
-<li><p><span class="math inline">\({E}(\mu_i, \phi)\)</span> : <code>Exponential</code> family</p></li>
-<li><p><span class="math inline">\(g(\mu_i)\)</span> : the <code>link</code> function</p></li>
-</ul>
-
-<aside><div>
-<p>Still modelling only shifts in the mean</p>
-</div></aside></section>
-<section id="example-glm" class="slide level2">
-<h2>Example: GLM</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>gamma fitted distribution</p>
-</div></aside></section>
-<section id="example-diagnostics-1" class="slide level2">
-<h2>Example: diagnostics 1</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>QQ-plot</p>
-</div></aside></section>
-<section id="example-diagnostics-2" class="slide level2">
-<h2>Example: diagnostics 2</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>Worm-plot</p>
-</div></aside></section>
-<section id="example-diagnostics-3" class="slide level2">
-<h2>Example: diagnostics 3</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>Bucket-plot</p>
-</div></aside></section>
-<section id="example-conclusion" class="slide level2">
-<h2>Example: conclusion</h2>
-<ul>
-<li><p>the <code>mean</code> of the response is fitted fine with the linear model but the distribution is not</p></li>
-<li><p>the distribution (implicit <code>Normal</code>) is not-adequate</p></li>
-<li><p>even the explicit <code>Gamma</code> distribution of the GLM is not-adequate</p></li>
-<li><p>therefore if we are interested on a statistic different from the <code>mean</code> we need something extra.</p></li>
-</ul>
-</section></section>
-<section>
-<section id="sec-Distributionalregression" class="title-slide slide level1 center">
-<h1>Distributional regression</h1>
-
-</section>
-<section id="distributional-regression" class="slide level2">
-<h2>Distributional regression</h2>
-<p><span class="math display">\[
-X  \stackrel{\textit{M}(\boldsymbol{\theta})}{\longrightarrow} D\left(Y|\boldsymbol{\theta}(\textbf{X})\right)
-\]</span></p>
-<ul>
-<li><p>All parameters <span class="math inline">\(\boldsymbol{\theta}\)</span> could functions of the explanatory variables <span class="math inline">\(\boldsymbol{\theta}(\textbf{X})\)</span>.</p></li>
-<li><p><span class="math inline">\(D\left(Y|\boldsymbol{\theta}(\textbf{X})\right)\)</span> can be any <span class="math inline">\(k\)</span> parameter distribution</p></li>
-</ul>
-</section>
-<section id="generalised-additive-models-for-location-scale-and-shape" class="slide level2">
-<h2>Generalised Additive models for Location Scale and Shape</h2>
-<p><span id="eq-GAMLSS"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {D}( \theta_{1i}, \ldots, \theta_{ki}) \nonumber \\
-g(\theta_{1i})  &amp;=&amp; b_{10} + s_1({x}_{1i})  +  \ldots,  s_p({x}_{pi}) \nonumber\\
-\ldots &amp;=&amp; \ldots \nonumber\\
-g({\theta}_{ki})  &amp;=&amp; b_0 + s_1({x}_{1i})  +   \ldots,  s_p({x}_{pi})
-\end{split}
-\qquad(6)\]</span></span></p>
-
-<aside><div>
-<p>for <span class="math inline">\(i=1,2,\ldots,n\)</span>.</p>
-</div></aside></section>
-<section id="gamlss-ml" class="slide level2">
-<h2>GAMLSS + ML</h2>
-<p><span id="eq-GAMLSS_ML"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {D}( \theta_{1i}, \ldots, \theta_{ki}) \nonumber \\
-g({\theta}_{1i}) &amp;=&amp; {ML}_1({x}_{1i},{x}_{2i}, \ldots,  {x}_{pi}) \nonumber \\
-\ldots &amp;=&amp; \ldots \nonumber\\
-g({\theta}_{ki}) &amp;=&amp; {ML}_1({x}_{1i},{x}_{2i}, \ldots,  {x}_{pi})
-\end{split}
-  \qquad(7)\]</span></span> <!--  --> <!--  \ldots &=& \ldots \nonumber\\ --> <!-- g(\boldsymbol{\theta}_k) &=& {ML}_k(\textbf{x}_{1i},\textbf{x}_{2i}, \ldots,  \textbf{x}_{pi})  --></p>
-
-<aside><div>
-<p>for <span class="math inline">\(i=1,2,\ldots,n\)</span>.</p>
-</div></aside></section>
-<section id="sec-Example" class="slide level2">
-<h2>Example: GAMLSS</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>BCT distribution GAMLSS model</p>
-</div></aside></section>
-<section id="example-diagnostics" class="slide level2">
-<h2>Example: diagnostics</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>QQ-plot, Gamma, <code>m3</code>, against BCT model, <code>m6</code>.</p>
-</div></aside></section>
-<section id="example-diagnostics-2-1" class="slide level2">
-<h2>Example: diagnostics 2</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>Worm-plot: Gamma, <code>m3</code>, against BCT model, <code>m6</code>.</p>
-</div></aside></section>
-<section id="example-diagnostics-3-1" class="slide level2">
-<h2>Example: diagnostics 3</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>Bucket-plot, Gamma, <code>m3</code>, against BCT model, <code>m6</code>.</p>
-</div></aside></section>
-<section id="fitted-centiles" class="slide level2">
-<h2>Fitted Centiles</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/fig-diagfigg-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;1: Centile-plot of the fitted <code>m6</code> model
+<img data-src="Distributions_files/figure-revealjs/fig-dist_types-1.png" data-ref-parent="fig-dist_types" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+(a) continuous
 </p></section>
-<section id="the-true-bmi-data" class="slide level2">
-<h2>The true <code>BMI</code> data</h2>
+<section id="discrete" class="slide level2">
+<h2>discrete</h2>
 
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
-<section id="the-fitted-model" class="slide level2">
-<h2>The fitted model</h2>
+<img data-src="Distributions_files/figure-revealjs/fig-dist_types2-1.png" data-ref-parent="fig-dist_types2" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+(a) discrete
+</p></section>
+<section id="mixed" class="slide level2">
+<h2>mixed</h2>
 
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
-<section id="the-fitted-centiles" class="slide level2">
-<h2>The fitted centiles</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>see <code>centile estimation</code> of 3rd day</p>
-</div></aside></section>
-<section id="diagnostics-1" class="slide level2">
-<h2>Diagnostics 1</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>QQ-plot</p>
-</div></aside></section>
-<section id="diagnostics-2" class="slide level2">
-<h2>Diagnostics 2</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>worm plot</p>
-</div></aside></section>
-<section id="diagnostics-3" class="slide level2">
-<h2>Diagnostics 3</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>bucket plot</p>
-</div></aside></section>
-<section id="summary" class="slide level2 smaller">
-<h2>Summary</h2>
+<img data-src="Distributions_files/figure-revealjs/fig-dist_types3-1.png" data-ref-parent="fig-dist_types3" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+(a) mixed
+</p></section>
+<section id="properties" class="slide level2">
+<h2>properties</h2>
+<p><span class="math inline">\(f(y;{\theta})\)</span></p>
 <ul>
-<li><p>Distributional assumptions often needed for the response to be fitted properly</p></li>
-<li><p>In the BMI example above we needed to model all the parameters of the distribution as function of the explanatory variable <code>age</code>.</p></li>
-<li><p>Those parameters were the <code>location</code> parameter <span class="math inline">\(\mu\)</span>, the <code>scale</code> parameter, <span class="math inline">\(\sigma\)</span>, the <code>skewness</code> parameter, <span class="math inline">\(\nu\)</span>, and the <code>kurtotic</code> parameter <span class="math inline">\(\tau\)</span></p></li>
-<li><p>Machine Learning methods are useful (especially for modelling interactions between variables) but they are not suitable if the interest do non lie in the mean.</p></li>
+<li><p><span class="math inline">\(\int_{R_Y} f(y) \; dy=1\)</span></p></li>
+<li><p><span class="math inline">\(\sum_{y\in R_Y} f(y)=\sum_{y \in R_Y} P(Y=y)=1\)</span></p></li>
+<li><p><span class="math inline">\(\int_{R_{1}} f(y)\, dy + \sum_{y \in R_{2}} f(y) = 1\)</span>.</p></li>
 </ul>
-<!-- -   `quantile regression` could be used in certain circumstances  but  it is more difficult to check its adequancy -->
-<!-- ::: callout-tip -->
-<!-- Implicit assumptions are more difficult to check in general -->
-<!-- ::: -->
 </section>
+<section id="parameters" class="slide level2">
+<h2>parameters</h2>
+<ul>
+<li><p><span class="math inline">\(f(y;{\theta})\)</span></p></li>
+<li><p><span class="math inline">\({\theta}= (\theta_1, \theta_2, \ldots, \theta_k)\)</span>.</p></li>
+<li><p><code>location</code></p></li>
+<li><p><code>scale</code></p></li>
+<li><p><code>shape</code></p>
+<ul>
+<li>skewness</li>
+<li>kurtosis</li>
+</ul></li>
+</ul>
+</section>
+<section id="left-skew" class="slide level2">
+<h2>left skew</h2>
+
+<img data-src="Distributions_files/figure-revealjs/fig-dist_skewness-1.png" data-ref-parent="fig-dist_skewness" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+(a) left skew
+</p></section>
+<section id="symmetric" class="slide level2">
+<h2>symmetric</h2>
+
+<img data-src="Distributions_files/figure-revealjs/fig-dist_skewness2-1.png" data-ref-parent="fig-dist_skewness2" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+(a) symmetric
+</p></section>
+<section id="right-skew" class="slide level2">
+<h2>right skew</h2>
+
+<img data-src="Distributions_files/figure-revealjs/fig-dist_skewness3-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;6: right skew
+</p></section>
+<section id="platy" class="slide level2">
+<h2>platy</h2>
+
+<img data-src="Distributions_files/figure-revealjs/fig-dist_kurtosis-1.png" data-ref-parent="fig-dist_kurtosis" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+(a) platy
+</p></section>
+<section id="meso" class="slide level2">
+<h2>meso</h2>
+
+<img data-src="Distributions_files/figure-revealjs/fig-dist_kurtosis2-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;8: meso
+</p></section>
+<section id="lepto" class="slide level2">
+<h2>lepto</h2>
+
+<img data-src="Distributions_files/figure-revealjs/fig-dist_kurtosis3-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;9: lepto
+</p></section>
+<section id="moments-based-characteristics" class="slide level2">
+<h2>moments based characteristics</h2>
+<ul>
+<li><p>mean <span class="math display">\[\begin{align*}
+E(Y)= \begin{cases}
+\int_{-\infty}^{\infty} y f(y)\, dy&amp;\text{for continuous}\\
+\sum_{y \epsilon R_Y} y\, P(Y=y) &amp;\text{for discrete}
+\end{cases}
+\end{align*}\]</span></p></li>
+<li><p>variance</p></li>
+<li><p>coefficient of skewness</p></li>
+<li><p>(adjusted) coefficient for kurtosis</p></li>
+</ul>
+
+<aside><div>
+<p>Not always exist</p>
+</div></aside></section>
+<section id="mean" class="slide level2">
+<h2>mean</h2>
+
+<img data-src="Distributions_files/figure-revealjs/fig-dist_mean-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;10: The mean is the point in which the distribution is balance.
+</p></section>
+<section id="centile-based-characteristics" class="slide level2">
+<h2>centile based characteristics</h2>
+<ul>
+<li><p>the median</p></li>
+<li><p>semi interquartile range</p></li>
+<li><p>centile skewness</p></li>
+<li><p>centile kurtosis</p></li>
+</ul>
+
+<aside><div>
+<p>Always exist</p>
+</div></aside></section>
+<section id="quantiles" class="slide level2">
+<h2>quantiles</h2>
+
+<img data-src="Distributions_files/figure-revealjs/fig-dist_centiles-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;11: Showing how <span class="math inline">\(Q1\)</span>, <span class="math inline">\(m\)</span> (median), <span class="math inline">\(Q3\)</span> and the interquartile range IR of a continuous distribution are derived from <span class="math inline">\(f(y)\)</span>.
+</p></section>
+<section id="the-gamlss-families" class="slide level2">
+<h2>The GAMLSS families</h2>
+<ul>
+<li><p>over 100 <code>explicit</code> distributions</p></li>
+<li><p><code>implicit</code> distributions</p>
+<ul>
+<li>truncation</li>
+<li>log distributions</li>
+<li>logit distribution</li>
+<li>inflated distributions</li>
+<li>zero adjusted</li>
+<li>generalised Tobit</li>
+</ul></li>
+</ul>
+</section>
+<section id="explicit-distributions" class="slide level2">
+<h2>explicit distributions</h2>
+<ul>
+<li><p><code>d</code> probability density functions (pdf)</p></li>
+<li><p><code>p</code> cumulative density functions (cdf)</p></li>
+<li><p><code>q</code> the q-function or inversed cumulative density functions (icdf)</p></li>
+<li><p><code>r</code> random generating function</p></li>
+<li><p>fitting function</p>
+<ul>
+<li>first and second devivative of the log-likelihood</li>
+<li>other information like names of parameters, range of the response a of the parameters e.t.c.</li>
+</ul></li>
+</ul>
+</section>
+<section id="continuous-1" class="slide level2">
+<h2>continuous</h2>
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-3-1.png" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-3-2.png" width="384"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-3-3.png" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-3-4.png" width="384"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="with-ggplot2" class="slide level2">
+<h2>with ggplot2</h2>
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-4-1.png" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-4-2.png" width="384"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-4-3.png" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-4-4.png" width="384"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="discrete-1" class="slide level2">
+<h2>discrete</h2>
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-5-1.png" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-5-2.png" width="384"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-5-3.png" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-5-4.png" width="384"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="with-ggplot2-1" class="slide level2">
+<h2>with ggplot2</h2>
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-6-1.png" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-6-2.png" width="384"></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-6-3.png" width="384"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Distributions_files/figure-revealjs/unnamed-chunk-6-4.png" width="384"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="demo" class="slide level2">
+<h2>demo</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(gamlss.demo)</span>
+<span id="cb1-2"><a></a><span class="fu">gamlss.demo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="implicit-distributions" class="title-slide slide level1 center">
+<h1>implicit distributions</h1>
+
+</section>
+<section id="truncated-distributions" class="slide level2">
+<h2>truncated distributions</h2>
+<ul>
+<li><p>Any distribution can be truncated</p>
+<p>– to the <code>left</code></p>
+<p>– to the <code>right</code> or</p>
+<p>– in <code>both</code> sides</p></li>
+</ul>
+</section>
+<section id="truncated-continuous" class="slide level2">
+<h2>truncated continuous</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(gamlss.tr)</span>
+<span id="cb2-2"><a></a><span class="fu">gen.trun</span>(<span class="st">"NO"</span>, <span class="at">par=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">3</span>), <span class="at">type=</span><span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A truncated family of distributions from NO has been generated 
+ and saved under the names:  
+ dNOtr pNOtr qNOtr rNOtr NOtr 
+The type of truncation is both 
+ and the truncation parameter is 0 3  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">family_pdf</span>(<span class="st">"NOtr"</span>, <span class="at">from=</span><span class="dv">0</span>,<span class="at">to=</span><span class="dv">3</span>, <span class="at">mu=</span><span class="dv">0</span>, <span class="at">sigma=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">integrate</span>(dNOtr, <span class="dv">0</span>,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 with absolute error &lt; 1.1e-14</code></pre>
+</div>
+</div>
+<img data-src="Distributions_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="truncated-discrete" class="slide level2">
+<h2>truncated discrete</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">gen.trun</span>(<span class="st">"NBI"</span>, <span class="at">par=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A truncated family of distributions from NBI has been generated 
+ and saved under the names:  
+ dNBItr pNBItr qNBItr rNBItr NBItr 
+The type of truncation is left 
+ and the truncation parameter is 0  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">family_pdf</span>(<span class="st">"NBItr"</span>, <span class="at">from=</span> <span class="dv">1</span>, <span class="at">to=</span><span class="dv">10</span>, <span class="at">mu=</span><span class="fl">1.5</span>, <span class="at">sigma=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Distributions_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="transformation-from--infty-infty-to-0-infty" class="slide level2">
+<h2>Transformation from <span class="math inline">\((-\infty, \infty)\)</span> to <span class="math inline">\((0, +\infty)\)</span></h2>
+<ul>
+<li><p>Any distribution for <span class="math inline">\(Z\)</span> on <span class="math inline">\((-\infty, \infty)\)</span> can be transformed to a corresponding distribution for <span class="math inline">\(Y=\exp(Z)\)</span> on <span class="math inline">\((0, +\infty)\)</span></p></li>
+<li><p>For example: from t distribution to <span class="math inline">\(\log t\)</span> distribution</p></li>
+</ul>
+</section>
+<section id="log-distributions" class="slide level2">
+<h2>log distributions</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">family_pdf</span>(<span class="st">"TF"</span>, <span class="at">from=</span><span class="sc">-</span><span class="dv">5</span>,<span class="at">to=</span><span class="dv">5</span>, <span class="at">mu=</span><span class="dv">0</span>, <span class="at">sigma=</span><span class="dv">1</span>, <span class="at">nu=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Distributions_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="log-distributions-con" class="slide level2">
+<h2>log distributions (con)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">gen.Family</span>(<span class="st">"TF"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A  log  family of distributions from TF has been generated 
+ and saved under the names:  
+ dlogTF plogTF qlogTF rlogTF logTF </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">family_pdf</span>(<span class="st">"logTF"</span>, <span class="at">from=</span><span class="fl">0.01</span>,<span class="at">to=</span><span class="dv">3</span>, <span class="at">mu=</span><span class="dv">0</span>, <span class="at">sigma=</span><span class="dv">1</span>, <span class="at">nu=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Distributions_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="transformation-from--infty-infty-to-0-1" class="slide level2">
+<h2>Transformation from <span class="math inline">\((-\infty, \infty)\)</span> to <span class="math inline">\((0, 1)\)</span></h2>
+<ul>
+<li><p>Any distribution for <span class="math inline">\(Z\)</span> on <span class="math inline">\((-\infty, \infty)\)</span> can be transformed to a corresponding distribution for <span class="math inline">\(Y=\exp(Z)\)</span> on <span class="math inline">\((0, 1)\)</span></p></li>
+<li><p>For example: from <code>t</code> distribution to <code>logit t</code> distribution</p></li>
+</ul>
+</section>
+<section id="logit-distributions" class="slide level2">
+<h2>logit distributions</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">library</span>(gamlss)</span>
+<span id="cb14-2"><a></a><span class="fu">library</span>(gamlss.ggplots)</span>
+<span id="cb14-3"><a></a><span class="fu">family_pdf</span>(<span class="st">"TF"</span>, <span class="at">from=</span><span class="sc">-</span><span class="dv">5</span>,<span class="at">to=</span><span class="dv">5</span>, <span class="at">mu=</span><span class="dv">0</span>, <span class="at">sigma=</span><span class="dv">1</span>, <span class="at">nu=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Distributions_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="logit-distributions-con" class="slide level2">
+<h2>logit distributions (con)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">gen.Family</span>(<span class="st">"TF"</span>, <span class="st">"logit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A  logit  family of distributions from TF has been generated 
+ and saved under the names:  
+ dlogitTF plogitTF qlogitTF rlogitTF logitTF </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">family_pdf</span>(<span class="st">"logitTF"</span>, <span class="at">from=</span><span class="fl">0.001</span>, <span class="at">to=</span>.<span class="dv">999</span>, <span class="at">mu=</span><span class="dv">0</span>, <span class="at">sigma=</span><span class="dv">1</span>, <span class="at">nu=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Distributions_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="inflated-distributions" class="slide level2">
+<h2>inflated distributions</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>A  logit  family of distributions from SHASHo has been generated 
+ and saved under the names:  
+ dlogitSHASHo plogitSHASHo qlogitSHASHo rlogitSHASHo logitSHASHo </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A  0to1 inflated logitSHASHo distribution has been generated 
+ and saved under the names:  
+ dlogitSHASHoInf0to1 plogitSHASHoInf0to1 qlogitSHASHoInf0to1 rlogitSHASHoInf0to1 
+ plotlogitSHASHoInf0to1 </code></pre>
+</div>
+
+</div>
+<img data-src="Distributions_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="zero-adjusted" class="slide level2">
+<h2>zero adjusted</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>A zero adjusted BCT distribution has been generated 
+ and saved under the names:  
+ dBCTZadj pBCTZadj qBCTZadj rBCTZadj 
+ plotBCTZadj </code></pre>
+</div>
+
+</div>
+<img data-src="Distributions_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<section id="tobit" class="slide level2">
+<h2>TOBIT</h2>
+
+<img data-src="tobit0Inf-1.png" class="r-stretch"></section>
+<section id="generalized-tobit" class="slide level2">
+<h2>generalized TOBIT</h2>
+
+<img data-src="tobit0Inf-2.png" class="r-stretch"></section>
+<section id="book-2" class="slide level2">
+<h2>book 2</h2>
+
+<img data-src="book-2.png" width="400" class="r-stretch quarto-figure-center"><p class="caption">book2</p></section>
 <section id="end" class="slide level2">
 <h2>end</h2>
 <p><a href="https://mstasinopoulos.github.io/Porto_short_course/">back to the index</a></p>
@@ -979,7 +1056,7 @@ Figure&nbsp;1: Centile-plot of the fitted <code>m6</code> model
         backgroundTransition: 'none',
 
         // Number of slides away from the current that are visible
-        viewDistance: 5,
+        viewDistance: 3,
 
         // Number of slides away from the current that are visible on mobile
         // devices. It is advisable to set this to a lower number than

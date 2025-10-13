@@ -12,10 +12,10 @@
 
   <meta name="author" content="Mikis Stasinopoulos">
   <meta name="author" content="Bob Rigby">
-  <meta name="author" content="Gillian Heller">
   <meta name="author" content="Fernanda De Bastiani">
+  <meta name="author" content="Gillian Heller">
   <meta name="author" content="Niki Umlauf">
-  <title>GAMLSS Port Short Course 2024 – Why GAMLSS?</title>
+  <title>GAMLSS Port Short Course 2024 – Interpreting models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -33,9 +33,73 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
-  <link rel="stylesheet" href="styles.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -327,13 +391,16 @@
       margin-right: 0; 
     }
   </style>
+  <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" data-background-image="Uni_greenwich.png" data-background-opacity="0.05" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">Why GAMLSS?</h1>
+  <h1 class="title">Interpreting models</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -348,12 +415,12 @@ Bob Rigby
 </div>
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Gillian Heller 
+Fernanda De Bastiani 
 </div>
 </div>
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Fernanda De Bastiani 
+Gillian Heller 
 </div>
 </div>
 <div class="quarto-title-author">
@@ -364,431 +431,422 @@ Niki Umlauf
 </div>
 
 </section>
-<section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
-
-</section>
-<section id="program" class="slide level2">
-<h2>Program</h2>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
 <ul>
-<li><p><code>why GAMLSS</code></p></li>
-<li><p><code>available software</code></p></li>
-<li><p><code>distributions</code></p></li>
-<li><p><code>fitting</code></p></li>
-<li><p><code>interpretation</code></p></li>
+<li>how to interpreted <code>the effect of a single term</code> into the distribution of the response;</li>
+<li>how to use the GAMLSS model for <code>prediction</code>.</li>
 </ul>
 </section>
-<section id="why-gamlss" class="slide level2">
-<h2>Why GAMLSS</h2>
+<section id="interpretation" class="slide level2">
+<h2>Interpretation</h2>
 <ul>
-<li><p>Statistical modelling</p></li>
-<li><p>Ditributional Regression</p></li>
+<li>how the information we obtain from the fitted model can be used</li>
 </ul>
-</section></section>
-<section>
-<section id="statistical-modelling" class="title-slide slide level1 center">
-<h1>Statistical modelling</h1>
-
+<div class="cell" data-reveal="true" data-fig-width="10" data-fig-heigh="10" data-fig-box="10" data-format="gfm" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-fitting" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-fitting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-fitting">flowchart TB
+  A[Features.] --&gt; B(Parameters) 
+  B --&gt; D[Properties, \n Characteristics]
+  D --&gt;  C(Distribution)
+  B --&gt; C
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fitting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: How x-variables effecting the properties of the distribution.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="statistical-models" class="slide level2">
-<h2>Statistical models</h2>
-<blockquote>
-<p>“all models are wrong but some are useful”.</p>
-<p>– George Box</p>
-</blockquote>
+<section id="graphical-partial-effects" class="slide level2 smaller">
+<h2>graphical Partial effects</h2>
 <ul>
-<li><p>Models should be <strong>parsimonious</strong></p></li>
-<li><p>Models should be <strong>fit for purpose</strong> and able to answer the question at hand</p></li>
-<li><p>Statistical models have a <strong>stochastic</strong> component</p></li>
-<li><p>All models are based on <strong>assumptions</strong>.</p></li>
-</ul>
-<aside class="notes">
-<p>A common theme in the following scientific subjects; <em>statistical analysis</em>; <em>statistical inference</em>; <em>statistical modelling</em>; <em>machine learning</em>; <em>statistical learning</em>; <em>data mining</em>; <em>information harvesting</em>; <em>information discovery</em>; <em>knowledge extraction</em>; <em>data analytics</em>, is <strong>data</strong>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="assumptions" class="slide level2">
-<h2>Assumptions</h2>
-<ul>
-<li><p>Assumptions are made to simplify things</p></li>
-<li><p><strong>Explicit</strong> assumptions</p></li>
-<li><p><strong>Implicit</strong> assumptions</p></li>
-<li><p>it is easier to check the explicit assumptions rather the implicit ones</p></li>
+<li><p><code>ceteris paribus</code> (concentate in one term fixing the rest)</p></li>
+<li><p><span class="math inline">\(\textbf{x}_j\)</span> denote a <strong>single</strong> (or maximum two terms)</p></li>
+<li><p><span class="math inline">\(\textbf{x}_{-j}\)</span> all the <strong>rest</strong> so <span class="math inline">\(\{\textbf{x}_j, \textbf{x}_{-j} \}\)</span> are all terms in the model</p></li>
+<li><p><span class="math inline">\(\omega(D)\)</span> the <strong>characteristic</strong> of the distribution we are interested <span class="math inline">\({D}(y | \textbf{x}_j , \textbf{x}_{-j}; \boldsymbol{\theta})\)</span> i.e.&nbsp;kurtosis</p></li>
+<li><p>under <strong>scenario</strong>, <span class="math inline">\(\textbf{S}[g()]\)</span> ()</p></li>
+<li><p><span class="math display">\[{PE}_{\omega({D})}\left( \textbf{x}_{j} | \textbf{S} \left[ g(\textbf{x}_{-j})\right] \right)\]</span></p></li>
 </ul>
 </section>
-<section id="model-circle" class="slide level2">
-<h2>Model circle</h2>
-<p><img data-src="Model_cicle.png" width="600"></p>
-
-<aside><div>
-<p>We keep going until we find an adequate model</p>
-</div></aside></section>
-<section id="sec-Regression" class="slide level2">
-<h2>Regression</h2>
+<section id="scenarios" class="slide level2 smaller">
+<h2>Scenarios</h2>
 <ul>
-<li><span class="math display">\[
-X  \stackrel{\textit{M}(\theta)}{\longrightarrow} Y
-\]</span></li>
-<li><span class="math inline">\(y\)</span>: <strong>targer</strong>, the <strong>y</strong> or the <strong>dependent</strong> variable</li>
-<li><span class="math inline">\(X\)</span>: <strong>explanatory</strong>, <strong>features</strong>, <strong>x’s</strong> or <strong>independent</strong> variables or <strong>terms</strong></li>
-</ul>
-
-<aside><div>
-<p><span class="math inline">\(M(\theta)\)</span> is a model depending on parameters <span class="math inline">\(\theta\)</span></p>
-</div></aside></section>
-<section id="linear-model" class="slide level2">
-<h2>Linear Model</h2>
+<li><p><code>fixing</code> values of <span class="math inline">\(\textbf{x}_{-j}\)</span> (mean or median for continuous, level with more number of observations for factors or other possible values of importance)</p></li>
+<li><p><code>average</code> over values of <span class="math inline">\(\textbf{x}_{-j}\)</span></p>
 <ul>
-<li>standard way</li>
-</ul>
-<p><span id="eq-LinearModel"><span class="math display">\[
-\begin{equation}
-y_i= b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}+ \epsilon_i
-\end{equation}
-\qquad(1)\]</span></span></p>
-
-<aside><div>
-<p>the model <span class="math inline">\(M(\theta)\)</span> is linear, and there are <span class="math inline">\(n\)</span> observations for <span class="math inline">\(i=1,2,\ldots,n\)</span>.</p>
-</div></aside></section>
-<section id="linear-model-1" class="slide level2">
-<h2>Linear Model</h2>
-<ul>
-<li>different way</li>
-</ul>
-<p><span id="eq-LinearModel1"><span class="math display">\[
-\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim } &amp;  {N}(\mu_i, \sigma) \nonumber \\
-\mu_i &amp;=&amp; b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}
-\end{split}
-\qquad(2)\]</span></span></p>
-
-<aside><div>
-<p>the model <span class="math inline">\(M(\theta)\)</span> is linear, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are the parameter and <span class="math inline">\(\beta\)</span> are the linear coefficients.</p>
-</div></aside></section>
-<section id="example-bmi-data" class="slide level2">
-<h2>Example: <code>BMI</code> data</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="example-bmi-fitted-model" class="slide level2">
-<h2>Example: <code>BMI</code> fitted model</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="additive-models" class="slide level2">
-<h2>Additive Models</h2>
-<p><span id="eq-AdditiveModel"><span class="math display">\[
-\begin{split}
-y_i   &amp;  \stackrel{\small{ind}}{\sim } &amp;  {N}(\mu_i, \sigma) \nonumber \\
-\mu_i &amp;=&amp; b_0 + s_1(x_{1i})  +  s_2(x_{2i}), \ldots,  s_p(x_{pi})
-\end{split}
-\qquad(3)\]</span></span></p>
-
-<aside><div>
-<p><span class="math inline">\(s(x)\)</span> are smooth functions determined by the data</p>
-</div></aside></section>
-<section id="example-additive-fitted-model" class="slide level2">
-<h2>Example: additive fitted model</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="machine-learning-models" class="slide level2">
-<h2>Machine Learning Models</h2>
-<p><span id="eq-MachineLearning"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {N}(\mu_i, \sigma) \nonumber \\
-\mu_i &amp;=&amp; ML(x_{1i},x_{2i}, \ldots,  x_{pi})
-\end{split}
-\qquad(4)\]</span></span></p>
-
-<aside><div>
-<p>All models concentrate on the mean and implicitly assumed a symmetric distribution</p>
-</div></aside></section>
-<section id="example-neural-networks" class="slide level2">
-<h2>Example: neural networks</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section id="example-regression-tree" class="slide level2">
-<h2>Example: regression tree</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
-<section id="generalised-linear-models" class="slide level2">
-<h2>Generalised Linear Models</h2>
-<p><span id="eq-GenaralisedLinearModel"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {E}(\mu_i, \phi) \nonumber \\
-g(\mu_i) &amp;=&amp; b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}
-\end{split}
-\qquad(5)\]</span></span></p>
-<ul>
-<li><p><span class="math inline">\({E}(\mu_i, \phi)\)</span> : <code>Exponential</code> family</p></li>
-<li><p><span class="math inline">\(g(\mu_i)\)</span> : the <code>link</code> function</p></li>
-</ul>
-
-<aside><div>
-<p>Still modelling only shifts in the mean</p>
-</div></aside></section>
-<section id="example-glm" class="slide level2">
-<h2>Example: GLM</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>gamma fitted distribution</p>
-</div></aside></section>
-<section id="example-diagnostics-1" class="slide level2">
-<h2>Example: diagnostics 1</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>QQ-plot</p>
-</div></aside></section>
-<section id="example-diagnostics-2" class="slide level2">
-<h2>Example: diagnostics 2</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>Worm-plot</p>
-</div></aside></section>
-<section id="example-diagnostics-3" class="slide level2">
-<h2>Example: diagnostics 3</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>Bucket-plot</p>
-</div></aside></section>
-<section id="example-conclusion" class="slide level2">
-<h2>Example: conclusion</h2>
-<ul>
-<li><p>the <code>mean</code> of the response is fitted fine with the linear model but the distribution is not</p></li>
-<li><p>the distribution (implicit <code>Normal</code>) is not-adequate</p></li>
-<li><p>even the explicit <code>Gamma</code> distribution of the GLM is not-adequate</p></li>
-<li><p>therefore if we are interested on a statistic different from the <code>mean</code> we need something extra.</p></li>
-</ul>
-</section></section>
-<section>
-<section id="sec-Distributionalregression" class="title-slide slide level1 center">
-<h1>Distributional regression</h1>
-
-</section>
-<section id="distributional-regression" class="slide level2">
-<h2>Distributional regression</h2>
-<p><span class="math display">\[
-X  \stackrel{\textit{M}(\boldsymbol{\theta})}{\longrightarrow} D\left(Y|\boldsymbol{\theta}(\textbf{X})\right)
-\]</span></p>
-<ul>
-<li><p>All parameters <span class="math inline">\(\boldsymbol{\theta}\)</span> could functions of the explanatory variables <span class="math inline">\(\boldsymbol{\theta}(\textbf{X})\)</span>.</p></li>
-<li><p><span class="math inline">\(D\left(Y|\boldsymbol{\theta}(\textbf{X})\right)\)</span> can be any <span class="math inline">\(k\)</span> parameter distribution</p></li>
+<li><code>Partial Dependence Plots</code> (PDF), <span class="math inline">\(\textbf{S}\left[ \text{average}(\textbf{x}_{-j})\right]\)</span><br>
+</li>
+<li><code>Accumulated Local Effects</code>, (ALE), accumulated average local differences</li>
+<li><code>Marginal Effects</code> (ME) average over local neighbourhood</li>
+</ul></li>
 </ul>
 </section>
-<section id="generalised-additive-models-for-location-scale-and-shape" class="slide level2">
-<h2>Generalised Additive models for Location Scale and Shape</h2>
-<p><span id="eq-GAMLSS"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {D}( \theta_{1i}, \ldots, \theta_{ki}) \nonumber \\
-g(\theta_{1i})  &amp;=&amp; b_{10} + s_1({x}_{1i})  +  \ldots,  s_p({x}_{pi}) \nonumber\\
-\ldots &amp;=&amp; \ldots \nonumber\\
-g({\theta}_{ki})  &amp;=&amp; b_0 + s_1({x}_{1i})  +   \ldots,  s_p({x}_{pi})
-\end{split}
-\qquad(6)\]</span></span></p>
-
-<aside><div>
-<p>for <span class="math inline">\(i=1,2,\ldots,n\)</span>.</p>
-</div></aside></section>
-<section id="gamlss-ml" class="slide level2">
-<h2>GAMLSS + ML</h2>
-<p><span id="eq-GAMLSS_ML"><span class="math display">\[\begin{split}
-y_i     &amp;  \stackrel{\small{ind}}{\sim }&amp;  {D}( \theta_{1i}, \ldots, \theta_{ki}) \nonumber \\
-g({\theta}_{1i}) &amp;=&amp; {ML}_1({x}_{1i},{x}_{2i}, \ldots,  {x}_{pi}) \nonumber \\
-\ldots &amp;=&amp; \ldots \nonumber\\
-g({\theta}_{ki}) &amp;=&amp; {ML}_1({x}_{1i},{x}_{2i}, \ldots,  {x}_{pi})
-\end{split}
-  \qquad(7)\]</span></span> <!--  --> <!--  \ldots &=& \ldots \nonumber\\ --> <!-- g(\boldsymbol{\theta}_k) &=& {ML}_k(\textbf{x}_{1i},\textbf{x}_{2i}, \ldots,  \textbf{x}_{pi})  --></p>
-
-<aside><div>
-<p>for <span class="math inline">\(i=1,2,\ldots,n\)</span>.</p>
-</div></aside></section>
-<section id="sec-Example" class="slide level2">
-<h2>Example: GAMLSS</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>BCT distribution GAMLSS model</p>
-</div></aside></section>
-<section id="example-diagnostics" class="slide level2">
-<h2>Example: diagnostics</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>QQ-plot, Gamma, <code>m3</code>, against BCT model, <code>m6</code>.</p>
-</div></aside></section>
-<section id="example-diagnostics-2-1" class="slide level2">
-<h2>Example: diagnostics 2</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>Worm-plot: Gamma, <code>m3</code>, against BCT model, <code>m6</code>.</p>
-</div></aside></section>
-<section id="example-diagnostics-3-1" class="slide level2">
-<h2>Example: diagnostics 3</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>Bucket-plot, Gamma, <code>m3</code>, against BCT model, <code>m6</code>.</p>
-</div></aside></section>
-<section id="fitted-centiles" class="slide level2">
-<h2>Fitted Centiles</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/fig-diagfigg-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;1: Centile-plot of the fitted <code>m6</code> model
-</p></section>
-<section id="the-true-bmi-data" class="slide level2">
-<h2>The true <code>BMI</code> data</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
-<section id="the-fitted-model" class="slide level2">
-<h2>The fitted model</h2>
-
-<img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
-<section id="the-fitted-centiles" class="slide level2">
-<h2>The fitted centiles</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>see <code>centile estimation</code> of 3rd day</p>
-</div></aside></section>
-<section id="diagnostics-1" class="slide level2">
-<h2>Diagnostics 1</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>QQ-plot</p>
-</div></aside></section>
-<section id="diagnostics-2" class="slide level2">
-<h2>Diagnostics 2</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>worm plot</p>
-</div></aside></section>
-<section id="diagnostics-3" class="slide level2">
-<h2>Diagnostics 3</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Why_GAMLSS_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<aside><div>
-<p>bucket plot</p>
-</div></aside></section>
-<section id="summary" class="slide level2 smaller">
-<h2>Summary</h2>
+<section id="characteristics" class="slide level2">
+<h2>Characteristics</h2>
 <ul>
-<li><p>Distributional assumptions often needed for the response to be fitted properly</p></li>
-<li><p>In the BMI example above we needed to model all the parameters of the distribution as function of the explanatory variable <code>age</code>.</p></li>
-<li><p>Those parameters were the <code>location</code> parameter <span class="math inline">\(\mu\)</span>, the <code>scale</code> parameter, <span class="math inline">\(\sigma\)</span>, the <code>skewness</code> parameter, <span class="math inline">\(\nu\)</span>, and the <code>kurtotic</code> parameter <span class="math inline">\(\tau\)</span></p></li>
-<li><p>Machine Learning methods are useful (especially for modelling interactions between variables) but they are not suitable if the interest do non lie in the mean.</p></li>
+<li><p><code>predictors</code>, <span class="math inline">\(\eta_{\theta_i}\)</span></p></li>
+<li><p><code>parameters</code>, <span class="math inline">\(\theta_i\)</span></p></li>
+<li><p><code>moment</code>, i.e.&nbsp;mean and variance</p></li>
+<li><p><code>quantiles</code> i.e.&nbsp;median</p></li>
+<li><p><code>distribution</code></p></li>
 </ul>
-<!-- -   `quantile regression` could be used in certain circumstances  but  it is more difficult to check its adequancy -->
-<!-- ::: callout-tip -->
-<!-- Implicit assumptions are more difficult to check in general -->
-<!-- ::: -->
+</section>
+<section id="pe-parameter-mu-additive" class="slide level2">
+<h2>PE-parameter <span class="math inline">\(\mu\)</span> additive</h2>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(gamlss.ggplots)</span>
+<span id="cb1-2"><a></a><span class="fu">pe_param</span>(madditive,<span class="st">"area"</span>)</span>
+<span id="cb1-3"><a></a><span class="fu">pe_param</span>(madditive,<span class="st">"yearc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-2-2.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="pe-parameter-mu-nn" class="slide level2">
+<h2>PE-parameter <span class="math inline">\(\mu\)</span> NN</h2>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">pe_param</span>(mneural, <span class="st">"area"</span> )</span>
+<span id="cb2-2"><a></a><span class="fu">pe_param</span>(mneural, <span class="st">"yearc"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-3-2.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="pe-parameter-sigma-additive" class="slide level2">
+<h2>PE; parameter <span class="math inline">\(\sigma\)</span>; additive</h2>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">pe_param</span>(madditive,<span class="st">"area"</span>, <span class="at">parameter=</span><span class="st">"sigma"</span>)</span>
+<span id="cb3-2"><a></a><span class="fu">pe_param</span>(madditive,<span class="st">"yearc"</span>, <span class="at">parameter=</span><span class="st">"sigma"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-4-2.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="pe-parameter-sigma-nn" class="slide level2">
+<h2>PE; parameter <span class="math inline">\(\sigma\)</span>; NN</h2>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">pe_param</span>(mneural,<span class="st">"area"</span>, <span class="at">parameter=</span><span class="st">"sigma"</span>)</span>
+<span id="cb4-2"><a></a><span class="fu">pe_param</span>(mneural,<span class="st">"yearc"</span>, <span class="at">parameter=</span><span class="st">"sigma"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-5-2.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="all-terms-additive" class="slide level2">
+<h2>all terms (additive)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">pe_param_grid</span>(madditive,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>,  <span class="st">"location"</span>, <span class="st">"bath"</span>, <span class="st">"kitchen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="way-interactions-additive" class="slide level2">
+<h2>2 way interactions (additive)</h2>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a> <span class="fu">pe_param</span>(madditive, <span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>)) </span>
+<span id="cb6-2"><a></a><span class="fu">pe_param</span>( madditive, <span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>), <span class="at">filled=</span><span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-7-2.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="ale-parameters-mu-additive" class="slide level2">
+<h2>ALE; parameters <span class="math inline">\(\mu\)</span>; Additive</h2>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(madditive,<span class="st">"area"</span>)</span>
+<span id="cb7-2"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(madditive,<span class="st">"yearc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-8-2.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="ale-parameters-mu-nn" class="slide level2">
+<h2>ALE; parameters <span class="math inline">\(\mu\)</span>; NN</h2>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(mneural,<span class="st">"area"</span>)</span>
+<span id="cb8-2"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(mneural,<span class="st">"yearc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-9-2.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="ale-interactions" class="slide level2">
+<h2>ALE interactions</h2>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(madditive,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>))</span>
+<span id="cb9-2"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(mneural,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-10-2.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="moments-mean" class="slide level2">
+<h2>moments (mean)</h2>
+<ul>
+<li><p>Not implemented yet for <code>gamlss2</code> objects</p></li>
+<li><p>Note that moments not always exist for example for the <code>BCTo</code> distribution</p>
+<ul>
+<li><p>for <span class="math inline">\(\tau\le2\)</span> the variance do not exist</p></li>
+<li><p>for <span class="math inline">\(\tau\le1\)</span> the mean do not exist</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="quantiles-additive" class="slide level2">
+<h2>quantiles, additive</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a> gamlss.ggplots<span class="sc">:::</span><span class="fu">pe_quantile</span>(madditive,<span class="fu">c</span>(<span class="st">"area"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="quantiles-additive-con." class="slide level2">
+<h2>quantiles, additive (con.)</h2>
+
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="quantiles-interactions" class="slide level2">
+<h2>quantiles interactions</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>  gamlss.ggplots<span class="sc">:::</span><span class="fu">pe_quantile</span>(madditive,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="quantiles-interactions-2" class="slide level2">
+<h2>quantiles interactions 2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a> gamlss.ggplots<span class="sc">:::</span><span class="fu">pe_quantile</span>(madditive,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"location"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="quantiles-interactions-2-1" class="slide level2">
+<h2>quantiles interactions 2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">pe_quantile</span>(madditive,<span class="fu">c</span>( <span class="st">"location"</span>, <span class="st">"bath"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<section id="distributions-mu-additive" class="slide level2">
+<h2>distributions, <span class="math inline">\(\mu\)</span>, additive</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co">#gamlss.ggplots:::pe_pdf_grid(madditive, list("area", "yearc", "location","bath"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="distributions-mu-nn" class="slide level2">
+<h2>distributions, <span class="math inline">\(\mu\)</span>, NN</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co">#gamlss.ggplots:::pe_pdf_grid(mneural, list("area", "yearc", "location","bath"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-purpose-of-the-study" class="slide level2 smaller">
+<h2>the purpose of the study</h2>
+<ul>
+<li><p>the <code>purpose</code> should be always in our mind when we try to analyse any data</p></li>
+<li><p>for the Munich rent data are collected almost every 10 years</p></li>
+<li><p>guidance to judges on whether a <strong>disputed rent</strong> is a fair or not</p></li>
+<li><p><code>purpose</code> is to identify very low or very hight rents by correcting for the explanatory variables</p></li>
+<li><p>similar in detecting “outliers”</p></li>
+<li><p>a possible solution: <code>prediction z-scores</code></p></li>
+</ul>
+</section>
+<section id="prediction-z-scores" class="slide level2">
+<h2>prediction z-scores</h2>
+<p>Scenarios</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">rent</th>
+<th style="text-align: right;">area</th>
+<th style="text-align: right;">yearc</th>
+<th style="text-align: right;">location</th>
+<th style="text-align: right;">bath</th>
+<th style="text-align: right;">kitchen</th>
+<th style="text-align: right;">heating</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">1983</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">1915</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">1960</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="prediction-z-scores-con." class="slide level2">
+<h2>prediction z-scores (con.)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co">#     rent &lt;- c(1500, 1000,800)</span></span>
+<span id="cb16-2"><a></a><span class="co">#     area &lt;- c(140, 55, 65)</span></span>
+<span id="cb16-3"><a></a><span class="co">#    yearc &lt;- c(1983, 1915, 1960)</span></span>
+<span id="cb16-4"><a></a><span class="co"># location &lt;- factor(c(3,1,1))</span></span>
+<span id="cb16-5"><a></a><span class="co">#     bath &lt;- factor(c(1,0,1))</span></span>
+<span id="cb16-6"><a></a><span class="co">#  kitchen &lt;- factor(c(1,0,1))</span></span>
+<span id="cb16-7"><a></a><span class="co"># cheating &lt;- factor(c(1,0,1))</span></span>
+<span id="cb16-8"><a></a><span class="co"># ndat &lt;- data.frame(rent, area, yearc, location, bath, kitchen, cheating)</span></span>
+<span id="cb16-9"><a></a><span class="co"># cat("prediction z-scores", "\n")</span></span>
+<span id="cb16-10"><a></a><span class="co"># pp &lt;-predict(madditive, newdata=ndat, type="parameter")</span></span>
+<span id="cb16-11"><a></a><span class="co">#  qNO(madditive$family$p(q=ndat$rent, par=pp))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="summary" class="slide level2">
+<h2>summary</h2>
+<p><code>GAMLSS</code> can tackle problems where the interest of the investigation lies <strong>not only</strong> in the <code>center</code> but <code>other parts of the distribution.</code></p>
+<p>Personal view for the future of <code>GAMLSS</code> development;</p>
+<ul>
+<li><p>theoretical contributions</p></li>
+<li><p>software and</p></li>
+<li><p>knowledge exchange</p></li>
+</ul>
+</section>
+<section id="summary-continue" class="slide level2">
+<h2>Summary (continue)</h2>
+<ul>
+<li><code>theoretical contributions</code>
+<ul>
+<li>interpretable tools</li>
+<li>model average for prediction</li>
+</ul></li>
+<li><code>software</code>
+<ul>
+<li><code>gamlss2</code></li>
+</ul></li>
+<li><code>books and knowledge exchange</code>
+<ul>
+<li>there is need for applied and elementary books</li>
+<li>more application public health and environment</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-team" class="slide level2 smaller">
+<h2>the team</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">working party</th>
+<th style="text-align: left;">current</th>
+<th style="text-align: left;">past</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>Gillian Heller</code></td>
+<td style="text-align: left;"><code>Konstantinos Pateras</code></td>
+<td style="text-align: left;">Popi Akantziliotou</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Fernanda De Bastiani</code></td>
+<td style="text-align: left;">Paul Eilers</td>
+<td style="text-align: left;">Vlasios Voudouris</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Thomas Kneib</code></td>
+<td style="text-align: left;">Nikos Kametas</td>
+<td style="text-align: left;">Nicoleta Mortan</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Achim Zaileis</code></td>
+<td style="text-align: left;"><code>Tim Cole</code></td>
+<td style="text-align: left;">Daniil Kiose</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Andreas Mayr</code></td>
+<td style="text-align: left;"><code>Nikos Georgikopoulos</code></td>
+<td style="text-align: left;">Dea-Jin Lee</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Nicolaus Umlauf</code></td>
+<td style="text-align: left;"><code>Luiz Nakamura</code></td>
+<td style="text-align: left;">María Xosé Rodríguez-Álvarez</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Reto Stauffer</code></td>
+<td style="text-align: left;">Nadja Klein</td>
+<td style="text-align: left;">Majid Djennad</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Robert Rigby</code></td>
+<td style="text-align: left;"><code>Julian Merder</code></td>
+<td style="text-align: left;">Fiona McElduff</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Mikis Stasinopoulos</code></td>
+<td style="text-align: left;">Abu Hossain</td>
+<td style="text-align: left;">Raydonal Ospina</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="end" class="slide level2">
 <h2>end</h2>
@@ -810,7 +868,7 @@ Figure&nbsp;1: Centile-plot of the fitted <code>m6</code> model
 <p>www.gamlss.com</p>
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -979,7 +1037,7 @@ Figure&nbsp;1: Centile-plot of the fitted <code>m6</code> model
         backgroundTransition: 'none',
 
         // Number of slides away from the current that are visible
-        viewDistance: 5,
+        viewDistance: 3,
 
         // Number of slides away from the current that are visible on mobile
         // devices. It is advisable to set this to a lower number than

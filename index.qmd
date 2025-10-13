@@ -1,0 +1,18 @@
+---
+title: "GAMLSS short course slides for XVII MGEST-2025"
+author:
+  - Mikis Stasinopoulos
+  - Bob Rigby
+  - Gillian Heller
+  - Fernanda De Bistiani  
+  - Niki Umlauf  
+---
+
+This website contains slides from the short course on GAMLSS given in June 2024 at Porto - Portugal.
+
+-   [Why GAMLSS](Why_GAMLSS.qmd)
+-   [The R shoftware](TheRsoftware.qmd)
+-   [Distributions](Distributions.qmd)
+-   [Model Fitting](fitting.qmd)
+-   [Comparison of Models](comparison.qmd)
+-   [Interpretation of Models](Interpret.qmd)
