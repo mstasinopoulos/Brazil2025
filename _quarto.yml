@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: docs
+website:
+  title: "GAMLSS Port Short Course 2024"
+  navbar:
+    background: primary
+    search: true
+    left:
+      - href: index.qmd
+        text: Home
+      - Why_GAMLSS.qmd
+
+
+      
+sidebar:
+  contents: auto
+      
+format:
+  html:
+    theme: sky
+    css: styles.css
+    toc: true
+
+editor: visual
+

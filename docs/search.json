@@ -1,0 +1,275 @@
+[
+  {
+    "objectID": "Why_GAMLSS.html#day-1",
+    "href": "Why_GAMLSS.html#day-1",
+    "title": "Why GAMLSS?",
+    "section": "DAY 1",
+    "text": "DAY 1\n\nMorning\n\nwhy GAMLSS\nAvailable software\nPractical 1\n\nAfternoon\n\nDistributions\nContinuous distributions\nPractical 2"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#day-2",
+    "href": "Why_GAMLSS.html#day-2",
+    "title": "Why GAMLSS?",
+    "section": "DAY 2",
+    "text": "DAY 2\n\nMorning\n\nDiscrete Distributions\nMixed distributions\nPractical 3\n\nAfternoon\n\nModel Fitting\nModel Selection\nPractical 4"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#day-3",
+    "href": "Why_GAMLSS.html#day-3",
+    "title": "Why GAMLSS?",
+    "section": "DAY 3",
+    "text": "DAY 3\n\nMorning\n\nCentile estination\nDiagnostics and ggplots\nPractical 5\n\nAfternoon\n\nModel Comparison\nModel Interpretation\nDiscussion"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#why-gamlss",
+    "href": "Why_GAMLSS.html#why-gamlss",
+    "title": "Why GAMLSS?",
+    "section": "Why GAMLSS",
+    "text": "Why GAMLSS\n\nStatistical modelling\nDitributional Regression"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#statistical-models",
+    "href": "Why_GAMLSS.html#statistical-models",
+    "title": "Why GAMLSS?",
+    "section": "Statistical models",
+    "text": "Statistical models\n\n“all models are wrong but some are useful”.\n– George Box\n\n\nModels should be parsimonious\nModels should be fit for purpose and able to answer the question at hand\nStatistical models have a stochastic component\nAll models are based on assumptions.\n\n\nA common theme in the following scientific subjects; statistical analysis; statistical inference; statistical modelling; machine learning; statistical learning; data mining; information harvesting; information discovery; knowledge extraction; data analytics, is data."
+  },
+  {
+    "objectID": "Why_GAMLSS.html#assumptions",
+    "href": "Why_GAMLSS.html#assumptions",
+    "title": "Why GAMLSS?",
+    "section": "Assumptions",
+    "text": "Assumptions\n\nAssumptions are made to simplify things\nExplicit assumptions\nImplicit assumptions\nit is easier to check the explicit assumptions rather the implicit ones"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#model-circle",
+    "href": "Why_GAMLSS.html#model-circle",
+    "title": "Why GAMLSS?",
+    "section": "Model circle",
+    "text": "Model circle\n\n\n\nWe keep going until we find an adequate model"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#sec-Regression",
+    "href": "Why_GAMLSS.html#sec-Regression",
+    "title": "Why GAMLSS?",
+    "section": "Regression",
+    "text": "Regression\n\n\\[\nX  \\stackrel{\\textit{M}(\\theta)}{\\longrightarrow} Y\n\\]\n\\(y\\): targer, the y or the dependent variable\n\\(X\\): explanatory, features, x’s or independent variables or terms\n\n\n\n\\(M(\\theta)\\) is a model depending on parameters \\(\\theta\\)"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#linear-model",
+    "href": "Why_GAMLSS.html#linear-model",
+    "title": "Why GAMLSS?",
+    "section": "Linear Model",
+    "text": "Linear Model\n\nstandard way\n\n\\[\n\\begin{equation}\ny_i= b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \\ldots,  b_p x_{pi}+ \\epsilon_i\n\\end{equation}\n\\qquad(1)\\]\n\n\nthe model \\(M(\\theta)\\) is linear, and there are \\(n\\) observations for \\(i=1,2,\\ldots,n\\)."
+  },
+  {
+    "objectID": "Why_GAMLSS.html#linear-model-1",
+    "href": "Why_GAMLSS.html#linear-model-1",
+    "title": "Why GAMLSS?",
+    "section": "Linear Model",
+    "text": "Linear Model\n\ndifferent way\n\n\\[\n\\begin{split}\ny_i     &  \\stackrel{\\small{ind}}{\\sim } &  {N}(\\mu_i, \\sigma) \\nonumber \\\\\n\\mu_i &=& b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \\ldots,  b_p x_{pi}\n\\end{split}\n\\qquad(2)\\]\n\n\nthe model \\(M(\\theta)\\) is linear, \\(\\mu\\) and \\(\\sigma\\) are the parameter and \\(\\beta\\) are the linear coefficients."
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-bmi-data",
+    "href": "Why_GAMLSS.html#example-bmi-data",
+    "title": "Why GAMLSS?",
+    "section": "Example: BMI data",
+    "text": "Example: BMI data"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-bmi-fitted-model",
+    "href": "Why_GAMLSS.html#example-bmi-fitted-model",
+    "title": "Why GAMLSS?",
+    "section": "Example: BMI fitted model",
+    "text": "Example: BMI fitted model"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#additive-models",
+    "href": "Why_GAMLSS.html#additive-models",
+    "title": "Why GAMLSS?",
+    "section": "Additive Models",
+    "text": "Additive Models\n\\[\n\\begin{split}\ny_i   &  \\stackrel{\\small{ind}}{\\sim } &  {N}(\\mu_i, \\sigma) \\nonumber \\\\\n\\mu_i &=& b_0 + s_1(x_{1i})  +  s_2(x_{2i}), \\ldots,  s_p(x_{pi})\n\\end{split}\n\\qquad(3)\\]\n\n\n\\(s(x)\\) are smooth functions determined by the data"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-additive-fitted-model",
+    "href": "Why_GAMLSS.html#example-additive-fitted-model",
+    "title": "Why GAMLSS?",
+    "section": "Example: additive fitted model",
+    "text": "Example: additive fitted model"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#machine-learning-models",
+    "href": "Why_GAMLSS.html#machine-learning-models",
+    "title": "Why GAMLSS?",
+    "section": "Machine Learning Models",
+    "text": "Machine Learning Models\n\\[\\begin{split}\ny_i     &  \\stackrel{\\small{ind}}{\\sim }&  {N}(\\mu_i, \\sigma) \\nonumber \\\\\n\\mu_i &=& ML(x_{1i},x_{2i}, \\ldots,  x_{pi})\n\\end{split}\n\\qquad(4)\\]\n\n\nAll models concentrate on the mean and implicitly assumed a symmetric distribution"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-neural-networks",
+    "href": "Why_GAMLSS.html#example-neural-networks",
+    "title": "Why GAMLSS?",
+    "section": "Example: neural networks",
+    "text": "Example: neural networks"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-regression-tree",
+    "href": "Why_GAMLSS.html#example-regression-tree",
+    "title": "Why GAMLSS?",
+    "section": "Example: regression tree",
+    "text": "Example: regression tree"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#generalised-linear-models",
+    "href": "Why_GAMLSS.html#generalised-linear-models",
+    "title": "Why GAMLSS?",
+    "section": "Generalised Linear Models",
+    "text": "Generalised Linear Models\n\\[\\begin{split}\ny_i     &  \\stackrel{\\small{ind}}{\\sim }&  {E}(\\mu_i, \\phi) \\nonumber \\\\\ng(\\mu_i) &=& b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \\ldots,  b_p x_{pi}\n\\end{split}\n\\qquad(5)\\]\n\n\\({E}(\\mu_i, \\phi)\\) : Exponential family\n\\(g(\\mu_i)\\) : the link function\n\n\n\nStill modelling only shifts in the mean"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-glm",
+    "href": "Why_GAMLSS.html#example-glm",
+    "title": "Why GAMLSS?",
+    "section": "Example: GLM",
+    "text": "Example: GLM\n\n\n\n\n\n\n\n\n\n\n\ngamma fitted distribution"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-diagnostics-1",
+    "href": "Why_GAMLSS.html#example-diagnostics-1",
+    "title": "Why GAMLSS?",
+    "section": "Example: diagnostics 1",
+    "text": "Example: diagnostics 1\n\n\n\n\n\n\n\n\n\n\n\nQQ-plot"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-diagnostics-2",
+    "href": "Why_GAMLSS.html#example-diagnostics-2",
+    "title": "Why GAMLSS?",
+    "section": "Example: diagnostics 2",
+    "text": "Example: diagnostics 2\n\n\n\n\n\n\n\n\n\n\n\nWorm-plot"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-diagnostics-3",
+    "href": "Why_GAMLSS.html#example-diagnostics-3",
+    "title": "Why GAMLSS?",
+    "section": "Example: diagnostics 3",
+    "text": "Example: diagnostics 3\n\n\n\n\n\n\n\n\n\n\n\nBucket-plot"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-conclusion",
+    "href": "Why_GAMLSS.html#example-conclusion",
+    "title": "Why GAMLSS?",
+    "section": "Example: conclusion",
+    "text": "Example: conclusion\n\nthe mean of the response is fitted fine with the linear model but the distribution is not\nthe distribution (implicit Normal) is not-adequate\neven the explicit Gamma distribution of the GLM is not-adequate\ntherefore if we are interested on a statistic different from the mean we need something extra."
+  },
+  {
+    "objectID": "Why_GAMLSS.html#distributional-regression",
+    "href": "Why_GAMLSS.html#distributional-regression",
+    "title": "Why GAMLSS?",
+    "section": "Distributional regression",
+    "text": "Distributional regression\n\\[\nX  \\stackrel{\\textit{M}(\\boldsymbol{\\theta})}{\\longrightarrow} D\\left(Y|\\boldsymbol{\\theta}(\\textbf{X})\\right)\n\\]\n\nAll parameters \\(\\boldsymbol{\\theta}\\) could functions of the explanatory variables \\(\\boldsymbol{\\theta}(\\textbf{X})\\).\n\\(D\\left(Y|\\boldsymbol{\\theta}(\\textbf{X})\\right)\\) can be any \\(k\\) parameter distribution"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#generalised-additive-models-for-location-scale-and-shape",
+    "href": "Why_GAMLSS.html#generalised-additive-models-for-location-scale-and-shape",
+    "title": "Why GAMLSS?",
+    "section": "Generalised Additive models for Location Scale and Shape",
+    "text": "Generalised Additive models for Location Scale and Shape\n\\[\\begin{split}\ny_i     &  \\stackrel{\\small{ind}}{\\sim }&  {D}( \\theta_{1i}, \\ldots, \\theta_{ki}) \\nonumber \\\\\ng(\\theta_{1i})  &=& b_{10} + s_1({x}_{1i})  +  \\ldots,  s_p({x}_{pi}) \\nonumber\\\\\n\\ldots &=& \\ldots \\nonumber\\\\\ng({\\theta}_{ki})  &=& b_0 + s_1({x}_{1i})  +   \\ldots,  s_p({x}_{pi})\n\\end{split}\n\\qquad(6)\\]\n\n\nfor \\(i=1,2,\\ldots,n\\)."
+  },
+  {
+    "objectID": "Why_GAMLSS.html#gamlss-ml",
+    "href": "Why_GAMLSS.html#gamlss-ml",
+    "title": "Why GAMLSS?",
+    "section": "GAMLSS + ML",
+    "text": "GAMLSS + ML\n\\[\\begin{split}\ny_i     &  \\stackrel{\\small{ind}}{\\sim }&  {D}( \\theta_{1i}, \\ldots, \\theta_{ki}) \\nonumber \\\\\ng({\\theta}_{1i}) &=& {ML}_1({x}_{1i},{x}_{2i}, \\ldots,  {x}_{pi}) \\nonumber \\\\\n\\ldots &=& \\ldots \\nonumber\\\\\ng({\\theta}_{ki}) &=& {ML}_1({x}_{1i},{x}_{2i}, \\ldots,  {x}_{pi})\n\\end{split}\n  \\qquad(7)\\]   \n\n\nfor \\(i=1,2,\\ldots,n\\)."
+  },
+  {
+    "objectID": "Why_GAMLSS.html#sec-Example",
+    "href": "Why_GAMLSS.html#sec-Example",
+    "title": "Why GAMLSS?",
+    "section": "Example: GAMLSS",
+    "text": "Example: GAMLSS\n\n\n\n\n\n\n\n\n\n\n\nBCT distribution GAMLSS model"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-diagnostics",
+    "href": "Why_GAMLSS.html#example-diagnostics",
+    "title": "Why GAMLSS?",
+    "section": "Example: diagnostics",
+    "text": "Example: diagnostics\n\n\n\n\n\n\n\n\n\n\n\nQQ-plot, Gamma, m3, against BCT model, m6."
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-diagnostics-2-1",
+    "href": "Why_GAMLSS.html#example-diagnostics-2-1",
+    "title": "Why GAMLSS?",
+    "section": "Example: diagnostics 2",
+    "text": "Example: diagnostics 2\n\n\n\n\n\n\n\n\n\n\n\nWorm-plot: Gamma, m3, against BCT model, m6."
+  },
+  {
+    "objectID": "Why_GAMLSS.html#example-diagnostics-3-1",
+    "href": "Why_GAMLSS.html#example-diagnostics-3-1",
+    "title": "Why GAMLSS?",
+    "section": "Example: diagnostics 3",
+    "text": "Example: diagnostics 3\n\n\n\n\n\n\n\n\n\n\n\nBucket-plot, Gamma, m3, against BCT model, m6."
+  },
+  {
+    "objectID": "Why_GAMLSS.html#fitted-centiles",
+    "href": "Why_GAMLSS.html#fitted-centiles",
+    "title": "Why GAMLSS?",
+    "section": "Fitted Centiles",
+    "text": "Fitted Centiles\n\n\nFigure 1: Centile-plot of the fitted m6 model"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#the-true-bmi-data",
+    "href": "Why_GAMLSS.html#the-true-bmi-data",
+    "title": "Why GAMLSS?",
+    "section": "The true BMI data",
+    "text": "The true BMI data"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#the-fitted-model",
+    "href": "Why_GAMLSS.html#the-fitted-model",
+    "title": "Why GAMLSS?",
+    "section": "The fitted model",
+    "text": "The fitted model"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#the-fitted-centiles",
+    "href": "Why_GAMLSS.html#the-fitted-centiles",
+    "title": "Why GAMLSS?",
+    "section": "The fitted centiles",
+    "text": "The fitted centiles\n\n\n\n\n\n\n\n\n\n\n\nsee centile estimation of 3rd day"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#diagnostics-1",
+    "href": "Why_GAMLSS.html#diagnostics-1",
+    "title": "Why GAMLSS?",
+    "section": "Diagnostics 1",
+    "text": "Diagnostics 1\n\n\n\n\n\n\n\n\n\n\n\nQQ-plot"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#diagnostics-2",
+    "href": "Why_GAMLSS.html#diagnostics-2",
+    "title": "Why GAMLSS?",
+    "section": "Diagnostics 2",
+    "text": "Diagnostics 2\n\n\n\n\n\n\n\n\n\n\n\nworm plot"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#diagnostics-3",
+    "href": "Why_GAMLSS.html#diagnostics-3",
+    "title": "Why GAMLSS?",
+    "section": "Diagnostics 3",
+    "text": "Diagnostics 3\n\n\n\n\n\n\n\n\n\n\n\nbucket plot"
+  },
+  {
+    "objectID": "Why_GAMLSS.html#summary",
+    "href": "Why_GAMLSS.html#summary",
+    "title": "Why GAMLSS?",
+    "section": "Summary",
+    "text": "Summary\n\nDistributional assumptions often needed for the response to be fitted properly\nIn the BMI example above we needed to model all the parameters of the distribution as function of the explanatory variable age.\nThose parameters were the location parameter \\(\\mu\\), the scale parameter, \\(\\sigma\\), the skewness parameter, \\(\\nu\\), and the kurtotic parameter \\(\\tau\\)\nMachine Learning methods are useful (especially for modelling interactions between variables) but they are not suitable if the interest do non lie in the mean."
+  },
+  {
+    "objectID": "Why_GAMLSS.html#end",
+    "href": "Why_GAMLSS.html#end",
+    "title": "Why GAMLSS?",
+    "section": "end",
+    "text": "end\nback to the index\n\n\n\n\n\n\n   The Books\n\n\n\n\n\n\n\nwww.gamlss.com"
+  }
+]
