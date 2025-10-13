@@ -10,10 +10,10 @@ website:
       - href: index.qmd
         text: Home
       - Why_GAMLSS.qmd
-      - The R shoftware
-      - Distributions
-      - Model Fitting
-      - Interpretation
+      - TheRsoftware.qmd
+      - Distributions.qmd
+      - fitting.qmd
+      - interpret.qmd
 
       
 sidebar:
