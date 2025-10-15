@@ -269,34 +269,33 @@ gamma fitted distribution
 ## Example: diagnostics 1
 
 ```{R}
-model_qqplot(m1, m5)+
+model_qqplot(m1, m4, m5)+
        theme_bw(base_size = 15)
 ```
 
 ::: aside
-QQ-plot
+QQ-plot for linear `m1`, regression tree `m4` and gamma `m5` models  
 :::
 
 ## Example: diagnostics 2
 
 ```{R}
-model_wp(m1, m5)
+model_wp(m1, m4, m5)
 ```
 
 ::: aside
-Worm-plot
+Worm-plot for linear `m1`, regression tree `m4` and gamma `m5` models  
 :::
 
 ## Example: diagnostics 3
 
 ```{R}
-moment_bucket(m1, m5)+
+moment_bucket(m1, m4, m5)+
    theme_bw() + 
    theme(legend.position = "none")
 ```
-
 ::: aside
-Bucket-plot
+Bucket-plot for linear `m1`, regression tree `m4` and gamma `m5` models  
 :::
 
 ## Example: conclusion
@@ -483,7 +482,7 @@ bucket plot
 
 -   Those parameters were the `location` parameter $\mu$, the `scale` parameter, $\sigma$, the `skewness` parameter, $\nu$, and the `kurtotic` parameter $\tau$
 
--   Machine Learning methods are useful (especially for modelling interactions between variables) but they are not suitable if the interest do non lie in the mean.
+-   Machine Learning methods are useful (especially for modelling interactions between variables) but they are not suitable if the interest do `not` lie in the mean of the distribution.
 
 <!-- -   `quantile regression` could be used in certain circumstances  but  it is more difficult to check its adequancy -->
 
