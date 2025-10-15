@@ -561,7 +561,7 @@ g(\mu_i) &amp;=&amp; b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}
 </div>
 
 <aside><div>
-<p>QQ-plot</p>
+<p>QQ-plot for linear <code>m1</code>, regression tree <code>m4</code> and gamma <code>m5</code> models</p>
 </div></aside></section>
 <section id="example-diagnostics-2" class="slide level2">
 <h2>Example: diagnostics 2</h2>
@@ -576,7 +576,7 @@ g(\mu_i) &amp;=&amp; b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}
 </div>
 
 <aside><div>
-<p>Worm-plot</p>
+<p>Worm-plot for linear <code>m1</code>, regression tree <code>m4</code> and gamma <code>m5</code> models</p>
 </div></aside></section>
 <section id="example-diagnostics-3" class="slide level2">
 <h2>Example: diagnostics 3</h2>
@@ -591,7 +591,7 @@ g(\mu_i) &amp;=&amp; b_0 + b_1 x_{1i}  +  b_2  x_{2i}, \ldots,  b_p x_{pi}
 </div>
 
 <aside><div>
-<p>Bucket-plot</p>
+<p>Bucket-plot for linear <code>m1</code>, regression tree <code>m4</code> and gamma <code>m5</code> models</p>
 </div></aside></section>
 <section id="example-conclusion" class="slide level2">
 <h2>Example: conclusion</h2>
@@ -783,7 +783,7 @@ Figure&nbsp;1: Centile-plot of the fitted <code>m6</code> model
 <li><p>Distributional assumptions often needed for the response to be fitted properly</p></li>
 <li><p>In the BMI example above we needed to model all the parameters of the distribution as function of the explanatory variable <code>age</code>.</p></li>
 <li><p>Those parameters were the <code>location</code> parameter <span class="math inline">\(\mu\)</span>, the <code>scale</code> parameter, <span class="math inline">\(\sigma\)</span>, the <code>skewness</code> parameter, <span class="math inline">\(\nu\)</span>, and the <code>kurtotic</code> parameter <span class="math inline">\(\tau\)</span></p></li>
-<li><p>Machine Learning methods are useful (especially for modelling interactions between variables) but they are not suitable if the interest do non lie in the mean.</p></li>
+<li><p>Machine Learning methods are useful (especially for modelling interactions between variables) but they are not suitable if the interest do <code>not</code> lie in the mean of the distribution.</p></li>
 </ul>
 <!-- -   `quantile regression` could be used in certain circumstances  but  it is more difficult to check its adequancy -->
 <!-- ::: callout-tip -->

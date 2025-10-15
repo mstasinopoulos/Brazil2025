@@ -137,21 +137,21 @@
     "href": "Why_GAMLSS.html#example-diagnostics-1",
     "title": "Why GAMLSS?",
     "section": "Example: diagnostics 1",
-    "text": "Example: diagnostics 1\n\n\n\n\n\n\n\n\n\n\n\nQQ-plot"
+    "text": "Example: diagnostics 1\n\n\n\n\n\n\n\n\n\n\n\nQQ-plot for linear m1, regression tree m4 and gamma m5 models"
   },
   {
     "objectID": "Why_GAMLSS.html#example-diagnostics-2",
     "href": "Why_GAMLSS.html#example-diagnostics-2",
     "title": "Why GAMLSS?",
     "section": "Example: diagnostics 2",
-    "text": "Example: diagnostics 2\n\n\n\n\n\n\n\n\n\n\n\nWorm-plot"
+    "text": "Example: diagnostics 2\n\n\n\n\n\n\n\n\n\n\n\nWorm-plot for linear m1, regression tree m4 and gamma m5 models"
   },
   {
     "objectID": "Why_GAMLSS.html#example-diagnostics-3",
     "href": "Why_GAMLSS.html#example-diagnostics-3",
     "title": "Why GAMLSS?",
     "section": "Example: diagnostics 3",
-    "text": "Example: diagnostics 3\n\n\n\n\n\n\n\n\n\n\n\nBucket-plot"
+    "text": "Example: diagnostics 3\n\n\n\n\n\n\n\n\n\n\n\nBucket-plot for linear m1, regression tree m4 and gamma m5 models"
   },
   {
     "objectID": "Why_GAMLSS.html#example-conclusion",
@@ -263,7 +263,7 @@
     "href": "Why_GAMLSS.html#summary",
     "title": "Why GAMLSS?",
     "section": "Summary",
-    "text": "Summary\n\nDistributional assumptions often needed for the response to be fitted properly\nIn the BMI example above we needed to model all the parameters of the distribution as function of the explanatory variable age.\nThose parameters were the location parameter \\(\\mu\\), the scale parameter, \\(\\sigma\\), the skewness parameter, \\(\\nu\\), and the kurtotic parameter \\(\\tau\\)\nMachine Learning methods are useful (especially for modelling interactions between variables) but they are not suitable if the interest do non lie in the mean."
+    "text": "Summary\n\nDistributional assumptions often needed for the response to be fitted properly\nIn the BMI example above we needed to model all the parameters of the distribution as function of the explanatory variable age.\nThose parameters were the location parameter \\(\\mu\\), the scale parameter, \\(\\sigma\\), the skewness parameter, \\(\\nu\\), and the kurtotic parameter \\(\\tau\\)\nMachine Learning methods are useful (especially for modelling interactions between variables) but they are not suitable if the interest do not lie in the mean of the distribution."
   },
   {
     "objectID": "Why_GAMLSS.html#end",
