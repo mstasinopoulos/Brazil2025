@@ -154,8 +154,8 @@ da  |> head() |> kable(digits = c(2, 0, 0, 0, 0,0,0), format="pipe")
 
 ```{r}
 #| echo: true
-r1 <- gamlss2(R~pb(Fl)+pb(A)+H+loc|pb(Fl)+pb(A)+H+loc, 
-           family=GA, data=rent)
+r1 <- gamlss2(R~s(Fl)+s(A)+H+loc|s(Fl)+s(A)+H+loc, 
+           family=BCTo, data=rent)
 ```
 
 
@@ -296,7 +296,7 @@ $^*$ in GitHub needed testing
 
 - `predict` in `gamlss` is not easy to use
 
-- current implementation can cope with only 4 parameters $\mu$, $\sigma$, $\nu$ and $\tau$ 
+- old implementation can cope with only 4 parameters $\mu$, $\sigma$, $\nu$ and $\tau$ 
 
 - to connect different estimation statistical approaches 
     

@@ -144,11 +144,11 @@ bb+ggtitle("(c) mixed: zero adjusted BCT")+
 
 $f(y;{\theta})$
 
--   $\int_{R_Y} f(y) \; dy=1$
+-   $\int_{R_Y} f(y) \; dy=1$ (continuous)
 
--   $\sum_{y\in R_Y} f(y)=\sum_{y \in R_Y} P(Y=y)=1$
+-   $\sum_{y\in R_Y} f(y)=\sum_{y \in R_Y} P(Y=y)=1$ (discrete)
 
--   $\int_{R_{1}} f(y)\, dy + \sum_{y \in R_{2}} f(y) = 1$.
+-   $\int_{R_{1}} f(y)\, dy + \sum_{y \in R_{2}} f(y) = 1$ (mixed).
 
 ## parameters
 
@@ -610,11 +610,11 @@ plotBCTZadj(mu=2, sigma=0.3, nu=2, tau=4, xi=.1)
 
 ## TOBIT
 
-![](tobit0Inf-1.png)
+![tobit 1](tobit0Inf-1.png)
 
 ## generalized TOBIT
 
-![](tobit0Inf-2.png)
+![tobit 2](tobit0Inf-2.png)
 
 ## book 2
 

@@ -550,7 +550,7 @@
     "href": "TheRsoftware.html#fitting",
     "title": "The R software",
     "section": "Fitting",
-    "text": "Fitting\n\nr1 &lt;- gamlss2(R~pb(Fl)+pb(A)+H+loc|pb(Fl)+pb(A)+H+loc, \n           family=GA, data=rent)\n\nGAMLSS-RS iteration  1: Global Deviance = 27566.2472 eps = 0.090862     \nGAMLSS-RS iteration  2: Global Deviance = 27564.2989 eps = 0.000070     \nGAMLSS-RS iteration  3: Global Deviance = 27564.2459 eps = 0.000001"
+    "text": "Fitting\n\nr1 &lt;- gamlss2(R~s(Fl)+s(A)+H+loc|s(Fl)+s(A)+H+loc, \n           family=BCTo, data=rent)\n\nGAMLSS-RS iteration  1: Global Deviance = 27602.3788 eps = 0.292375     \nGAMLSS-RS iteration  2: Global Deviance = 27562.2724 eps = 0.001453     \nGAMLSS-RS iteration  3: Global Deviance = 27558.3328 eps = 0.000142     \nGAMLSS-RS iteration  4: Global Deviance = 27556.9649 eps = 0.000049     \nGAMLSS-RS iteration  5: Global Deviance = 27556.3928 eps = 0.000020     \nGAMLSS-RS iteration  6: Global Deviance = 27556.1928 eps = 0.000007"
   },
   {
     "objectID": "TheRsoftware.html#residual-plots-agaist-index",
@@ -655,7 +655,7 @@
     "href": "TheRsoftware.html#why-gamlss2",
     "title": "The R software",
     "section": "why gamlss2",
-    "text": "why gamlss2\n\ngamlss() for very large data is slow\npredict in gamlss is not easy to use\ncurrent implementation can cope with only 4 parameters \\(\\mu\\), \\(\\sigma\\), \\(\\nu\\) and \\(\\tau\\)\nto connect different estimation statistical approaches\n\npenalised likelihood\nBayesian\nboosting\n\nto implement extra algorithms i.e. stepwise, robust\nto implement machine learning methodology"
+    "text": "why gamlss2\n\ngamlss() for very large data is slow\npredict in gamlss is not easy to use\nold implementation can cope with only 4 parameters \\(\\mu\\), \\(\\sigma\\), \\(\\nu\\) and \\(\\tau\\)\nto connect different estimation statistical approaches\n\npenalised likelihood\nBayesian\nboosting\n\nto implement extra algorithms i.e. stepwise, robust\nto implement machine learning methodology"
   },
   {
     "objectID": "TheRsoftware.html#getting-the-libraries",
@@ -718,7 +718,7 @@
     "href": "Distributions.html#properties",
     "title": "Distributions",
     "section": "properties",
-    "text": "properties\n\\(f(y;{\\theta})\\)\n\n\\(\\int_{R_Y} f(y) \\; dy=1\\)\n\\(\\sum_{y\\in R_Y} f(y)=\\sum_{y \\in R_Y} P(Y=y)=1\\)\n\\(\\int_{R_{1}} f(y)\\, dy + \\sum_{y \\in R_{2}} f(y) = 1\\)."
+    "text": "properties\n\\(f(y;{\\theta})\\)\n\n\\(\\int_{R_Y} f(y) \\; dy=1\\) (continuous)\n\\(\\sum_{y\\in R_Y} f(y)=\\sum_{y \\in R_Y} P(Y=y)=1\\) (discrete)\n\\(\\int_{R_{1}} f(y)\\, dy + \\sum_{y \\in R_{2}} f(y) = 1\\) (mixed)."
   },
   {
     "objectID": "Distributions.html#parameters",
@@ -928,14 +928,14 @@
     "href": "Distributions.html#tobit",
     "title": "Distributions",
     "section": "TOBIT",
-    "text": "TOBIT"
+    "text": "TOBIT\n\ntobit 1"
   },
   {
     "objectID": "Distributions.html#generalized-tobit",
     "href": "Distributions.html#generalized-tobit",
     "title": "Distributions",
     "section": "generalized TOBIT",
-    "text": "generalized TOBIT"
+    "text": "generalized TOBIT\n\ntobit 2"
   },
   {
     "objectID": "Distributions.html#book-2",

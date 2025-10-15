@@ -678,12 +678,15 @@ Table&nbsp;2: Variables in Munich rent data
 <section id="fitting" class="slide level2">
 <h2>Fitting</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>r1 <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(R<span class="sc">~</span><span class="fu">pb</span>(Fl)<span class="sc">+</span><span class="fu">pb</span>(A)<span class="sc">+</span>H<span class="sc">+</span>loc<span class="sc">|</span><span class="fu">pb</span>(Fl)<span class="sc">+</span><span class="fu">pb</span>(A)<span class="sc">+</span>H<span class="sc">+</span>loc, </span>
-<span id="cb2-2"><a></a>           <span class="at">family=</span>GA, <span class="at">data=</span>rent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>r1 <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(R<span class="sc">~</span><span class="fu">s</span>(Fl)<span class="sc">+</span><span class="fu">s</span>(A)<span class="sc">+</span>H<span class="sc">+</span>loc<span class="sc">|</span><span class="fu">s</span>(Fl)<span class="sc">+</span><span class="fu">s</span>(A)<span class="sc">+</span>H<span class="sc">+</span>loc, </span>
+<span id="cb2-2"><a></a>           <span class="at">family=</span>BCTo, <span class="at">data=</span>rent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>GAMLSS-RS iteration  1: Global Deviance = 27566.2472 eps = 0.090862     
-GAMLSS-RS iteration  2: Global Deviance = 27564.2989 eps = 0.000070     
-GAMLSS-RS iteration  3: Global Deviance = 27564.2459 eps = 0.000001     </code></pre>
+<pre><code>GAMLSS-RS iteration  1: Global Deviance = 27602.3788 eps = 0.292375     
+GAMLSS-RS iteration  2: Global Deviance = 27562.2724 eps = 0.001453     
+GAMLSS-RS iteration  3: Global Deviance = 27558.3328 eps = 0.000142     
+GAMLSS-RS iteration  4: Global Deviance = 27556.9649 eps = 0.000049     
+GAMLSS-RS iteration  5: Global Deviance = 27556.3928 eps = 0.000020     
+GAMLSS-RS iteration  6: Global Deviance = 27556.1928 eps = 0.000007     </code></pre>
 </div>
 </div>
 </section>
@@ -812,7 +815,7 @@ GAMLSS-RS iteration  3: Global Deviance = 27564.2459 eps = 0.000001     </code><
 <ul>
 <li><p><code>gamlss()</code> for very large data is slow</p></li>
 <li><p><code>predict</code> in <code>gamlss</code> is not easy to use</p></li>
-<li><p>current implementation can cope with only 4 parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\tau\)</span></p></li>
+<li><p>old implementation can cope with only 4 parameters <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\nu\)</span> and <span class="math inline">\(\tau\)</span></p></li>
 <li><p>to connect different estimation statistical approaches</p>
 <ul>
 <li><code>penalised likelihood</code></li>
