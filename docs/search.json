@@ -1096,14 +1096,14 @@
     "href": "Interpret.html#distributions-mu-additive",
     "title": "Interpreting models",
     "section": "distributions, \\(\\mu\\), additive",
-    "text": "distributions, \\(\\mu\\), additive\n\n#gamlss.ggplots:::pe_pdf_grid(madditive, list(\"area\", \"yearc\", \"location\",\"bath\"))"
+    "text": "distributions, \\(\\mu\\), additive\n\ngamlss.ggplots:::pe_pdf_grid(madditive, list(\"area\", \"yearc\", \"location\",\"bath\"))"
   },
   {
     "objectID": "Interpret.html#distributions-mu-nn",
     "href": "Interpret.html#distributions-mu-nn",
     "title": "Interpreting models",
     "section": "distributions, \\(\\mu\\), NN",
-    "text": "distributions, \\(\\mu\\), NN\n\n#gamlss.ggplots:::pe_pdf_grid(mneural, list(\"area\", \"yearc\", \"location\",\"bath\"))"
+    "text": "distributions, \\(\\mu\\), NN\n\ngamlss.ggplots:::pe_pdf_grid(mneural, list(\"area\", \"yearc\", \"location\",\"bath\"))"
   },
   {
     "objectID": "Interpret.html#the-purpose-of-the-study",
@@ -1124,7 +1124,7 @@
     "href": "Interpret.html#prediction-z-scores-con.",
     "title": "Interpreting models",
     "section": "prediction z-scores (con.)",
-    "text": "prediction z-scores (con.)\n\n#     rent &lt;- c(1500, 1000,800)\n#     area &lt;- c(140, 55, 65)\n#    yearc &lt;- c(1983, 1915, 1960)\n# location &lt;- factor(c(3,1,1))\n#     bath &lt;- factor(c(1,0,1))\n#  kitchen &lt;- factor(c(1,0,1))\n# cheating &lt;- factor(c(1,0,1))\n# ndat &lt;- data.frame(rent, area, yearc, location, bath, kitchen, cheating)\n# cat(\"prediction z-scores\", \"\\n\")\n# pp &lt;-predict(madditive, newdata=ndat, type=\"parameter\")\n#  qNO(madditive$family$p(q=ndat$rent, par=pp))"
+    "text": "prediction z-scores (con.)\n\n     rent &lt;- c(1500, 1000,800)\n     area &lt;- c(140, 55, 65)\n    yearc &lt;- c(1983, 1915, 1960)\n location &lt;- factor(c(3,1,1))\n     bath &lt;- factor(c(1,0,1))\n  kitchen &lt;- factor(c(1,0,1))\n cheating &lt;- factor(c(1,0,1))\n ndat &lt;- data.frame(rent, area, yearc, location, bath, kitchen, cheating)\n cat(\"prediction z-scores\", \"\\n\")\n\nprediction z-scores \n\n pp &lt;-predict(madditive, newdata=ndat, type=\"parameter\")\n  qNO(madditive$family$cdf(q=ndat$rent, par=pp))\n\n[1] 0.2616374 4.7737859 2.0955995"
   },
   {
     "objectID": "Interpret.html#summary",
@@ -1145,7 +1145,7 @@
     "href": "Interpret.html#the-team",
     "title": "Interpreting models",
     "section": "the team",
-    "text": "the team\n\n\n\n\n\n\n\n\nworking party\ncurrent\npast\n\n\n\n\nGillian Heller\nKonstantinos Pateras\nPopi Akantziliotou\n\n\nFernanda De Bastiani\nPaul Eilers\nVlasios Voudouris\n\n\nThomas Kneib\nNikos Kametas\nNicoleta Mortan\n\n\nAchim Zaileis\nTim Cole\nDaniil Kiose\n\n\nAndreas Mayr\nNikos Georgikopoulos\nDea-Jin Lee\n\n\nNicolaus Umlauf\nLuiz Nakamura\nMaría Xosé Rodríguez-Álvarez\n\n\nReto Stauffer\nNadja Klein\nMajid Djennad\n\n\nRobert Rigby\nJulian Merder\nFiona McElduff\n\n\nMikis Stasinopoulos\nAbu Hossain\nRaydonal Ospina"
+    "text": "the team\n\n\n\n\n\n\n\n\nworking party\ncurrent\npast\n\n\n\n\nGillian Heller\nKonstantinos Pateras\nPopi Akantziliotou,\n\n\nFernanda De Bastiani\nPaul Eilers , Kevin Burke\nVlasios Voudouris, Nadja Klein\n\n\nThomas Kneib\nNikos Kametas\nMarco Enea, Nicoleta Mortan\n\n\nAchim Zeileis\nTim Cole\nDaniil Kiose, Florian Ziel\n\n\nAndreas Mayr\nArtur Fredrich\nDea-Jin Lee, Peru Muniain\n\n\nNicolaus Umlauf\nLuiz Nakamura\nMaría Xosé Rodríguez-Álvarez\n\n\nReto Stauffer\nElisa Van Eynde\nMajid Djennad\n\n\nRobert Rigby\nJulian Merder\nNikos Georgikopoulos\n\n\nMikis Stasinopoulos\nAbu Hossain\nRaydonal Ospina, Fiona McElduff"
   },
   {
     "objectID": "Interpret.html#end",
@@ -1202,5 +1202,12 @@
     "title": "Fitting models",
     "section": "LASSO 2",
     "text": "LASSO 2\n\n\n (Intercept)         area        area2        area3        yearc       yearc2 \n 0.170078437  0.244928458 -0.033422433  0.004850439  0.138919707  0.062595342 \n      yearc3        bath1    cheating0     kitchen1    location1    location2 \n-0.013271475  0.060201306 -0.338518720  0.111794049 -0.222495637 -0.131310857 \n\n\n (Intercept)         area        area2        area3        yearc       yearc2 \n 0.044503278  0.019210761 -0.013455170  0.005293646 -0.249616969  0.000000000 \n      yearc3        bath1    cheating0     kitchen1    location1    location2 \n 0.055728860  0.000000000  0.212985531  0.000000000 -0.059687857  0.000000000 \n\n\nNULL"
+  },
+  {
+    "objectID": "Interpret.html#pe_pdf",
+    "href": "Interpret.html#pe_pdf",
+    "title": "Interpreting models",
+    "section": "pe_pdf",
+    "text": "pe_pdf"
   }
 ]

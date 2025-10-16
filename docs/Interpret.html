@@ -582,25 +582,13 @@ Figure&nbsp;1: How x-variables effecting the properties of the distribution.
 </div>
 </div>
 </section>
+<section id="pe_pdf" class="slide level2">
+<h2>pe_pdf</h2>
+</section>
 <section id="ale-parameters-mu-additive" class="slide level2">
 <h2>ALE; parameters <span class="math inline">\(\mu\)</span>; Additive</h2>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(madditive,<span class="st">"area"</span>)</span>
 <span id="cb7-2"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(madditive,<span class="st">"yearc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-8-2.png" width="960"></p>
-</div>
-</div>
-</div>
-</section>
-<section id="ale-parameters-mu-nn" class="slide level2">
-<h2>ALE; parameters <span class="math inline">\(\mu\)</span>; NN</h2>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(mneural,<span class="st">"area"</span>)</span>
-<span id="cb8-2"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(mneural,<span class="st">"yearc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -612,10 +600,10 @@ Figure&nbsp;1: How x-variables effecting the properties of the distribution.
 </div>
 </div>
 </section>
-<section id="ale-interactions" class="slide level2">
-<h2>ALE interactions</h2>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(madditive,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>))</span>
-<span id="cb9-2"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(mneural,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="ale-parameters-mu-nn" class="slide level2">
+<h2>ALE; parameters <span class="math inline">\(\mu\)</span>; NN</h2>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(mneural,<span class="st">"area"</span>)</span>
+<span id="cb8-2"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(mneural,<span class="st">"yearc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -623,6 +611,21 @@ Figure&nbsp;1: How x-variables effecting the properties of the distribution.
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-10-2.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="ale-interactions" class="slide level2">
+<h2>ALE interactions</h2>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(madditive,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>))</span>
+<span id="cb9-2"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">ale_param</span>(mneural,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="Interpret_files/figure-revealjs/unnamed-chunk-11-2.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -644,44 +647,46 @@ Figure&nbsp;1: How x-variables effecting the properties of the distribution.
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a> gamlss.ggplots<span class="sc">:::</span><span class="fu">pe_quantile</span>(madditive,<span class="fu">c</span>(<span class="st">"area"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="quantiles-additive-con." class="slide level2">
 <h2>quantiles, additive (con.)</h2>
 
-<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
 <section id="quantiles-interactions" class="slide level2">
 <h2>quantiles interactions</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>  gamlss.ggplots<span class="sc">:::</span><span class="fu">pe_quantile</span>(madditive,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
 <section id="quantiles-interactions-2" class="slide level2">
 <h2>quantiles interactions 2</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a> gamlss.ggplots<span class="sc">:::</span><span class="fu">pe_quantile</span>(madditive,<span class="fu">c</span>(<span class="st">"area"</span>, <span class="st">"location"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
 <section id="quantiles-interactions-2-1" class="slide level2">
 <h2>quantiles interactions 2</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">pe_quantile</span>(madditive,<span class="fu">c</span>( <span class="st">"location"</span>, <span class="st">"bath"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
 <section id="distributions-mu-additive" class="slide level2">
 <h2>distributions, <span class="math inline">\(\mu\)</span>, additive</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co">#gamlss.ggplots:::pe_pdf_grid(madditive, list("area", "yearc", "location","bath"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">pe_pdf_grid</span>(madditive, <span class="fu">list</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>, <span class="st">"location"</span>,<span class="st">"bath"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</section>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="distributions-mu-nn" class="slide level2">
 <h2>distributions, <span class="math inline">\(\mu\)</span>, NN</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co">#gamlss.ggplots:::pe_pdf_grid(mneural, list("area", "yearc", "location","bath"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>gamlss.ggplots<span class="sc">:::</span><span class="fu">pe_pdf_grid</span>(mneural, <span class="fu">list</span>(<span class="st">"area"</span>, <span class="st">"yearc"</span>, <span class="st">"location"</span>,<span class="st">"bath"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</section>
+<img data-src="Interpret_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
 <section id="the-purpose-of-the-study" class="slide level2 smaller">
 <h2>the purpose of the study</h2>
 <ul>
@@ -742,17 +747,23 @@ Figure&nbsp;1: How x-variables effecting the properties of the distribution.
 <section id="prediction-z-scores-con." class="slide level2">
 <h2>prediction z-scores (con.)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co">#     rent &lt;- c(1500, 1000,800)</span></span>
-<span id="cb16-2"><a></a><span class="co">#     area &lt;- c(140, 55, 65)</span></span>
-<span id="cb16-3"><a></a><span class="co">#    yearc &lt;- c(1983, 1915, 1960)</span></span>
-<span id="cb16-4"><a></a><span class="co"># location &lt;- factor(c(3,1,1))</span></span>
-<span id="cb16-5"><a></a><span class="co">#     bath &lt;- factor(c(1,0,1))</span></span>
-<span id="cb16-6"><a></a><span class="co">#  kitchen &lt;- factor(c(1,0,1))</span></span>
-<span id="cb16-7"><a></a><span class="co"># cheating &lt;- factor(c(1,0,1))</span></span>
-<span id="cb16-8"><a></a><span class="co"># ndat &lt;- data.frame(rent, area, yearc, location, bath, kitchen, cheating)</span></span>
-<span id="cb16-9"><a></a><span class="co"># cat("prediction z-scores", "\n")</span></span>
-<span id="cb16-10"><a></a><span class="co"># pp &lt;-predict(madditive, newdata=ndat, type="parameter")</span></span>
-<span id="cb16-11"><a></a><span class="co">#  qNO(madditive$family$p(q=ndat$rent, par=pp))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>     rent <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1500</span>, <span class="dv">1000</span>,<span class="dv">800</span>)</span>
+<span id="cb16-2"><a></a>     area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">140</span>, <span class="dv">55</span>, <span class="dv">65</span>)</span>
+<span id="cb16-3"><a></a>    yearc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1983</span>, <span class="dv">1915</span>, <span class="dv">1960</span>)</span>
+<span id="cb16-4"><a></a> location <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb16-5"><a></a>     bath <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb16-6"><a></a>  kitchen <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb16-7"><a></a> cheating <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb16-8"><a></a> ndat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(rent, area, yearc, location, bath, kitchen, cheating)</span>
+<span id="cb16-9"><a></a> <span class="fu">cat</span>(<span class="st">"prediction z-scores"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>prediction z-scores </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a> pp <span class="ot">&lt;-</span><span class="fu">predict</span>(madditive, <span class="at">newdata=</span>ndat, <span class="at">type=</span><span class="st">"parameter"</span>)</span>
+<span id="cb18-2"><a></a>  <span class="fu">qNO</span>(madditive<span class="sc">$</span>family<span class="sc">$</span><span class="fu">cdf</span>(<span class="at">q=</span>ndat<span class="sc">$</span>rent, <span class="at">par=</span>pp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2616374 4.7737859 2.0955995</code></pre>
+</div>
 </div>
 </section>
 <section id="summary" class="slide level2">
@@ -803,27 +814,27 @@ Figure&nbsp;1: How x-variables effecting the properties of the distribution.
 <tr class="odd">
 <td style="text-align: left;"><code>Gillian Heller</code></td>
 <td style="text-align: left;"><code>Konstantinos Pateras</code></td>
-<td style="text-align: left;">Popi Akantziliotou</td>
+<td style="text-align: left;">Popi Akantziliotou,</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>Fernanda De Bastiani</code></td>
-<td style="text-align: left;">Paul Eilers</td>
-<td style="text-align: left;">Vlasios Voudouris</td>
+<td style="text-align: left;">Paul Eilers , <code>Kevin Burke</code></td>
+<td style="text-align: left;">Vlasios Voudouris, Nadja Klein</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>Thomas Kneib</code></td>
-<td style="text-align: left;">Nikos Kametas</td>
-<td style="text-align: left;">Nicoleta Mortan</td>
+<td style="text-align: left;"><code>Nikos Kametas</code></td>
+<td style="text-align: left;">Marco Enea, Nicoleta Mortan</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>Achim Zaileis</code></td>
-<td style="text-align: left;"><code>Tim Cole</code></td>
-<td style="text-align: left;">Daniil Kiose</td>
+<td style="text-align: left;"><code>Achim Zeileis</code></td>
+<td style="text-align: left;">Tim Cole</td>
+<td style="text-align: left;">Daniil Kiose, Florian Ziel</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>Andreas Mayr</code></td>
-<td style="text-align: left;"><code>Nikos Georgikopoulos</code></td>
-<td style="text-align: left;">Dea-Jin Lee</td>
+<td style="text-align: left;"><code>Artur Fredrich</code></td>
+<td style="text-align: left;">Dea-Jin Lee, Peru Muniain</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>Nicolaus Umlauf</code></td>
@@ -832,18 +843,18 @@ Figure&nbsp;1: How x-variables effecting the properties of the distribution.
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>Reto Stauffer</code></td>
-<td style="text-align: left;">Nadja Klein</td>
+<td style="text-align: left;"><code>Elisa Van Eynde</code></td>
 <td style="text-align: left;">Majid Djennad</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>Robert Rigby</code></td>
 <td style="text-align: left;"><code>Julian Merder</code></td>
-<td style="text-align: left;">Fiona McElduff</td>
+<td style="text-align: left;">Nikos Georgikopoulos</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>Mikis Stasinopoulos</code></td>
 <td style="text-align: left;">Abu Hossain</td>
-<td style="text-align: left;">Raydonal Ospina</td>
+<td style="text-align: left;">Raydonal Ospina, Fiona McElduff</td>
 </tr>
 </tbody>
 </table>
