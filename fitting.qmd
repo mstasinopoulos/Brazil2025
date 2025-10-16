@@ -69,7 +69,29 @@ g({\theta}_{ki}) &=& {ML}_1({x}_{1i},{x}_{2i}, \ldots,  {x}_{pi})
  \end{split} 
  $$ {#eq-GAMLSS_ML} <!--  --> <!--  \ldots &=& \ldots \nonumber\\ --> <!-- g(\boldsymbol{\theta}_k) &=& {ML}_k(\textbf{x}_{1i},\textbf{x}_{2i}, \ldots,  \textbf{x}_{pi})  -->
 
+## two major problems 
+
+- The task within  `GAMLSS` is to find ;
+
+    1)  how the x's effect the parameters of the distribution i.e $\boldsymbol{\theta}(X)$ and 
+    
+    2)  the appropriate distribution for the response i.e. $D(Y|\boldsymbol{\theta}(X))$
+
+
+## DISTRIBUTION 
+
+- The `range` of the response should determine the type of distribution 
+
+- if we know the right variables we could determine a `adequate` distribution by looking over a set of appropriate distributions
+
+- if `one` of the variable is very important i.e. time, age it can be used otherwise use a `linear` model for all parameters (which works fast) to pick up a distribution
+
+
+
+
 ## Parameters for Estimation
+
+Given a distribution we need to estimate the;  
 
 -   **distribution parameters**
 
@@ -78,7 +100,7 @@ g({\theta}_{ki}) &=& {ML}_1({x}_{1i},{x}_{2i}, \ldots,  {x}_{pi})
     ```         
       - **coefficients**
 
-      - **random effects**
+      - **random effects** and the 
     ```
 
 -   **hyper-parameters**
@@ -126,11 +148,11 @@ flowchart LR
 
 ## Important
 
--   assumed **distribution** (the log-likelihood is needed and the first and second derivatives)
+-   for the assumed **distribution** the log-likelihood is needed (and the first and second derivatives with respect to the parameters)
 
--   **hierarchy** of the paramerers (i.e. a good location model is required before model the scale)
+-   an **hierarchy** of the parameters exist a good location model is required before model the scale parameters e.t.c.
 
--   **orthogonality** of the parameters (leads to better convergence)
+-   **orthogonality** of the parameters leads to better convergence and interpretation 
 
 ## Checking orthogonality
 
@@ -202,8 +224,8 @@ rent99 |> data_rm( c(2,9)) |>
 #| message: false
 #| output: true
 #| output-location: slide
-mlinear <- gamlss2(rent~area+poly(yearc,2)+location+bath+kitchen+
-              cheating|area+yearc+location+bath+kitchen+cheating, 
+mlinear <- gamlss2(rent~poly(area,3)+poly(yearc,3)+location+bath+kitchen+
+              cheating|poly(area,3)+poly(yearc,3)+location+bath+kitchen+cheating, 
               family=BCTo, trace=FALSE, data=da)
 summary(mlinear)
 ```
@@ -219,6 +241,7 @@ madditive <- gamlss2(rent~s(area)+s(yearc)+location+bath+kitchen+
                 cheating|s(area)+s(yearc)+location+bath+kitchen+cheating, 
               family=BCTo, data=da, trace=F)
 GAIC(mlinear, madditive)
+GAIC(mlinear, madditive, k=log(dim(rent99)[1]))
 ```
 
 ## Additive Models (con.)
@@ -252,7 +275,7 @@ mregtree <- gamlss2(rent~tree(~area+yearc+location+bath+kitchen+cheating)|
                   family=BCTo, data=da, trace=FALSE) 
 
 GAIC(mlinear, madditive, mregtree)
-
+GAIC(mlinear, madditive, mregtree, k=log(dim(rent99)[1]))
 ```
 
 ## Regression Trees (con.)
@@ -287,9 +310,11 @@ da <- rent99[,-c(2,9)]
 ```{R}
 #| echo: true 
 #| cache: true 
-f <- rent ~ n(~area+yearc+location+bath+kitchen, size=10)|           n(~area+yearc+location+bath+kitchen, size=3)
+f <- rent ~ n(~area+yearc+location+bath+kitchen, size=10)|
+           n(~area+yearc+location+bath+kitchen, size=3)
 mneural <- gamlss2(f,family=BCTo, data=da)
 gamlss2::GAIC(mlinear, madditive, mneural, mregtree, k=2)
+gamlss2::GAIC(mlinear, madditive, mneural, mregtree, k=log(dim(rent99)[1]))
 ```
 
 ## Neural Networks (plot)
@@ -320,11 +345,68 @@ gamlss2::GAIC(mlinear, madditive, mneural, mregtree, mcf, k=2)
 
 ## LASSO-RIDGE
 
--   there is function `ri()` in `gamlss` using P-splines
+In `gamlss2` there are the functions; 
 
--   there is also package `gamlss.lasso` for `gamlss` connecting with package `glmnet`
 
--   but LASSO is non implemented for `gamlss2` yet
+-   `la()` which fit the model using a modified smoothing technique
+
+-   `lasso()`  which connects `gamlss2` and `glmnet`
+
+    -  the `glmnet` provides elastic net estimation  with  `alpha=1` equal to lasso and `alpha=0` equal to ridge regression    
+
+    -  the `glmnet` do not fit a single model but provides the path of all possible models
+
+    -  in `gamlss2` the model is selected using `BIC`
+
+
+## LASSO
+
+```{r}
+library(gamlss.prepdata )
+data("rent99", package = "gamlss.data") 
+da <- rent99[,-c(2,9)] 
+ da |> data_factor() -> da
+ da |> data_scale(, response="rent") -> da 
+ da |> data_vars2data(,response="rent", nonlinear=TRUE, 
+                      basis="poly", arg="3, raw=TRUE") -> da
+ 
+# dafnet2  <- rent ~ lasso(~(area + area2 + area3 + yearc + yearc2 + yearc3 + 
+#           bath1 + cheating0+ kitchen1 + location1+ location2)^2) |
+#  lasso(~(area + area2 + area3 + yearc + yearc2 + yearc3 + 
+#           bath1 + cheating0+ kitchen1 + location1+ location2)^2)|
+#  lasso(~(area + area2 + area3 + yearc + yearc2 + yearc3 + 
+#           bath1 + cheating0+ kitchen1 + location1+ location2)^2)
+fnet1  <- rent ~ lasso(~area + area2 + area3 + yearc + yearc2 + yearc3 + 
+          bath1 + cheating0+ kitchen1 + location1+ location2) |
+lasso(~area + area2 + area3 + yearc + yearc2 + yearc3 + 
+          bath1 + cheating0+ kitchen1 + location1+ location2) |
+lasso(~area + area2 + area3 + yearc + yearc2 + yearc3 + 
+          bath1 + cheating0+ kitchen1 + location1+ location2) |
+lasso(~area + area2 + area3 + yearc + yearc2 + yearc3 + 
+          bath1 + cheating0+ kitchen1 + location1+ location2)
+bnet <- gamlss2(fnet1, data = da, family = BCTo)
+gamlss2::GAIC(mlinear, madditive, mneural, mregtree, mcf, bnet, k=0)
+
+```
+
+## LASSO 1
+
+```{r}
+summary(bnet)
+```
+
+## LASSO 2
+```{r}
+stmu<- specials(bnet, model = "mu")
+stmu$coefficients
+
+stsigma<- specials(bnet, model = "sigma")
+stsigma$coefficients
+
+stnu<- specials(bnet, model = "nu")
+stnu$coefficients
+```
+
 
 ## Principal Componet Regression
 

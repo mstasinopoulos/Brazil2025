@@ -305,7 +305,7 @@
     "href": "fitting.html#parameters-for-estimation",
     "title": "Fitting models",
     "section": "Parameters for Estimation",
-    "text": "Parameters for Estimation\n\ndistribution parameters\ncoefficient parameters\n  - **coefficients**\n\n  - **random effects**\nhyper-parameters"
+    "text": "Parameters for Estimation\nGiven a distribution we need to estimate the;\n\ndistribution parameters\ncoefficient parameters\n  - **coefficients**\n\n  - **random effects** and the \nhyper-parameters"
   },
   {
     "objectID": "fitting.html#flowchart",
@@ -326,7 +326,7 @@
     "href": "fitting.html#important",
     "title": "Fitting models",
     "section": "Important",
-    "text": "Important\n\nassumed distribution (the log-likelihood is needed and the first and second derivatives)\nhierarchy of the paramerers (i.e. a good location model is required before model the scale)\northogonality of the parameters (leads to better convergence)"
+    "text": "Important\n\nfor the assumed distribution the log-likelihood is needed (and the first and second derivatives with respect to the parameters)\nan hierarchy of the parameters exist a good location model is required before model the scale parameters e.t.c.\northogonality of the parameters leads to better convergence and interpretation"
   },
   {
     "objectID": "fitting.html#checking-orthogonality",
@@ -354,21 +354,21 @@
     "href": "fitting.html#linear-models",
     "title": "Fitting models",
     "section": "Linear Models",
-    "text": "Linear Models\n\nmlinear &lt;- gamlss2(rent~area+poly(yearc,2)+location+bath+kitchen+\n              cheating|area+yearc+location+bath+kitchen+cheating, \n              family=BCTo, trace=FALSE, data=da)\nsummary(mlinear)"
+    "text": "Linear Models\n\nmlinear &lt;- gamlss2(rent~poly(area,3)+poly(yearc,3)+location+bath+kitchen+\n              cheating|poly(area,3)+poly(yearc,3)+location+bath+kitchen+cheating, \n              family=BCTo, trace=FALSE, data=da)\nsummary(mlinear)"
   },
   {
     "objectID": "fitting.html#linear-models-output",
     "href": "fitting.html#linear-models-output",
     "title": "Fitting models",
     "section": "Linear Models",
-    "text": "Linear Models\n\nCall:\ngamlss2(formula = rent ~ area + poly(yearc, 2) + location + bath + \n    kitchen + cheating | area + yearc + location + bath + kitchen + \n    cheating, data = da, family = BCTo, ... = pairlist(trace = FALSE))\n---\nFamily: BCTo \nLink functions: mu = log, sigma = log, nu = identity, tau = log\n*--------\nCoefficients:\n                     Estimate Std. Error   t value Pr(&gt;|t|)    \nmu.(Intercept)      5.013e+00  2.754e-02   182.007  &lt; 2e-16 ***\nmu.area             1.063e-02  2.329e-04    45.640  &lt; 2e-16 ***\nmu.location2        8.788e-02  1.041e-02     8.440  &lt; 2e-16 ***\nmu.location3        1.983e-01  3.830e-02     5.178 2.39e-07 ***\nmu.bath1            4.152e-02  2.065e-02     2.010   0.0445 *  \nmu.kitchen1         1.130e-01  2.361e-02     4.784 1.80e-06 ***\nmu.cheating1        3.305e-01  2.405e-02    13.743  &lt; 2e-16 ***\nmu.poly(yearc, 2)1  5.047e+00  3.302e-01    15.287  &lt; 2e-16 ***\nmu.poly(yearc, 2)2  3.358e+00  2.751e-01    12.204  &lt; 2e-16 ***\nsigma.(Intercept)   1.047e+01  6.245e-02   167.650  &lt; 2e-16 ***\nsigma.area          1.218e-03  6.099e-04     1.996   0.0460 *  \nsigma.yearc        -5.972e-03  8.078e-07 -7392.764  &lt; 2e-16 ***\nsigma.location2     5.971e-02  2.911e-02     2.051   0.0403 *  \nsigma.location3     2.176e-01  9.224e-02     2.359   0.0184 *  \nsigma.bath1         5.069e-03  5.966e-02     0.085   0.9323    \nsigma.kitchen1      3.750e-02  7.106e-02     0.528   0.5977    \nsigma.cheating1    -2.431e-01  4.766e-02    -5.100 3.60e-07 ***\nnu.(Intercept)      6.534e-01  5.454e-02    11.980  &lt; 2e-16 ***\ntau.(Intercept)     3.190e+00  1.758e-02   181.397  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n*--------\nn = 3082 df =  19 res.df =  3063\nDeviance = 38254.617 Null Dev. Red. = 5.95%\nAIC = 38292.617 elapsed =  0.55sec"
+    "text": "Linear Models\n\nCall:\ngamlss2(formula = rent ~ poly(area, 3) + poly(yearc, 3) + location + \n    bath + kitchen + cheating | poly(area, 3) + poly(yearc, 3) + \n    location + bath + kitchen + cheating, data = da, family = BCTo, \n    ... = pairlist(trace = FALSE))\n---\nFamily: BCTo \nLink functions: mu = log, sigma = log, nu = identity, tau = log\n*--------\nCoefficients:\n                      Estimate Std. Error t value Pr(&gt;|t|)    \nmu.(Intercept)         5.71590    0.02366 241.595  &lt; 2e-16 ***\nmu.location2           0.09005    0.01028   8.760  &lt; 2e-16 ***\nmu.location3           0.21550    0.03717   5.798 7.39e-09 ***\nmu.bath1               0.05882    0.02083   2.824  0.00478 ** \nmu.kitchen1            0.11118    0.02360   4.710 2.58e-06 ***\nmu.cheating1           0.34265    0.02422  14.148  &lt; 2e-16 ***\nmu.poly(area, 3)1     13.33793    0.31111  42.871  &lt; 2e-16 ***\nmu.poly(area, 3)2     -2.01312    0.32273  -6.238 5.05e-10 ***\nmu.poly(area, 3)3      0.63310    0.30519   2.074  0.03812 *  \nmu.poly(yearc, 3)1     4.77815    0.34420  13.882  &lt; 2e-16 ***\nmu.poly(yearc, 3)2     3.66120    0.28934  12.654  &lt; 2e-16 ***\nmu.poly(yearc, 3)3    -0.76633    0.29134  -2.630  0.00857 ** \nsigma.(Intercept)     -1.16028    0.05323 -21.799  &lt; 2e-16 ***\nsigma.location2        0.05851    0.02972   1.969  0.04905 *  \nsigma.location3        0.21471    0.09343   2.298  0.02162 *  \nsigma.bath1            0.03078    0.06067   0.507  0.61191    \nsigma.kitchen1         0.01141    0.07309   0.156  0.87597    \nsigma.cheating1       -0.23024    0.05114  -4.502 6.98e-06 ***\nsigma.poly(area, 3)1   1.90318    0.84748   2.246  0.02479 *  \nsigma.poly(area, 3)2  -0.70530    0.81681  -0.863  0.38794    \nsigma.poly(area, 3)3   1.23728    0.83095   1.489  0.13659    \nsigma.poly(yearc, 3)1 -7.40430    0.89183  -8.302  &lt; 2e-16 ***\nsigma.poly(yearc, 3)2 -0.42953    0.81051  -0.530  0.59619    \nsigma.poly(yearc, 3)3  3.66610    0.78688   4.659 3.31e-06 ***\nnu.(Intercept)         0.68241    0.05732  11.906  &lt; 2e-16 ***\ntau.(Intercept)        3.12679    0.36811   8.494  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n*--------\nn = 3082 df =  26 res.df =  3056\nDeviance = 38164.1012 Null Dev. Red. = 6.18%\nAIC = 38216.1012 elapsed =  0.50sec"
   },
   {
     "objectID": "fitting.html#additive-models",
     "href": "fitting.html#additive-models",
     "title": "Fitting models",
     "section": "Additive Models",
-    "text": "Additive Models\n\nmadditive &lt;- gamlss2(rent~s(area)+s(yearc)+location+bath+kitchen+\n                cheating|s(area)+s(yearc)+location+bath+kitchen+cheating, \n              family=BCTo, data=da, trace=F)\nGAIC(mlinear, madditive)\n\n               AIC       df\nmadditive 38196.79 31.99106\nmlinear   38292.62 19.00000"
+    "text": "Additive Models\n\nmadditive &lt;- gamlss2(rent~s(area)+s(yearc)+location+bath+kitchen+\n                cheating|s(area)+s(yearc)+location+bath+kitchen+cheating, \n              family=BCTo, data=da, trace=F)\nGAIC(mlinear, madditive)\n\n               AIC       df\nmadditive 38196.79 31.99106\nmlinear   38216.10 26.00000\n\nGAIC(mlinear, madditive, k=log(dim(rent99)[1]))\n\n               AIC       df\nmlinear   38372.97 26.00000\nmadditive 38389.81 31.99106"
   },
   {
     "objectID": "fitting.html#additive-models-con.",
@@ -389,7 +389,7 @@
     "href": "fitting.html#sec-RegressionTrees",
     "title": "Fitting models",
     "section": "Regression Trees",
-    "text": "Regression Trees\n\nsource(\"~/Dropbox/GAMLSS-development/nnet/reg.tree.R\")\nmregtree &lt;- gamlss2(rent~tree(~area+yearc+location+bath+kitchen+cheating)|\n                       tree(~area+yearc+location+bath+kitchen+cheating),\n                  family=BCTo, data=da, trace=FALSE) \n\nGAIC(mlinear, madditive, mregtree)\n\n               AIC       df\nmadditive 38196.79 31.99106\nmlinear   38292.62 19.00000\nmregtree  38622.27 26.00000"
+    "text": "Regression Trees\n\nsource(\"~/Dropbox/GAMLSS-development/nnet/reg.tree.R\")\nmregtree &lt;- gamlss2(rent~tree(~area+yearc+location+bath+kitchen+cheating)|\n                       tree(~area+yearc+location+bath+kitchen+cheating),\n                  family=BCTo, data=da, trace=FALSE) \n\nGAIC(mlinear, madditive, mregtree)\n\n               AIC       df\nmadditive 38196.79 31.99106\nmlinear   38216.10 26.00000\nmregtree  38622.27 26.00000\n\nGAIC(mlinear, madditive, mregtree, k=log(dim(rent99)[1]))\n\n               AIC       df\nmlinear   38372.97 26.00000\nmadditive 38389.81 31.99106\nmregtree  38779.13 26.00000"
   },
   {
     "objectID": "fitting.html#regression-trees-con.",
@@ -410,7 +410,7 @@
     "href": "fitting.html#neural-networks-fit",
     "title": "Fitting models",
     "section": "Neural Networks (fit)",
-    "text": "Neural Networks (fit)\n\nf &lt;- rent ~ n(~area+yearc+location+bath+kitchen, size=10)|           n(~area+yearc+location+bath+kitchen, size=3)\nmneural &lt;- gamlss2(f,family=BCTo, data=da)\n\nGAMLSS-RS iteration  1: Global Deviance = 38212.1529 eps = 0.289812     \nGAMLSS-RS iteration  2: Global Deviance = 38187.2302 eps = 0.000652     \nGAMLSS-RS iteration  3: Global Deviance = 38179.642 eps = 0.000198     \nGAMLSS-RS iteration  4: Global Deviance = 38177.9778 eps = 0.000043     \nGAMLSS-RS iteration  5: Global Deviance = 38164.163 eps = 0.000361     \nGAMLSS-RS iteration  6: Global Deviance = 38162.7354 eps = 0.000037     \nGAMLSS-RS iteration  7: Global Deviance = 38162.2335 eps = 0.000013     \nGAMLSS-RS iteration  8: Global Deviance = 38161.8367 eps = 0.000010     \nGAMLSS-RS iteration  9: Global Deviance = 38161.3414 eps = 0.000012     \nGAMLSS-RS iteration 10: Global Deviance = 38160.9489 eps = 0.000010     \nGAMLSS-RS iteration 11: Global Deviance = 38160.6182 eps = 0.000008     \n\ngamlss2::GAIC(mlinear, madditive, mneural, mregtree, k=2)\n\n               AIC        df\nmadditive 38196.79  31.99106\nmlinear   38292.62  19.00000\nmneural   38380.62 110.00000\nmregtree  38622.27  26.00000"
+    "text": "Neural Networks (fit)\n\nf &lt;- rent ~ n(~area+yearc+location+bath+kitchen, size=10)|\n           n(~area+yearc+location+bath+kitchen, size=3)\nmneural &lt;- gamlss2(f,family=BCTo, data=da)\n\nGAMLSS-RS iteration  1: Global Deviance = 38201.2516 eps = 0.290015     \nGAMLSS-RS iteration  2: Global Deviance = 38161.604 eps = 0.001037     \nGAMLSS-RS iteration  3: Global Deviance = 38156.2641 eps = 0.000139     \nGAMLSS-RS iteration  4: Global Deviance = 38155.6106 eps = 0.000017     \nGAMLSS-RS iteration  5: Global Deviance = 38155.2744 eps = 0.000008     \n\ngamlss2::GAIC(mlinear, madditive, mneural, mregtree, k=2)\n\n               AIC        df\nmadditive 38196.79  31.99106\nmlinear   38216.10  26.00000\nmneural   38375.27 110.00000\nmregtree  38622.27  26.00000\n\ngamlss2::GAIC(mlinear, madditive, mneural, mregtree, k=log(dim(rent99)[1]))\n\n               AIC        df\nmlinear   38372.97  26.00000\nmadditive 38389.81  31.99106\nmregtree  38779.13  26.00000\nmneural   39038.94 110.00000"
   },
   {
     "objectID": "fitting.html#neural-networks-plot",
@@ -438,7 +438,7 @@
     "href": "fitting.html#lasso-ridge",
     "title": "Fitting models",
     "section": "LASSO-RIDGE",
-    "text": "LASSO-RIDGE\n\nthere is function ri() in gamlss using P-splines\nthere is also package gamlss.lasso for gamlss connecting with package glmnet\nbut LASSO is non implemented for gamlss2 yet"
+    "text": "LASSO-RIDGE\nIn gamlss2 there are the functions;\n\nla() which fit the model using a modified smoothing technique\nlasso() which connects gamlss2 and glmnet\n\nthe glmnet provides elastic net estimation with alpha=1 equal to lasso and alpha=0 equal to ridge regression\nthe glmnet do not fit a single model but provides the path of all possible models\nin gamlss2 the model is selected using BIC"
   },
   {
     "objectID": "fitting.html#principal-componet-regression",
@@ -1160,5 +1160,47 @@
     "title": "The R software",
     "section": "",
     "text": "residuals in GAMLSS\nan example; the rent99 data\nR packages"
+  },
+  {
+    "objectID": "fitting.html#problem",
+    "href": "fitting.html#problem",
+    "title": "Fitting models",
+    "section": "problem",
+    "text": "problem\n\nThe task within GAMLSS is to find ;\n\nhow the x’s effect the parameters of the distribution i.e \\(\\boldsymbol{\\theta}(X)\\) and\nthe appropriate distribution for the response i.e. \\(D(Y|\\boldsymbol{\\theta}(X))\\)"
+  },
+  {
+    "objectID": "fitting.html#two-major-problems",
+    "href": "fitting.html#two-major-problems",
+    "title": "Fitting models",
+    "section": "two major problems",
+    "text": "two major problems\n\nThe task within GAMLSS is to find ;\n\nhow the x’s effect the parameters of the distribution i.e \\(\\boldsymbol{\\theta}(X)\\) and\nthe appropriate distribution for the response i.e. \\(D(Y|\\boldsymbol{\\theta}(X))\\)"
+  },
+  {
+    "objectID": "fitting.html#distribution",
+    "href": "fitting.html#distribution",
+    "title": "Fitting models",
+    "section": "DISTRIBUTION",
+    "text": "DISTRIBUTION\n\nThe range of the response should determine the type of distribution\nif we know the right variables we could determine a adequate distribution by looking over a set of appropriate distributions\nif one of the variable is very important i.e. time, age it can be used otherwise use a linear model for all parameters (which works fast) to pick up a distribution"
+  },
+  {
+    "objectID": "fitting.html#lasso",
+    "href": "fitting.html#lasso",
+    "title": "Fitting models",
+    "section": "LASSO",
+    "text": "LASSO\n\n\n    area    yearc location     bath  kitchen cheating \n     132       68        3        2        2        2 \n 100 % of data are saved, \nthat is, 3082 observations. \n\n\n    area    yearc location     bath  kitchen cheating \n     132       68        3        2        2        2 \n\n\nGAMLSS-RS iteration  1: Global Deviance = 38208.7594 eps = 0.289875     \nGAMLSS-RS iteration  2: Global Deviance = 38173.0959 eps = 0.000933     \nGAMLSS-RS iteration  3: Global Deviance = 38171.6335 eps = 0.000038     \nGAMLSS-RS iteration  4: Global Deviance = 38171.2781 eps = 0.000009     \n\n\n               AIC        df\nmadditive 38132.81  31.99106\nmneural   38155.27 110.00000\nmlinear   38164.10  26.00000\nbnet      38171.28  24.00000\nmcf       38306.19 204.00000\nmregtree  38570.27  26.00000"
+  },
+  {
+    "objectID": "fitting.html#lasso-1",
+    "href": "fitting.html#lasso-1",
+    "title": "Fitting models",
+    "section": "LASSO 1",
+    "text": "LASSO 1\n\n\nCall:\ngamlss2(formula = fnet1, data = da, family = BCTo)\n---\nFamily: BCTo \nLink functions: mu = log, sigma = log, nu = identity, tau = log\n*--------\nCoefficients:\n                   Estimate Std. Error t value Pr(&gt;|t|)    \nmu.(Intercept)     6.073499   0.007714  787.37   &lt;2e-16 ***\nsigma.(Intercept) -1.339268   0.007751 -172.79   &lt;2e-16 ***\nnu.(Intercept)     0.682562   0.039437   17.31   &lt;2e-16 ***\ntau.(Intercept)    3.072434   0.061779   49.73   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n---\nSmooth terms:\n    mu.lasso(~area+area2+area3+yearc+yearc2+yearc3+bath1+cheating0+kitchen1+location1+location2)\nedf                                                                                           12\n    sigma.lasso(~area+area2+area3+yearc+yearc2+yearc3+bath1+cheating0+kitchen1+location1+location2)\nedf                                                                                               8\n*--------\nn = 3082 df =  24 res.df =  3058\nDeviance = 38171.2781 Null Dev. Red. = 6.16%\nAIC = 38219.2781 elapsed =  0.77sec"
+  },
+  {
+    "objectID": "fitting.html#lasso-2",
+    "href": "fitting.html#lasso-2",
+    "title": "Fitting models",
+    "section": "LASSO 2",
+    "text": "LASSO 2\n\n\n (Intercept)         area        area2        area3        yearc       yearc2 \n 0.170078437  0.244928458 -0.033422433  0.004850439  0.138919707  0.062595342 \n      yearc3        bath1    cheating0     kitchen1    location1    location2 \n-0.013271475  0.060201306 -0.338518720  0.111794049 -0.222495637 -0.131310857 \n\n\n (Intercept)         area        area2        area3        yearc       yearc2 \n 0.044503278  0.019210761 -0.013455170  0.005293646 -0.249616969  0.000000000 \n      yearc3        bath1    cheating0     kitchen1    location1    location2 \n 0.055728860  0.000000000  0.212985531  0.000000000 -0.059687857  0.000000000 \n\n\nNULL"
   }
 ]

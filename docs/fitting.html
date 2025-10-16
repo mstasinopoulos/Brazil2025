@@ -477,14 +477,33 @@ g({\theta}_{ki}) &amp;=&amp; {ML}_1({x}_{1i},{x}_{2i}, \ldots,  {x}_{pi})
 \end{split}
   \qquad(2)\]</span></span> <!--  --> <!--  \ldots &=& \ldots \nonumber\\ --> <!-- g(\boldsymbol{\theta}_k) &=& {ML}_k(\textbf{x}_{1i},\textbf{x}_{2i}, \ldots,  \textbf{x}_{pi})  --></p>
 </section>
+<section id="two-major-problems" class="slide level2">
+<h2>two major problems</h2>
+<ul>
+<li><p>The task within <code>GAMLSS</code> is to find ;</p>
+<ol type="1">
+<li><p>how the x’s effect the parameters of the distribution i.e <span class="math inline">\(\boldsymbol{\theta}(X)\)</span> and</p></li>
+<li><p>the appropriate distribution for the response i.e.&nbsp;<span class="math inline">\(D(Y|\boldsymbol{\theta}(X))\)</span></p></li>
+</ol></li>
+</ul>
+</section>
+<section id="distribution" class="slide level2">
+<h2>DISTRIBUTION</h2>
+<ul>
+<li><p>The <code>range</code> of the response should determine the type of distribution</p></li>
+<li><p>if we know the right variables we could determine a <code>adequate</code> distribution by looking over a set of appropriate distributions</p></li>
+<li><p>if <code>one</code> of the variable is very important i.e.&nbsp;time, age it can be used otherwise use a <code>linear</code> model for all parameters (which works fast) to pick up a distribution</p></li>
+</ul>
+</section>
 <section id="parameters-for-estimation" class="slide level2">
 <h2>Parameters for Estimation</h2>
+<p>Given a distribution we need to estimate the;</p>
 <ul>
 <li><p><strong>distribution parameters</strong></p></li>
 <li><p><strong>coefficient parameters</strong></p>
 <pre><code>  - **coefficients**
 
-  - **random effects**</code></pre></li>
+  - **random effects** and the </code></pre></li>
 <li><p><strong>hyper-parameters</strong></p></li>
 </ul>
 </section>
@@ -540,9 +559,9 @@ Figure&nbsp;1: Different ways to estimate the parameters in a GAMLSS model.
 <section id="important" class="slide level2">
 <h2>Important</h2>
 <ul>
-<li><p>assumed <strong>distribution</strong> (the log-likelihood is needed and the first and second derivatives)</p></li>
-<li><p><strong>hierarchy</strong> of the paramerers (i.e.&nbsp;a good location model is required before model the scale)</p></li>
-<li><p><strong>orthogonality</strong> of the parameters (leads to better convergence)</p></li>
+<li><p>for the assumed <strong>distribution</strong> the log-likelihood is needed (and the first and second derivatives with respect to the parameters)</p></li>
+<li><p>an <strong>hierarchy</strong> of the parameters exist a good location model is required before model the scale parameters e.t.c.</p></li>
+<li><p><strong>orthogonality</strong> of the parameters leads to better convergence and interpretation</p></li>
 </ul>
 </section>
 <section id="checking-orthogonality" class="slide level2">
@@ -590,8 +609,8 @@ Figure&nbsp;2: Paramater orthogonality for BCTo distribution
 <section id="linear-models" class="slide level2">
 <h2>Linear Models</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>mlinear <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(rent<span class="sc">~</span>area<span class="sc">+</span><span class="fu">poly</span>(yearc,<span class="dv">2</span>)<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen<span class="sc">+</span></span>
-<span id="cb4-2"><a></a>              cheating<span class="sc">|</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen<span class="sc">+</span>cheating, </span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>mlinear <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(rent<span class="sc">~</span><span class="fu">poly</span>(area,<span class="dv">3</span>)<span class="sc">+</span><span class="fu">poly</span>(yearc,<span class="dv">3</span>)<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen<span class="sc">+</span></span>
+<span id="cb4-2"><a></a>              cheating<span class="sc">|</span><span class="fu">poly</span>(area,<span class="dv">3</span>)<span class="sc">+</span><span class="fu">poly</span>(yearc,<span class="dv">3</span>)<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen<span class="sc">+</span>cheating, </span>
 <span id="cb4-3"><a></a>              <span class="at">family=</span>BCTo, <span class="at">trace=</span><span class="cn">FALSE</span>, <span class="at">data=</span>da)</span>
 <span id="cb4-4"><a></a><span class="fu">summary</span>(mlinear)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -600,40 +619,48 @@ Figure&nbsp;2: Paramater orthogonality for BCTo distribution
 <section id="linear-models-output" class="slide level2 output-location-slide"><h2>Linear Models</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
-gamlss2(formula = rent ~ area + poly(yearc, 2) + location + bath + 
-    kitchen + cheating | area + yearc + location + bath + kitchen + 
-    cheating, data = da, family = BCTo, ... = pairlist(trace = FALSE))
+gamlss2(formula = rent ~ poly(area, 3) + poly(yearc, 3) + location + 
+    bath + kitchen + cheating | poly(area, 3) + poly(yearc, 3) + 
+    location + bath + kitchen + cheating, data = da, family = BCTo, 
+    ... = pairlist(trace = FALSE))
 ---
 Family: BCTo 
 Link functions: mu = log, sigma = log, nu = identity, tau = log
 *--------
 Coefficients:
-                     Estimate Std. Error   t value Pr(&gt;|t|)    
-mu.(Intercept)      5.013e+00  2.754e-02   182.007  &lt; 2e-16 ***
-mu.area             1.063e-02  2.329e-04    45.640  &lt; 2e-16 ***
-mu.location2        8.788e-02  1.041e-02     8.440  &lt; 2e-16 ***
-mu.location3        1.983e-01  3.830e-02     5.178 2.39e-07 ***
-mu.bath1            4.152e-02  2.065e-02     2.010   0.0445 *  
-mu.kitchen1         1.130e-01  2.361e-02     4.784 1.80e-06 ***
-mu.cheating1        3.305e-01  2.405e-02    13.743  &lt; 2e-16 ***
-mu.poly(yearc, 2)1  5.047e+00  3.302e-01    15.287  &lt; 2e-16 ***
-mu.poly(yearc, 2)2  3.358e+00  2.751e-01    12.204  &lt; 2e-16 ***
-sigma.(Intercept)   1.047e+01  6.245e-02   167.650  &lt; 2e-16 ***
-sigma.area          1.218e-03  6.099e-04     1.996   0.0460 *  
-sigma.yearc        -5.972e-03  8.078e-07 -7392.764  &lt; 2e-16 ***
-sigma.location2     5.971e-02  2.911e-02     2.051   0.0403 *  
-sigma.location3     2.176e-01  9.224e-02     2.359   0.0184 *  
-sigma.bath1         5.069e-03  5.966e-02     0.085   0.9323    
-sigma.kitchen1      3.750e-02  7.106e-02     0.528   0.5977    
-sigma.cheating1    -2.431e-01  4.766e-02    -5.100 3.60e-07 ***
-nu.(Intercept)      6.534e-01  5.454e-02    11.980  &lt; 2e-16 ***
-tau.(Intercept)     3.190e+00  1.758e-02   181.397  &lt; 2e-16 ***
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+mu.(Intercept)         5.71590    0.02366 241.595  &lt; 2e-16 ***
+mu.location2           0.09005    0.01028   8.760  &lt; 2e-16 ***
+mu.location3           0.21550    0.03717   5.798 7.39e-09 ***
+mu.bath1               0.05882    0.02083   2.824  0.00478 ** 
+mu.kitchen1            0.11118    0.02360   4.710 2.58e-06 ***
+mu.cheating1           0.34265    0.02422  14.148  &lt; 2e-16 ***
+mu.poly(area, 3)1     13.33793    0.31111  42.871  &lt; 2e-16 ***
+mu.poly(area, 3)2     -2.01312    0.32273  -6.238 5.05e-10 ***
+mu.poly(area, 3)3      0.63310    0.30519   2.074  0.03812 *  
+mu.poly(yearc, 3)1     4.77815    0.34420  13.882  &lt; 2e-16 ***
+mu.poly(yearc, 3)2     3.66120    0.28934  12.654  &lt; 2e-16 ***
+mu.poly(yearc, 3)3    -0.76633    0.29134  -2.630  0.00857 ** 
+sigma.(Intercept)     -1.16028    0.05323 -21.799  &lt; 2e-16 ***
+sigma.location2        0.05851    0.02972   1.969  0.04905 *  
+sigma.location3        0.21471    0.09343   2.298  0.02162 *  
+sigma.bath1            0.03078    0.06067   0.507  0.61191    
+sigma.kitchen1         0.01141    0.07309   0.156  0.87597    
+sigma.cheating1       -0.23024    0.05114  -4.502 6.98e-06 ***
+sigma.poly(area, 3)1   1.90318    0.84748   2.246  0.02479 *  
+sigma.poly(area, 3)2  -0.70530    0.81681  -0.863  0.38794    
+sigma.poly(area, 3)3   1.23728    0.83095   1.489  0.13659    
+sigma.poly(yearc, 3)1 -7.40430    0.89183  -8.302  &lt; 2e-16 ***
+sigma.poly(yearc, 3)2 -0.42953    0.81051  -0.530  0.59619    
+sigma.poly(yearc, 3)3  3.66610    0.78688   4.659 3.31e-06 ***
+nu.(Intercept)         0.68241    0.05732  11.906  &lt; 2e-16 ***
+tau.(Intercept)        3.12679    0.36811   8.494  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 *--------
-n = 3082 df =  19 res.df =  3063
-Deviance = 38254.617 Null Dev. Red. = 5.95%
-AIC = 38292.617 elapsed =  0.55sec</code></pre>
+n = 3082 df =  26 res.df =  3056
+Deviance = 38164.1012 Null Dev. Red. = 6.18%
+AIC = 38216.1012 elapsed =  0.50sec</code></pre>
 </div>
 </div></section><section id="additive-models" class="slide level2">
 <h2>Additive Models</h2>
@@ -645,14 +672,20 @@ AIC = 38292.617 elapsed =  0.55sec</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>               AIC       df
 madditive 38196.79 31.99106
-mlinear   38292.62 19.00000</code></pre>
+mlinear   38216.10 26.00000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">GAIC</span>(mlinear, madditive, <span class="at">k=</span><span class="fu">log</span>(<span class="fu">dim</span>(rent99)[<span class="dv">1</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               AIC       df
+mlinear   38372.97 26.00000
+madditive 38389.81 31.99106</code></pre>
 </div>
 </div>
 </section>
 <section id="additive-models-con." class="slide level2">
 <h2>Additive Models (con.)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">summary</span>(madditive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">summary</span>(madditive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 gamlss2(formula = rent ~ s(area) + s(yearc) + location + bath + 
@@ -694,94 +727,104 @@ AIC = 38196.7933 elapsed =  0.60sec</code></pre>
 <section id="additive-models-con.-1" class="slide level2">
 <h2>Additive Models (con.)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">plot</span>(madditive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">plot</span>(madditive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="fitting_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section id="sec-RegressionTrees" class="slide level2">
 <h2>Regression Trees</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">source</span>(<span class="st">"~/Dropbox/GAMLSS-development/nnet/reg.tree.R"</span>)</span>
-<span id="cb11-2"><a></a>mregtree <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(rent<span class="sc">~</span><span class="fu">tree</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen<span class="sc">+</span>cheating)<span class="sc">|</span></span>
-<span id="cb11-3"><a></a>                       <span class="fu">tree</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen<span class="sc">+</span>cheating),</span>
-<span id="cb11-4"><a></a>                  <span class="at">family=</span>BCTo, <span class="at">data=</span>da, <span class="at">trace=</span><span class="cn">FALSE</span>) </span>
-<span id="cb11-5"><a></a></span>
-<span id="cb11-6"><a></a><span class="fu">GAIC</span>(mlinear, madditive, mregtree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">source</span>(<span class="st">"~/Dropbox/GAMLSS-development/nnet/reg.tree.R"</span>)</span>
+<span id="cb13-2"><a></a>mregtree <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(rent<span class="sc">~</span><span class="fu">tree</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen<span class="sc">+</span>cheating)<span class="sc">|</span></span>
+<span id="cb13-3"><a></a>                       <span class="fu">tree</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen<span class="sc">+</span>cheating),</span>
+<span id="cb13-4"><a></a>                  <span class="at">family=</span>BCTo, <span class="at">data=</span>da, <span class="at">trace=</span><span class="cn">FALSE</span>) </span>
+<span id="cb13-5"><a></a></span>
+<span id="cb13-6"><a></a><span class="fu">GAIC</span>(mlinear, madditive, mregtree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               AIC       df
 madditive 38196.79 31.99106
-mlinear   38292.62 19.00000
+mlinear   38216.10 26.00000
 mregtree  38622.27 26.00000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">GAIC</span>(mlinear, madditive, mregtree, <span class="at">k=</span><span class="fu">log</span>(<span class="fu">dim</span>(rent99)[<span class="dv">1</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               AIC       df
+mlinear   38372.97 26.00000
+madditive 38389.81 31.99106
+mregtree  38779.13 26.00000</code></pre>
 </div>
 </div>
 </section>
 <section id="regression-trees-con." class="slide level2">
 <h2>Regression Trees (con.)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>pp<span class="ot">&lt;-</span> <span class="fu">specials</span>(mregtree, <span class="at">model =</span> <span class="st">"mu"</span>, <span class="at">elements =</span> <span class="st">"model"</span>)</span>
-<span id="cb13-2"><a></a><span class="fu">plot</span>(pp)</span>
-<span id="cb13-3"><a></a><span class="fu">text</span>(pp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>pp<span class="ot">&lt;-</span> <span class="fu">specials</span>(mregtree, <span class="at">model =</span> <span class="st">"mu"</span>, <span class="at">elements =</span> <span class="st">"model"</span>)</span>
+<span id="cb17-2"><a></a><span class="fu">plot</span>(pp)</span>
+<span id="cb17-3"><a></a><span class="fu">text</span>(pp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="fitting_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
 <section id="regression-trees-continue" class="slide level2">
 <h2>Regression Trees (continue)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>pp<span class="ot">&lt;-</span><span class="fu">specials</span>(mregtree, <span class="at">model =</span> <span class="st">"sigma"</span>, <span class="at">elements =</span> <span class="st">"model"</span>)</span>
-<span id="cb14-2"><a></a><span class="fu">plot</span>(pp)</span>
-<span id="cb14-3"><a></a><span class="fu">text</span>(pp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>pp<span class="ot">&lt;-</span><span class="fu">specials</span>(mregtree, <span class="at">model =</span> <span class="st">"sigma"</span>, <span class="at">elements =</span> <span class="st">"model"</span>)</span>
+<span id="cb18-2"><a></a><span class="fu">plot</span>(pp)</span>
+<span id="cb18-3"><a></a><span class="fu">text</span>(pp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="fitting_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
 <section id="neural-networks-fit" class="slide level2">
 <h2>Neural Networks (fit)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>f <span class="ot">&lt;-</span> rent <span class="sc">~</span> <span class="fu">n</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen, <span class="at">size=</span><span class="dv">10</span>)<span class="sc">|</span>           <span class="fu">n</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen, <span class="at">size=</span><span class="dv">3</span>)</span>
-<span id="cb15-2"><a></a>mneural <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(f,<span class="at">family=</span>BCTo, <span class="at">data=</span>da)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>f <span class="ot">&lt;-</span> rent <span class="sc">~</span> <span class="fu">n</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen, <span class="at">size=</span><span class="dv">10</span>)<span class="sc">|</span></span>
+<span id="cb19-2"><a></a>           <span class="fu">n</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen, <span class="at">size=</span><span class="dv">3</span>)</span>
+<span id="cb19-3"><a></a>mneural <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(f,<span class="at">family=</span>BCTo, <span class="at">data=</span>da)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>GAMLSS-RS iteration  1: Global Deviance = 38212.1529 eps = 0.289812     
-GAMLSS-RS iteration  2: Global Deviance = 38187.2302 eps = 0.000652     
-GAMLSS-RS iteration  3: Global Deviance = 38179.642 eps = 0.000198     
-GAMLSS-RS iteration  4: Global Deviance = 38177.9778 eps = 0.000043     
-GAMLSS-RS iteration  5: Global Deviance = 38164.163 eps = 0.000361     
-GAMLSS-RS iteration  6: Global Deviance = 38162.7354 eps = 0.000037     
-GAMLSS-RS iteration  7: Global Deviance = 38162.2335 eps = 0.000013     
-GAMLSS-RS iteration  8: Global Deviance = 38161.8367 eps = 0.000010     
-GAMLSS-RS iteration  9: Global Deviance = 38161.3414 eps = 0.000012     
-GAMLSS-RS iteration 10: Global Deviance = 38160.9489 eps = 0.000010     
-GAMLSS-RS iteration 11: Global Deviance = 38160.6182 eps = 0.000008     </code></pre>
+<pre><code>GAMLSS-RS iteration  1: Global Deviance = 38201.2516 eps = 0.290015     
+GAMLSS-RS iteration  2: Global Deviance = 38161.604 eps = 0.001037     
+GAMLSS-RS iteration  3: Global Deviance = 38156.2641 eps = 0.000139     
+GAMLSS-RS iteration  4: Global Deviance = 38155.6106 eps = 0.000017     
+GAMLSS-RS iteration  5: Global Deviance = 38155.2744 eps = 0.000008     </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>gamlss2<span class="sc">::</span><span class="fu">GAIC</span>(mlinear, madditive, mneural, mregtree, <span class="at">k=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>gamlss2<span class="sc">::</span><span class="fu">GAIC</span>(mlinear, madditive, mneural, mregtree, <span class="at">k=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               AIC        df
 madditive 38196.79  31.99106
-mlinear   38292.62  19.00000
-mneural   38380.62 110.00000
+mlinear   38216.10  26.00000
+mneural   38375.27 110.00000
 mregtree  38622.27  26.00000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>gamlss2<span class="sc">::</span><span class="fu">GAIC</span>(mlinear, madditive, mneural, mregtree, <span class="at">k=</span><span class="fu">log</span>(<span class="fu">dim</span>(rent99)[<span class="dv">1</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               AIC        df
+mlinear   38372.97  26.00000
+madditive 38389.81  31.99106
+mregtree  38779.13  26.00000
+mneural   39038.94 110.00000</code></pre>
 </div>
 </div>
 </section>
 <section id="neural-networks-plot" class="slide level2">
 <h2>Neural Networks (plot)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">source</span>(<span class="st">"~/Dropbox/GAMLSS-development/nnet/plot_NN.R"</span>)</span>
-<span id="cb19-2"><a></a> <span class="fu">plot</span>(<span class="fu">specials</span>(mneural, <span class="at">model =</span> <span class="st">"mu"</span>, <span class="at">elements =</span> <span class="st">"model"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">source</span>(<span class="st">"~/Dropbox/GAMLSS-development/nnet/plot_NN.R"</span>)</span>
+<span id="cb25-2"><a></a> <span class="fu">plot</span>(<span class="fu">specials</span>(mneural, <span class="at">model =</span> <span class="st">"mu"</span>, <span class="at">elements =</span> <span class="st">"model"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="fitting_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="neural-networks-plot-1" class="slide level2">
 <h2>Neural Networks (plot)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">source</span>(<span class="st">"~/Dropbox/GAMLSS-development/nnet/plot_NN.R"</span>)</span>
-<span id="cb20-2"><a></a><span class="fu">plot</span>(<span class="fu">specials</span>(mneural, <span class="at">model =</span> <span class="st">"sigma"</span>, <span class="at">elements =</span> <span class="st">"model"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">source</span>(<span class="st">"~/Dropbox/GAMLSS-development/nnet/plot_NN.R"</span>)</span>
+<span id="cb26-2"><a></a><span class="fu">plot</span>(<span class="fu">specials</span>(mneural, <span class="at">model =</span> <span class="st">"sigma"</span>, <span class="at">elements =</span> <span class="st">"model"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="fitting_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="random-forest" class="slide level2">
 <h2>random forest</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>f <span class="ot">&lt;-</span> rent <span class="sc">~</span> <span class="fu">cf</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen)<span class="sc">|</span>    <span class="fu">cf</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen)</span>
-<span id="cb21-2"><a></a>mcf <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(f,<span class="at">family=</span>BCTo, <span class="at">data=</span>da)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>f <span class="ot">&lt;-</span> rent <span class="sc">~</span> <span class="fu">cf</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen)<span class="sc">|</span>    <span class="fu">cf</span>(<span class="sc">~</span>area<span class="sc">+</span>yearc<span class="sc">+</span>location<span class="sc">+</span>bath<span class="sc">+</span>kitchen)</span>
+<span id="cb27-2"><a></a>mcf <span class="ot">&lt;-</span> <span class="fu">gamlss2</span>(f,<span class="at">family=</span>BCTo, <span class="at">data=</span>da)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>GAMLSS-RS iteration  1: Global Deviance = 38466.2361 eps = 0.285090     
 GAMLSS-RS iteration  2: Global Deviance = 38312.7521 eps = 0.003990     
@@ -789,7 +832,7 @@ GAMLSS-RS iteration  3: Global Deviance = 38307.7194 eps = 0.000131
 GAMLSS-RS iteration  4: Global Deviance = 38306.3367 eps = 0.000036     
 GAMLSS-RS iteration  5: Global Deviance = 38306.1885 eps = 0.000003     </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>gamlss2<span class="sc">::</span><span class="fu">GAIC</span>(mlinear, madditive, mneural, mregtree, mcf, <span class="at">k=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>gamlss2<span class="sc">::</span><span class="fu">GAIC</span>(mlinear, madditive, mneural, mregtree, mcf, <span class="at">k=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               AIC        df
 madditive 38196.79  31.99106
@@ -802,11 +845,97 @@ mcf       38714.19 204.00000</code></pre>
 </section>
 <section id="lasso-ridge" class="slide level2">
 <h2>LASSO-RIDGE</h2>
+<p>In <code>gamlss2</code> there are the functions;</p>
 <ul>
-<li><p>there is function <code>ri()</code> in <code>gamlss</code> using P-splines</p></li>
-<li><p>there is also package <code>gamlss.lasso</code> for <code>gamlss</code> connecting with package <code>glmnet</code></p></li>
-<li><p>but LASSO is non implemented for <code>gamlss2</code> yet</p></li>
+<li><p><code>la()</code> which fit the model using a modified smoothing technique</p></li>
+<li><p><code>lasso()</code> which connects <code>gamlss2</code> and <code>glmnet</code></p>
+<ul>
+<li><p>the <code>glmnet</code> provides elastic net estimation with <code>alpha=1</code> equal to lasso and <code>alpha=0</code> equal to ridge regression</p></li>
+<li><p>the <code>glmnet</code> do not fit a single model but provides the path of all possible models</p></li>
+<li><p>in <code>gamlss2</code> the model is selected using <code>BIC</code></p></li>
+</ul></li>
 </ul>
+</section>
+<section id="lasso" class="slide level2">
+<h2>LASSO</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>    area    yearc location     bath  kitchen cheating 
+     132       68        3        2        2        2 
+ 100 % of data are saved, 
+that is, 3082 observations. </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    area    yearc location     bath  kitchen cheating 
+     132       68        3        2        2        2 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>GAMLSS-RS iteration  1: Global Deviance = 38208.7594 eps = 0.289875     
+GAMLSS-RS iteration  2: Global Deviance = 38173.0959 eps = 0.000933     
+GAMLSS-RS iteration  3: Global Deviance = 38171.6335 eps = 0.000038     
+GAMLSS-RS iteration  4: Global Deviance = 38171.2781 eps = 0.000009     </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               AIC        df
+madditive 38132.81  31.99106
+mneural   38155.27 110.00000
+mlinear   38164.10  26.00000
+bnet      38171.28  24.00000
+mcf       38306.19 204.00000
+mregtree  38570.27  26.00000</code></pre>
+</div>
+</div>
+</section>
+<section id="lasso-1" class="slide level2">
+<h2>LASSO 1</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+gamlss2(formula = fnet1, data = da, family = BCTo)
+---
+Family: BCTo 
+Link functions: mu = log, sigma = log, nu = identity, tau = log
+*--------
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+mu.(Intercept)     6.073499   0.007714  787.37   &lt;2e-16 ***
+sigma.(Intercept) -1.339268   0.007751 -172.79   &lt;2e-16 ***
+nu.(Intercept)     0.682562   0.039437   17.31   &lt;2e-16 ***
+tau.(Intercept)    3.072434   0.061779   49.73   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+---
+Smooth terms:
+    mu.lasso(~area+area2+area3+yearc+yearc2+yearc3+bath1+cheating0+kitchen1+location1+location2)
+edf                                                                                           12
+    sigma.lasso(~area+area2+area3+yearc+yearc2+yearc3+bath1+cheating0+kitchen1+location1+location2)
+edf                                                                                               8
+*--------
+n = 3082 df =  24 res.df =  3058
+Deviance = 38171.2781 Null Dev. Red. = 6.16%
+AIC = 38219.2781 elapsed =  0.77sec</code></pre>
+</div>
+</div>
+</section>
+<section id="lasso-2" class="slide level2">
+<h2>LASSO 2</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept)         area        area2        area3        yearc       yearc2 
+ 0.170078437  0.244928458 -0.033422433  0.004850439  0.138919707  0.062595342 
+      yearc3        bath1    cheating0     kitchen1    location1    location2 
+-0.013271475  0.060201306 -0.338518720  0.111794049 -0.222495637 -0.131310857 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept)         area        area2        area3        yearc       yearc2 
+ 0.044503278  0.019210761 -0.013455170  0.005293646 -0.249616969  0.000000000 
+      yearc3        bath1    cheating0     kitchen1    location1    location2 
+ 0.055728860  0.000000000  0.212985531  0.000000000 -0.059687857  0.000000000 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
 </section>
 <section id="principal-componet-regression" class="slide level2">
 <h2>Principal Componet Regression</h2>
