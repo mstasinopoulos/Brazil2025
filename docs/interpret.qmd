@@ -160,6 +160,13 @@ pe_param_grid(madditive,c("area", "yearc",  "location", "bath", "kitchen"))
 pe_param( madditive, c("area", "yearc"), filled=TRUE) 
 ```
 
+## pe_pdf
+
+```{r}
+#pe_pdf(madditive,"area")
+#pe_pdf(madditive,"yearc")
+```
+
 ## ALE; parameters $\mu$; Additive
 
 ```{R}
@@ -235,14 +242,14 @@ gamlss.ggplots:::pe_quantile(madditive,c( "location", "bath"))
 
 ```{R}
 #| echo: true
-#gamlss.ggplots:::pe_pdf_grid(madditive, list("area", "yearc", "location","bath"))
+gamlss.ggplots:::pe_pdf_grid(madditive, list("area", "yearc", "location","bath"))
 ```
 
 ## distributions, $\mu$, NN
 
 ```{R}
 #| echo: true
-#gamlss.ggplots:::pe_pdf_grid(mneural, list("area", "yearc", "location","bath"))
+gamlss.ggplots:::pe_pdf_grid(mneural, list("area", "yearc", "location","bath"))
 ```
 
 ## the purpose of the study {.smaller}
@@ -277,17 +284,17 @@ Scenarios
 #| warning: false
 #| message: false
 #| output: true
-#     rent <- c(1500, 1000,800)
-#     area <- c(140, 55, 65)
-#    yearc <- c(1983, 1915, 1960)
-# location <- factor(c(3,1,1))
-#     bath <- factor(c(1,0,1))
-#  kitchen <- factor(c(1,0,1))
-# cheating <- factor(c(1,0,1))
-# ndat <- data.frame(rent, area, yearc, location, bath, kitchen, cheating)
-# cat("prediction z-scores", "\n")
-# pp <-predict(madditive, newdata=ndat, type="parameter")
-#  qNO(madditive$family$p(q=ndat$rent, par=pp))
+     rent <- c(1500, 1000,800)
+     area <- c(140, 55, 65)
+    yearc <- c(1983, 1915, 1960)
+ location <- factor(c(3,1,1))
+     bath <- factor(c(1,0,1))
+  kitchen <- factor(c(1,0,1))
+ cheating <- factor(c(1,0,1))
+ ndat <- data.frame(rent, area, yearc, location, bath, kitchen, cheating)
+ cat("prediction z-scores", "\n")
+ pp <-predict(madditive, newdata=ndat, type="parameter")
+  qNO(madditive$family$cdf(q=ndat$rent, par=pp))
 ```
 
 ## summary
@@ -315,18 +322,17 @@ Personal view for the future of `GAMLSS` development;
 
 ## the team {.smaller}
 
-| working party          | current                | past                         |
+| working party | current | past |
 |:---------------------|:---------------------|:---------------------------|
-| `Gillian Heller`       | `Konstantinos Pateras` | Popi Akantziliotou           |
-| `Fernanda De Bastiani` | Paul Eilers            | Vlasios Voudouris            |
-| `Thomas Kneib`         | Nikos Kametas          | Nicoleta Mortan              |
-| `Achim Zaileis`        | `Tim Cole`             | Daniil Kiose                 |
-| `Andreas Mayr`         | `Nikos Georgikopoulos` | Dea-Jin Lee                  |
-| `Nicolaus Umlauf`      | `Luiz Nakamura`        | María Xosé Rodríguez-Álvarez |
-| `Reto Stauffer`        | Nadja Klein            | Majid Djennad                |
-| `Robert Rigby`         | `Julian Merder`        | Fiona McElduff               |
-| `Mikis Stasinopoulos`  | Abu Hossain            | Raydonal Ospina              |
-
+| `Gillian Heller` | `Konstantinos Pateras` | Popi Akantziliotou, |
+| `Fernanda De Bastiani` | Paul Eilers , `Kevin Burke` | Vlasios Voudouris, Nadja Klein |
+| `Thomas Kneib` | `Nikos Kametas` | Marco Enea, Nicoleta Mortan |
+| `Achim Zeileis` | Tim Cole | Daniil Kiose, Florian Ziel |
+| `Andreas Mayr` | `Artur Fredrich` | Dea-Jin Lee, Peru Muniain |
+| `Nicolaus Umlauf` | `Luiz Nakamura` | María Xosé Rodríguez-Álvarez |
+| `Reto Stauffer` | `Elisa Van Eynde` | Majid Djennad |
+| `Robert Rigby` | `Julian Merder` | Nikos Georgikopoulos |
+| `Mikis Stasinopoulos` | Abu Hossain | Raydonal Ospina, Fiona McElduff |
 
 ## end
 
